@@ -18,6 +18,11 @@ if /I "%1"=="fast" (
     exit /b %ERRORLEVEL%
 )
 
+if /I "%1"=="test" (
+    %PY% -m pytest -v
+    exit /b %ERRORLEVEL%
+)
+
 if /I "%1"=="api" (
     %PY% -m src.api.predict
     exit /b %ERRORLEVEL%
