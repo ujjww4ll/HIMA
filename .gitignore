@@ -30,6 +30,7 @@ data/processed/boundaries/*
 *.nc
 *.zip
 *.pdf
+!HIMA_Project_Study_Guide_and_Viva_Prep.pdf
 *.parquet
 *.gpkg
 !data/processed/boundaries/study_states.gpkg
