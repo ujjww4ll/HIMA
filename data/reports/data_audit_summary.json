@@ -1,0 +1,760 @@
+{
+  "audit_timestamp_utc": "2026-11-18T04:09:10.727767+00:00",
+  "raw_data_root": "C:\\Users\\lenovo\\Downloads\\hima",
+  "total_files_scanned": 184,
+  "total_size_gb": 2.898,
+  "target_years": [
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "coverage": {
+    "firms_years_all": [
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+    ],
+    "firms_missing_in_target": [],
+    "firms_archives": [
+      {
+        "file": "DL_FIRE_SV-C2_816506.zip",
+        "year": 2012,
+        "rows": 1087275,
+        "date_min": "2012-01-20",
+        "date_max": "2013-12-31",
+        "csv_files": [
+          "fire_archive_SV-C2_816506.csv"
+        ]
+      },
+      {
+        "file": "DL_FIRE_SV-C2_816507.zip",
+        "year": 2013,
+        "rows": 1042583,
+        "date_min": "2013-01-01",
+        "date_max": "2014-12-31",
+        "csv_files": [
+          "fire_archive_SV-C2_816507.csv"
+        ]
+      },
+      {
+        "file": "DL_FIRE_SV-C2_816508.zip",
+        "year": 2014,
+        "rows": 1030223,
+        "date_min": "2014-01-01",
+        "date_max": "2015-12-31",
+        "csv_files": [
+          "fire_archive_SV-C2_816508.csv"
+        ]
+      },
+      {
+        "file": "DL_FIRE_SV-C2_816509.zip",
+        "year": 2015,
+        "rows": 1167699,
+        "date_min": "2015-01-01",
+        "date_max": "2016-12-31",
+        "csv_files": [
+          "fire_archive_SV-C2_816509.csv"
+        ]
+      },
+      {
+        "file": "DL_FIRE_SV-C2_816512.zip",
+        "year": 2016,
+        "rows": 1286094,
+        "date_min": "2016-01-01",
+        "date_max": "2017-12-31",
+        "csv_files": [
+          "fire_archive_SV-C2_816512.csv"
+        ]
+      },
+      {
+        "file": "DL_FIRE_SV-C2_816513.zip",
+        "year": 2017,
+        "rows": 1254621,
+        "date_min": "2017-01-01",
+        "date_max": "2018-12-31",
+        "csv_files": [
+          "fire_archive_SV-C2_816513.csv"
+        ]
+      },
+      {
+        "file": "DL_FIRE_SV-C2_816514.zip",
+        "year": 2018,
+        "rows": 1188216,
+        "date_min": "2018-01-01",
+        "date_max": "2019-12-31",
+        "csv_files": [
+          "fire_archive_SV-C2_816514.csv"
+        ]
+      },
+      {
+        "file": "DL_FIRE_SV-C2_816515.zip",
+        "year": 2019,
+        "rows": 1027378,
+        "date_min": "2019-01-01",
+        "date_max": "2020-12-31",
+        "csv_files": [
+          "fire_archive_SV-C2_816515.csv"
+        ]
+      },
+      {
+        "file": "DL_FIRE_SV-C2_816516.zip",
+        "year": 2020,
+        "rows": 1261570,
+        "date_min": "2020-01-01",
+        "date_max": "2021-12-31",
+        "csv_files": [
+          "fire_archive_SV-C2_816516.csv"
+        ]
+      },
+      {
+        "file": "DL_FIRE_SV-C2_816517.zip",
+        "year": 2021,
+        "rows": 1363532,
+        "date_min": "2021-01-01",
+        "date_max": "2022-12-31",
+        "csv_files": [
+          "fire_archive_SV-C2_816517.csv"
+        ]
+      },
+      {
+        "file": "DL_FIRE_SV-C2_816518.zip",
+        "year": 2022,
+        "rows": 1171327,
+        "date_min": "2022-01-01",
+        "date_max": "2023-12-31",
+        "csv_files": [
+          "fire_archive_SV-C2_816518.csv"
+        ]
+      },
+      {
+        "file": "DL_FIRE_SV-C2_816520.zip",
+        "year": 2024,
+        "rows": 1198688,
+        "date_min": "2024-01-01",
+        "date_max": "2025-12-31",
+        "csv_files": [
+          "fire_archive_SV-C2_816520.csv"
+        ]
+      },
+      {
+        "file": "DL_FIRE_SV-C2_816521.zip",
+        "year": 2025,
+        "rows": 1065317,
+        "date_min": "2025-01-01",
+        "date_max": "2026-06-30",
+        "csv_files": [
+          "fire_archive_SV-C2_816521.csv",
+          "fire_nrt_SV-C2_816521.csv"
+        ]
+      }
+    ],
+    "imd_years_all": [
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "imd_missing_in_target": [],
+    "era5_processed_total_months": 128,
+    "era5_processed_target_present": 44,
+    "era5_processed_target_expected": 48,
+    "era5_processed_missing_in_target": [
+      "2023-08",
+      "2023-09",
+      "2023-11",
+      "2023-12"
+    ],
+    "era5_raw_grib_total_months": 24,
+    "era5_raw_grib_years": [
+      2012,
+      2013
+    ]
+  },
+  "schemas": {
+    "boundaries_zip": {
+      "entries": [
+        "state_NWIC.dbf",
+        "state_NWIC.prj",
+        "state_NWIC.shp",
+        "state_NWIC.shx"
+      ],
+      "csv_files": [],
+      "header": null,
+      "date_min": null,
+      "date_max": null,
+      "row_count": null
+    },
+    "firms_sample_header": [
+      "latitude",
+      "longitude",
+      "brightness",
+      "scan",
+      "track",
+      "acq_date",
+      "acq_time",
+      "satellite",
+      "instrument",
+      "confidence",
+      "version",
+      "bright_t31",
+      "frp",
+      "daynight",
+      "type"
+    ],
+    "imd_sample": {
+      "file": "RF25_ind2021_rfp25.nc",
+      "data_vars": [
+        "RAINFALL"
+      ],
+      "coords": [
+        "LONGITUDE",
+        "LATITUDE",
+        "TIME"
+      ],
+      "dims": {
+        "TIME": 365,
+        "LATITUDE": 129,
+        "LONGITUDE": 135
+      },
+      "global_attrs": {
+        "history": "FERRET V6.82   20-Feb-26",
+        "Conventions": "CF-1.0"
+      },
+      "var_attrs": {
+        "RAINFALL": {
+          "long_name": "Rainfall",
+          "units": "mm",
+          "history": "From ind2021_rfp25.grd"
+        },
+        "LONGITUDE": {
+          "units": "degrees_east",
+          "point_spacing": "even",
+          "axis": "X",
+          "modulo": "360.0",
+          "standard_name": "longitude"
+        },
+        "LATITUDE": {
+          "units": "degrees_north",
+          "point_spacing": "even",
+          "axis": "Y",
+          "standard_name": "latitude"
+        },
+        "TIME": {
+          "units": "days since 1900-12-31 00:00:00",
+          "axis": "T",
+          "time_origin": "31-DEC-1900",
+          "standard_name": "time"
+        }
+      },
+      "time_raw_dtype": "float64",
+      "time_raw_first5": [
+        43831.0,
+        43832.0,
+        43833.0,
+        43834.0,
+        43835.0
+      ],
+      "time_raw_last3": [
+        44193.0,
+        44194.0,
+        44195.0
+      ],
+      "time_decoded_first": "2021-01-01T00:00:00.000000000",
+      "time_decoded_last": "2021-12-31T00:00:00.000000000",
+      "time_decoded_dtype": "datetime64[ns]"
+    },
+    "era5_processed_sample": {
+      "file": "ERA5_Land_daily_2021_01.nc",
+      "data_vars": [
+        "temperature_c",
+        "dewpoint_c",
+        "u_wind",
+        "v_wind",
+        "soil_water_layer1",
+        "rainfall_m",
+        "relative_humidity_mean",
+        "relative_humidity_min"
+      ],
+      "coords": [
+        "latitude",
+        "longitude",
+        "time"
+      ],
+      "dims": {
+        "time": 31,
+        "latitude": 76,
+        "longitude": 77
+      },
+      "global_attrs": {
+        "GRIB_NV": "0",
+        "GRIB_Nx": "3600",
+        "GRIB_Ny": "1801",
+        "GRIB_cfName": "unknown",
+        "GRIB_cfVarName": "t2m",
+        "GRIB_dataType": "fc",
+        "GRIB_gridDefinitionDescription": "Latitude/Longitude Grid",
+        "GRIB_gridType": "regular_ll",
+        "GRIB_iDirectionIncrementInDegrees": "0.1",
+        "GRIB_iScansNegatively": "0",
+        "GRIB_jDirectionIncrementInDegrees": "0.1",
+        "GRIB_jPointsAreConsecutive": "0",
+        "GRIB_jScansPositively": "0",
+        "GRIB_latitudeOfFirstGridPointInDegrees": "90.0",
+        "GRIB_latitudeOfLastGridPointInDegrees": "-90.0",
+        "GRIB_longitudeOfFirstGridPointInDegrees": "0.0",
+        "GRIB_longitudeOfLastGridPointInDegrees": "359.9",
+        "GRIB_missingValue": "3.4028234663852886e+38",
+        "GRIB_name": "2 metre temperature",
+        "GRIB_numberOfPoints": "6483600",
+        "GRIB_paramId": "167",
+        "GRIB_shortName": "2t",
+        "GRIB_stepType": "instant",
+        "GRIB_stepUnits": "1",
+        "GRIB_totalNumber": "0",
+        "GRIB_typeOfLevel": "surface",
+        "GRIB_units": "K",
+        "long_name": "2 metre temperature",
+        "standard_name": "unknown",
+        "units": "K"
+      },
+      "var_attrs": {
+        "temperature_c": {
+          "GRIB_NV": "0",
+          "GRIB_Nx": "3600",
+          "GRIB_Ny": "1801",
+          "GRIB_cfName": "unknown",
+          "GRIB_cfVarName": "t2m",
+          "GRIB_dataType": "fc",
+          "GRIB_gridDefinitionDescription": "Latitude/Longitude Grid",
+          "GRIB_gridType": "regular_ll",
+          "GRIB_iDirectionIncrementInDegrees": "0.1",
+          "GRIB_iScansNegatively": "0",
+          "GRIB_jDirectionIncrementInDegrees": "0.1",
+          "GRIB_jPointsAreConsecutive": "0",
+          "GRIB_jScansPositively": "0",
+          "GRIB_latitudeOfFirstGridPointInDegrees": "90.0",
+          "GRIB_latitudeOfLastGridPointInDegrees": "-90.0",
+          "GRIB_longitudeOfFirstGridPointInDegrees": "0.0",
+          "GRIB_longitudeOfLastGridPointInDegrees": "359.9",
+          "GRIB_missingValue": "3.4028234663852886e+38",
+          "GRIB_name": "2 metre temperature",
+          "GRIB_numberOfPoints": "6483600",
+          "GRIB_paramId": "167",
+          "GRIB_shortName": "2t",
+          "GRIB_stepType": "instant",
+          "GRIB_stepUnits": "1",
+          "GRIB_totalNumber": "0",
+          "GRIB_typeOfLevel": "surface",
+          "GRIB_units": "K",
+          "long_name": "2 metre temperature",
+          "standard_name": "unknown",
+          "units": "K"
+        },
+        "dewpoint_c": {
+          "GRIB_NV": "0",
+          "GRIB_Nx": "3600",
+          "GRIB_Ny": "1801",
+          "GRIB_cfName": "unknown",
+          "GRIB_cfVarName": "d2m",
+          "GRIB_dataType": "fc",
+          "GRIB_gridDefinitionDescription": "Latitude/Longitude Grid",
+          "GRIB_gridType": "regular_ll",
+          "GRIB_iDirectionIncrementInDegrees": "0.1",
+          "GRIB_iScansNegatively": "0",
+          "GRIB_jDirectionIncrementInDegrees": "0.1",
+          "GRIB_jPointsAreConsecutive": "0",
+          "GRIB_jScansPositively": "0",
+          "GRIB_latitudeOfFirstGridPointInDegrees": "90.0",
+          "GRIB_latitudeOfLastGridPointInDegrees": "-90.0",
+          "GRIB_longitudeOfFirstGridPointInDegrees": "0.0",
+          "GRIB_longitudeOfLastGridPointInDegrees": "359.9",
+          "GRIB_missingValue": "3.4028234663852886e+38",
+          "GRIB_name": "2 metre dewpoint temperature",
+          "GRIB_numberOfPoints": "6483600",
+          "GRIB_paramId": "168",
+          "GRIB_shortName": "2d",
+          "GRIB_stepType": "instant",
+          "GRIB_stepUnits": "1",
+          "GRIB_totalNumber": "0",
+          "GRIB_typeOfLevel": "surface",
+          "GRIB_units": "K",
+          "long_name": "2 metre dewpoint temperature",
+          "standard_name": "unknown",
+          "units": "K"
+        },
+        "u_wind": {
+          "GRIB_NV": "0",
+          "GRIB_Nx": "3600",
+          "GRIB_Ny": "1801",
+          "GRIB_cfName": "unknown",
+          "GRIB_cfVarName": "u10",
+          "GRIB_dataType": "fc",
+          "GRIB_gridDefinitionDescription": "Latitude/Longitude Grid",
+          "GRIB_gridType": "regular_ll",
+          "GRIB_iDirectionIncrementInDegrees": "0.1",
+          "GRIB_iScansNegatively": "0",
+          "GRIB_jDirectionIncrementInDegrees": "0.1",
+          "GRIB_jPointsAreConsecutive": "0",
+          "GRIB_jScansPositively": "0",
+          "GRIB_latitudeOfFirstGridPointInDegrees": "90.0",
+          "GRIB_latitudeOfLastGridPointInDegrees": "-90.0",
+          "GRIB_longitudeOfFirstGridPointInDegrees": "0.0",
+          "GRIB_longitudeOfLastGridPointInDegrees": "359.9",
+          "GRIB_missingValue": "3.4028234663852886e+38",
+          "GRIB_name": "10 metre U wind component",
+          "GRIB_numberOfPoints": "6483600",
+          "GRIB_paramId": "165",
+          "GRIB_shortName": "10u",
+          "GRIB_stepType": "instant",
+          "GRIB_stepUnits": "1",
+          "GRIB_totalNumber": "0",
+          "GRIB_typeOfLevel": "surface",
+          "GRIB_units": "m s**-1",
+          "long_name": "10 metre U wind component",
+          "standard_name": "unknown",
+          "units": "m s**-1"
+        },
+        "v_wind": {
+          "GRIB_NV": "0",
+          "GRIB_Nx": "3600",
+          "GRIB_Ny": "1801",
+          "GRIB_cfName": "unknown",
+          "GRIB_cfVarName": "v10",
+          "GRIB_dataType": "fc",
+          "GRIB_gridDefinitionDescription": "Latitude/Longitude Grid",
+          "GRIB_gridType": "regular_ll",
+          "GRIB_iDirectionIncrementInDegrees": "0.1",
+          "GRIB_iScansNegatively": "0",
+          "GRIB_jDirectionIncrementInDegrees": "0.1",
+          "GRIB_jPointsAreConsecutive": "0",
+          "GRIB_jScansPositively": "0",
+          "GRIB_latitudeOfFirstGridPointInDegrees": "90.0",
+          "GRIB_latitudeOfLastGridPointInDegrees": "-90.0",
+          "GRIB_longitudeOfFirstGridPointInDegrees": "0.0",
+          "GRIB_longitudeOfLastGridPointInDegrees": "359.9",
+          "GRIB_missingValue": "3.4028234663852886e+38",
+          "GRIB_name": "10 metre V wind component",
+          "GRIB_numberOfPoints": "6483600",
+          "GRIB_paramId": "166",
+          "GRIB_shortName": "10v",
+          "GRIB_stepType": "instant",
+          "GRIB_stepUnits": "1",
+          "GRIB_totalNumber": "0",
+          "GRIB_typeOfLevel": "surface",
+          "GRIB_units": "m s**-1",
+          "long_name": "10 metre V wind component",
+          "standard_name": "unknown",
+          "units": "m s**-1"
+        },
+        "soil_water_layer1": {
+          "GRIB_NV": "0",
+          "GRIB_Nx": "3600",
+          "GRIB_Ny": "1801",
+          "GRIB_cfName": "unknown",
+          "GRIB_cfVarName": "swvl1",
+          "GRIB_dataType": "an",
+          "GRIB_gridDefinitionDescription": "Latitude/Longitude Grid",
+          "GRIB_gridType": "regular_ll",
+          "GRIB_iDirectionIncrementInDegrees": "0.1",
+          "GRIB_iScansNegatively": "0",
+          "GRIB_jDirectionIncrementInDegrees": "0.1",
+          "GRIB_jPointsAreConsecutive": "0",
+          "GRIB_jScansPositively": "0",
+          "GRIB_latitudeOfFirstGridPointInDegrees": "90.0",
+          "GRIB_latitudeOfLastGridPointInDegrees": "-90.0",
+          "GRIB_longitudeOfFirstGridPointInDegrees": "0.0",
+          "GRIB_longitudeOfLastGridPointInDegrees": "359.9",
+          "GRIB_missingValue": "3.4028234663852886e+38",
+          "GRIB_name": "Volumetric soil water layer 1",
+          "GRIB_numberOfPoints": "6483600",
+          "GRIB_paramId": "39",
+          "GRIB_shortName": "swvl1",
+          "GRIB_stepType": "instant",
+          "GRIB_stepUnits": "1",
+          "GRIB_totalNumber": "0",
+          "GRIB_typeOfLevel": "depthBelowLandLayer",
+          "GRIB_units": "m**3 m**-3",
+          "long_name": "Volumetric soil water layer 1",
+          "standard_name": "unknown",
+          "units": "m**3 m**-3"
+        },
+        "rainfall_m": {
+          "GRIB_NV": "0",
+          "GRIB_Nx": "3600",
+          "GRIB_Ny": "1801",
+          "GRIB_cfName": "unknown",
+          "GRIB_cfVarName": "tp",
+          "GRIB_dataType": "fc",
+          "GRIB_gridDefinitionDescription": "Latitude/Longitude Grid",
+          "GRIB_gridType": "regular_ll",
+          "GRIB_iDirectionIncrementInDegrees": "0.1",
+          "GRIB_iScansNegatively": "0",
+          "GRIB_jDirectionIncrementInDegrees": "0.1",
+          "GRIB_jPointsAreConsecutive": "0",
+          "GRIB_jScansPositively": "0",
+          "GRIB_latitudeOfFirstGridPointInDegrees": "90.0",
+          "GRIB_latitudeOfLastGridPointInDegrees": "-90.0",
+          "GRIB_longitudeOfFirstGridPointInDegrees": "0.0",
+          "GRIB_longitudeOfLastGridPointInDegrees": "359.9",
+          "GRIB_missingValue": "3.4028234663852886e+38",
+          "GRIB_name": "Total precipitation",
+          "GRIB_numberOfPoints": "6483600",
+          "GRIB_paramId": "228",
+          "GRIB_shortName": "tp",
+          "GRIB_stepType": "accum",
+          "GRIB_stepUnits": "1",
+          "GRIB_totalNumber": "0",
+          "GRIB_typeOfLevel": "surface",
+          "GRIB_units": "m",
+          "long_name": "Total precipitation",
+          "standard_name": "unknown",
+          "units": "m"
+        },
+        "relative_humidity_mean": {
+          "GRIB_NV": "0",
+          "GRIB_Nx": "3600",
+          "GRIB_Ny": "1801",
+          "GRIB_cfName": "unknown",
+          "GRIB_dataType": "fc",
+          "GRIB_gridDefinitionDescription": "Latitude/Longitude Grid",
+          "GRIB_gridType": "regular_ll",
+          "GRIB_iDirectionIncrementInDegrees": "0.1",
+          "GRIB_iScansNegatively": "0",
+          "GRIB_jDirectionIncrementInDegrees": "0.1",
+          "GRIB_jPointsAreConsecutive": "0",
+          "GRIB_jScansPositively": "0",
+          "GRIB_latitudeOfFirstGridPointInDegrees": "90.0",
+          "GRIB_latitudeOfLastGridPointInDegrees": "-90.0",
+          "GRIB_longitudeOfFirstGridPointInDegrees": "0.0",
+          "GRIB_longitudeOfLastGridPointInDegrees": "359.9",
+          "GRIB_missingValue": "3.4028234663852886e+38",
+          "GRIB_numberOfPoints": "6483600",
+          "GRIB_stepType": "instant",
+          "GRIB_stepUnits": "1",
+          "GRIB_totalNumber": "0",
+          "GRIB_typeOfLevel": "surface",
+          "GRIB_units": "K",
+          "standard_name": "unknown",
+          "units": "K"
+        },
+        "relative_humidity_min": {
+          "GRIB_NV": "0",
+          "GRIB_Nx": "3600",
+          "GRIB_Ny": "1801",
+          "GRIB_cfName": "unknown",
+          "GRIB_dataType": "fc",
+          "GRIB_gridDefinitionDescription": "Latitude/Longitude Grid",
+          "GRIB_gridType": "regular_ll",
+          "GRIB_iDirectionIncrementInDegrees": "0.1",
+          "GRIB_iScansNegatively": "0",
+          "GRIB_jDirectionIncrementInDegrees": "0.1",
+          "GRIB_jPointsAreConsecutive": "0",
+          "GRIB_jScansPositively": "0",
+          "GRIB_latitudeOfFirstGridPointInDegrees": "90.0",
+          "GRIB_latitudeOfLastGridPointInDegrees": "-90.0",
+          "GRIB_longitudeOfFirstGridPointInDegrees": "0.0",
+          "GRIB_longitudeOfLastGridPointInDegrees": "359.9",
+          "GRIB_missingValue": "3.4028234663852886e+38",
+          "GRIB_numberOfPoints": "6483600",
+          "GRIB_stepType": "instant",
+          "GRIB_stepUnits": "1",
+          "GRIB_totalNumber": "0",
+          "GRIB_typeOfLevel": "surface",
+          "GRIB_units": "K",
+          "standard_name": "unknown",
+          "units": "K"
+        }
+      },
+      "time_first": "2021-01-01T00:00:00.000000000",
+      "time_last": "2021-01-31T00:00:00.000000000",
+      "lat_range": [
+        21.90000000000088,
+        29.400000000000986
+      ],
+      "lon_range": [
+        89.79999999999916,
+        97.39999999999873
+      ],
+      "lat_step": 0.10000000000000142,
+      "lon_step": 0.09999999999999432
+    },
+    "coolr": {
+      "file": "COOLR_India_Events.json",
+      "root_keys": [
+        "objectIdFieldName",
+        "globalIdFieldName",
+        "geometryType",
+        "spatialReference",
+        "fields",
+        "features"
+      ],
+      "geometry_type": "esriGeometryPoint",
+      "spatial_reference": {
+        "wkid": 4326,
+        "latestWkid": 4326
+      },
+      "field_names": [
+        "objectid",
+        "source_name",
+        "source_link",
+        "event_id",
+        "event_date",
+        "event_time",
+        "event_title",
+        "event_description",
+        "location_description",
+        "landslide_category",
+        "landslide_trigger",
+        "storm_name",
+        "comments",
+        "method",
+        "image_type",
+        "sat_date_before",
+        "sat_date_after",
+        "country_name",
+        "country_code",
+        "citation",
+        "latitude",
+        "longitude"
+      ],
+      "feature_count": 176,
+      "first_feature_keys": [
+        "attributes"
+      ],
+      "sample_attributes": {
+        "objectid": 1886,
+        "source_name": "International Disasters Charter",
+        "source_link": "https://disasterscharter.org/web/guest/activations/-/article/flood-large-in-india-activation-827-",
+        "event_id": 27925,
+        "event_date": 1688860800000,
+        "event_time": null,
+        "event_title": "Manual inventory of landslides in India, 2023-07-09",
+        "event_description": "Northern India was hit by flash flooding and landslides on July 9, 2023.",
+        "location_description": "Uttarakhand and Himachal Pradesh, India",
+        "landslide_category": "Landslide",
+        "landslide_trigger": "Heavy Rain",
+        "storm_name": null,
+        "comments": null,
+        "method": "Manual",
+        "image_type": "PlanetScope",
+        "sat_date_before": "2023-06-16",
+        "sat_date_after": "2023-07-31",
+        "country_name": "India",
+        "country_code": "IN",
+        "citation": "Soobitsky, R., 2023, Manual inventory of landslides in India, 2023-07-09. NASA GSFC. Juang CS, Stanley TA, and Kirschbaum DB. (2019). Using citizen science to expand the global map of landslides: Introducing the Cooperative Open Online Landslide Repository (COOLR). PLOS ONE. 14(7): e0218657. doi: 1371/journal.pone.0218657.",
+        "latitude": 30.94462955,
+        "longitude": 77.05982073
+      }
+    },
+    "gsi_pdf": {
+      "file": "GSI_Landslide_Inventory_Field_Validated.pdf",
+      "size_mb": 300.95,
+      "page_count": 904,
+      "metadata": {
+        "format": "PDF 1.7",
+        "title": "",
+        "author": "",
+        "subject": "",
+        "keywords": "",
+        "creator": "",
+        "producer": "pypdf",
+        "creationDate": "",
+        "modDate": "",
+        "trapped": "",
+        "encryption": null
+      },
+      "probed_pages": 19,
+      "probed_pages_with_text": 19,
+      "sample_pages": [
+        {
+          "page_1based": 1,
+          "char_count": 4546,
+          "preview": "Sl.No.\nSlide_No\nState\nDistrict\nSlide_Name\nNH_SH_Location\nLatitude\nLongitude\nMaterial Involved\nMovement \nType\nHistory\n1\nASM/HKN/83D07/2020/2\nAssam\nHailakandi\nKukinala slide\nKukinala\n24.27\n92.5\nDebris\nSlide\nNA\n2\nAS/HKN/83D11/2020/1\nAssam\nHailakandi\nJal"
+        },
+        {
+          "page_1based": 2,
+          "char_count": 4049,
+          "preview": "Sl.No.\nSlide_No\nState\nDistrict\nSlide_Name\nNH_SH_Location\nLatitude\nLongitude\nMaterial Involved\nMovement \nType\nHistory\n40\nASM/HLK/83D09/2020/006\nAssam\nHailakandi\nChandipur Grant Slide \nBowarthar, Chandipur, Algapur \nCircle. \n24.79489\n92.55506\nDebris\nSl"
+        },
+        {
+          "page_1based": 3,
+          "char_count": 4113,
+          "preview": "Sl.No.\nSlide_No\nState\nDistrict\nSlide_Name\nNH_SH_Location\nLatitude\nLongitude\nMaterial Involved\nMovement \nType\nHistory\n77\nAS/DIM/83C16/2017/41\nAssam\nDima Hasao\nDurbintola4\nNH54\n25.01856\n92.77011\nDebris\nSlide\nNA\n78\nAS/DIM/83C16/2018/49\nAssam\nDima Hasao\n"
+        },
+        {
+          "page_1based": 4,
+          "char_count": 4397,
+          "preview": "Sl.No.\nSlide_No\nState\nDistrict\nSlide_Name\nNH_SH_Location\nLatitude\nLongitude\nMaterial Involved\nMovement \nType\nHistory\n115\nAS/DIM/83C16/2017/07\nAssam\nDima Hasao\nRetzawl6\nOld HaflongSilchar road\n25.10292\n92.986883\nRock cum debris\nSlide\nNA\n116\nAS/DIM/83C"
+        },
+        {
+          "page_1based": 5,
+          "char_count": 4402,
+          "preview": "Sl.No.\nSlide_No\nState\nDistrict\nSlide_Name\nNH_SH_Location\nLatitude\nLongitude\nMaterial Involved\nMovement \nType\nHistory\n152\nAS/DIM/83G4/2015/58\nAssam\nDima Hasao\nBara Haflong-3\nBara Haflong,Near New Haflong \nRS\n25.139\n93.025\nEarth\nSlide\nNA\n153\nAS/DIM/83G"
+        },
+        {
+          "page_1based": 6,
+          "char_count": 3705,
+          "preview": "Sl.No.\nSlide_No\nState\nDistrict\nSlide_Name\nNH_SH_Location\nLatitude\nLongitude\nMaterial Involved\nMovement \nType\nHistory\n187\nAS/DIH/83G08/2020/15\nAssam\nDima Hasao\n \nData recorded from Hejaichak \nto Hangrum road\n25.17\n93.36\nRock\nSlide\nNA\n188\nAS/DIH/83G08/"
+        },
+        {
+          "page_1based": 7,
+          "char_count": 3950,
+          "preview": "Sl.No.\nSlide_No\nState\nDistrict\nSlide_Name\nNH_SH_Location\nLatitude\nLongitude\nMaterial Involved\nMovement \nType\nHistory\n217\nAS/DIH/83G08/2020/1\nAssam\nDima Hasao\n \nData collected from Mahur-\nToulpui road.\n25.2\n93.25\nRock\nSlide\nNA\n218\nAS/DIH/83G08/2020/43"
+        },
+        {
+          "page_1based": 8,
+          "char_count": 4114,
+          "preview": "Sl.No.\nSlide_No\nState\nDistrict\nSlide_Name\nNH_SH_Location\nLatitude\nLongitude\nMaterial Involved\nMovement \nType\nHistory\n251\nASM/DIM/83C15/2017/03\nAssam\nDima Hasao\nKobak Slide.\nNew Sangbar_ Kobak District \nRoad.\n25.257696\n92.809603\nEarth\nSlide\nNA\n252\nAS/"
+        }
+      ]
+    }
+  },
+  "planned_static_datasets": {
+    "SRTM / Copernicus DEM": {
+      "status": "NOT_FOUND",
+      "matches": []
+    },
+    "ESA WorldCover": {
+      "status": "NOT_FOUND",
+      "matches": []
+    },
+    "MODIS MOD13Q1 NDVI": {
+      "status": "NOT_FOUND",
+      "matches": []
+    },
+    "SoilGrids": {
+      "status": "NOT_FOUND",
+      "matches": []
+    },
+    "Geology / Lithology": {
+      "status": "NOT_FOUND",
+      "matches": []
+    },
+    "ISRO NRSC Landslide Atlas": {
+      "status": "NOT_FOUND",
+      "matches": []
+    }
+  }
+}

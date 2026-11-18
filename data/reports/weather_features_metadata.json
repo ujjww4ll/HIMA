@@ -1,0 +1,52 @@
+{
+  "date_start": "2021-01-01",
+  "date_end": "2024-12-31",
+  "prediction_cutoff": "same_day_weather_for_fire_risk_and_prior_lags",
+  "ne_cells_count": 253408,
+  "used_era5_grid_points": 2491,
+  "used_imd_grid_points": 415,
+  "era5_nearest_dist_km_median": 4.21,
+  "era5_nearest_dist_km_max": 9.99,
+  "imd_nearest_dist_km_median": 10.57,
+  "imd_nearest_dist_km_max": 32.09,
+  "imd_feature_rows": 606315,
+  "era5_feature_rows": 3639351,
+  "era5_missing_rows_flagged": 303902,
+  "imd_feature_columns": [
+    "imd_rain_1d",
+    "imd_rain_lag1d",
+    "imd_rain_sum_3d",
+    "imd_rain_sum_7d",
+    "imd_rain_sum_15d",
+    "imd_rain_max_7d",
+    "imd_rainy_days_7d",
+    "imd_rainy_days_15d",
+    "imd_days_since_rain"
+  ],
+  "era5_feature_columns": [
+    "temperature_c",
+    "dewpoint_c",
+    "dewpoint_depression_c",
+    "wind_speed_ms",
+    "soil_water_layer1",
+    "era5_rainfall_mm",
+    "relative_humidity_mean",
+    "relative_humidity_min",
+    "era5_temp_mean_7d",
+    "era5_temp_max_7d",
+    "era5_rh_min_7d",
+    "era5_rh_mean_7d",
+    "era5_soil_water_mean_7d",
+    "era5_wind_mean_7d",
+    "era5_rain_sum_3d",
+    "era5_rain_sum_7d",
+    "era5_rain_sum_15d",
+    "era5_days_since_rain",
+    "era5_missing_flag"
+  ],
+  "outputs": {
+    "grid_linked": "C:\\Users\\lenovo\\Desktop\\aiml project\\data\\processed\\grid\\grid_1km_with_weather_keys.parquet",
+    "imd_features": "C:\\Users\\lenovo\\Desktop\\aiml project\\data\\processed\\weather\\imd_features_daily.parquet",
+    "era5_features": "C:\\Users\\lenovo\\Desktop\\aiml project\\data\\processed\\weather\\era5_features_daily.parquet"
+  }
+}

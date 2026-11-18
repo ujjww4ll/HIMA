@@ -1,0 +1,51 @@
+{
+  "source_file": "C:\\Users\\lenovo\\Downloads\\hima\\COOLR_India_Events.json",
+  "all_columns": [
+    "objectid",
+    "source_name",
+    "source_link",
+    "event_id",
+    "event_date",
+    "event_time",
+    "event_title",
+    "event_description",
+    "location_description",
+    "landslide_category",
+    "landslide_trigger",
+    "storm_name",
+    "comments",
+    "method",
+    "image_type",
+    "sat_date_before",
+    "sat_date_after",
+    "country_name",
+    "country_code",
+    "citation",
+    "latitude",
+    "longitude"
+  ],
+  "detected_columns": {
+    "lat": "latitude",
+    "lon": "longitude",
+    "date": "event_date",
+    "id": "objectid"
+  },
+  "total_india_candidates": 176,
+  "valid_coord_india_candidates": 176,
+  "duplicate_source_ids_india": 0,
+  "date_quality_india": {
+    "dated_in_target_2021_2024": 176
+  },
+  "ne_india_total_events": 0,
+  "duplicate_source_ids_ne": 0,
+  "ne_india_by_state": {},
+  "ne_india_by_date_quality": {},
+  "ne_india_by_year": {},
+  "ne_india_date_min": null,
+  "ne_india_date_max": null,
+  "outputs": {
+    "all_india_parquet": "C:\\Users\\lenovo\\Desktop\\aiml project\\data\\interim\\events_validated\\coolr_all_india.parquet",
+    "ne_india_parquet": "C:\\Users\\lenovo\\Desktop\\aiml project\\data\\interim\\events_validated\\coolr_ne_india.parquet",
+    "ne_india_csv": "C:\\Users\\lenovo\\Desktop\\aiml project\\data\\interim\\events_validated\\coolr_ne_india.csv"
+  }
+}

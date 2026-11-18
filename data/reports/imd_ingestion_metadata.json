@@ -1,0 +1,191 @@
+{
+  "source_dataset": "IMD_RF25_0.25deg_Daily_Rainfall",
+  "units": "mm/day",
+  "target_years": [
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "missing_years": [],
+  "total_rows": 648684,
+  "unique_valid_grid_points": 444,
+  "date_min": "2021-01-01",
+  "date_max": "2024-12-31",
+  "missing_rainfall_values": 0,
+  "files": [
+    {
+      "file": "RF25_ind2021_rfp25.nc",
+      "year": 2021,
+      "time_dim": "TIME",
+      "n_steps": 365,
+      "expected_days_for_year": 365,
+      "raw_time_attrs": {
+        "units": "days since 1900-12-31 00:00:00",
+        "axis": "T",
+        "time_origin": "31-DEC-1900",
+        "standard_name": "time"
+      },
+      "raw_first_3": [
+        43831.0,
+        43832.0,
+        43833.0
+      ],
+      "raw_last_3": [
+        44193.0,
+        44194.0,
+        44195.0
+      ],
+      "decoded_method": "cf_decoded_directly",
+      "date_start": "2021-01-01",
+      "date_end": "2021-12-31",
+      "variable": "RAINFALL",
+      "var_attrs": {
+        "long_name": "Rainfall",
+        "units": "mm",
+        "history": "From ind2021_rfp25.grd"
+      },
+      "fill_value_detected": -999.0,
+      "lat_step_deg": 0.25,
+      "lon_step_deg": 0.25,
+      "clipped_lat_count": 34,
+      "clipped_lon_count": 35,
+      "nodata_cells_masked_in_bbox": 0,
+      "valid_land_grid_points": 444,
+      "rainfall_min_mm": 0.0,
+      "rainfall_max_mm": 507.0380859375,
+      "rainfall_mean_mm": 5.205
+    },
+    {
+      "file": "RF25_ind2022_rfp25.nc",
+      "year": 2022,
+      "time_dim": "TIME",
+      "n_steps": 365,
+      "expected_days_for_year": 365,
+      "raw_time_attrs": {
+        "units": "days since 1900-12-31 00:00:00",
+        "axis": "T",
+        "time_origin": "31-DEC-1900",
+        "standard_name": "time"
+      },
+      "raw_first_3": [
+        44196.0,
+        44197.0,
+        44198.0
+      ],
+      "raw_last_3": [
+        44558.0,
+        44559.0,
+        44560.0
+      ],
+      "decoded_method": "cf_decoded_directly",
+      "date_start": "2022-01-01",
+      "date_end": "2022-12-31",
+      "variable": "RAINFALL",
+      "var_attrs": {
+        "long_name": "Rainfall",
+        "units": "mm",
+        "history": "From ind2022_rfp25.grd"
+      },
+      "fill_value_detected": -999.0,
+      "lat_step_deg": 0.25,
+      "lon_step_deg": 0.25,
+      "clipped_lat_count": 34,
+      "clipped_lon_count": 35,
+      "nodata_cells_masked_in_bbox": 0,
+      "valid_land_grid_points": 444,
+      "rainfall_min_mm": 0.0,
+      "rainfall_max_mm": 979.144775390625,
+      "rainfall_mean_mm": 7.254
+    },
+    {
+      "file": "RF25_ind2023_rfp25.nc",
+      "year": 2023,
+      "time_dim": "TIME",
+      "n_steps": 365,
+      "expected_days_for_year": 365,
+      "raw_time_attrs": {
+        "units": "days since 1900-12-31 00:00:00",
+        "axis": "T",
+        "time_origin": "31-DEC-1900",
+        "standard_name": "time"
+      },
+      "raw_first_3": [
+        44561.0,
+        44562.0,
+        44563.0
+      ],
+      "raw_last_3": [
+        44923.0,
+        44924.0,
+        44925.0
+      ],
+      "decoded_method": "cf_decoded_directly",
+      "date_start": "2023-01-01",
+      "date_end": "2023-12-31",
+      "variable": "RAINFALL",
+      "var_attrs": {
+        "long_name": "Rainfall",
+        "units": "mm",
+        "history": "From ind2023_rfp25.grd"
+      },
+      "fill_value_detected": -999.0,
+      "lat_step_deg": 0.25,
+      "lon_step_deg": 0.25,
+      "clipped_lat_count": 34,
+      "clipped_lon_count": 35,
+      "nodata_cells_masked_in_bbox": 0,
+      "valid_land_grid_points": 444,
+      "rainfall_min_mm": 0.0,
+      "rainfall_max_mm": 449.0838317871094,
+      "rainfall_mean_mm": 5.656
+    },
+    {
+      "file": "RF25_ind2024_rfp25.nc",
+      "year": 2024,
+      "time_dim": "TIME",
+      "n_steps": 366,
+      "expected_days_for_year": 366,
+      "raw_time_attrs": {
+        "units": "days since 1900-12-31 00:00:00",
+        "axis": "T",
+        "calendar": "GREGORIAN",
+        "time_origin": "31-DEC-1900",
+        "standard_name": "time"
+      },
+      "raw_first_3": [
+        44926.0,
+        44927.0,
+        44928.0
+      ],
+      "raw_last_3": [
+        45289.0,
+        45290.0,
+        45291.0
+      ],
+      "decoded_method": "cf_decoded_directly",
+      "date_start": "2024-01-01",
+      "date_end": "2024-12-31",
+      "variable": "RAINFALL",
+      "var_attrs": {
+        "long_name": "Rainfall",
+        "units": "mm",
+        "history": "From ind2024_rfp25.grd"
+      },
+      "fill_value_detected": -999.0,
+      "lat_step_deg": 0.25,
+      "lon_step_deg": 0.25,
+      "clipped_lat_count": 34,
+      "clipped_lon_count": 35,
+      "nodata_cells_masked_in_bbox": 0,
+      "valid_land_grid_points": 444,
+      "rainfall_min_mm": 0.0,
+      "rainfall_max_mm": 660.5491943359375,
+      "rainfall_mean_mm": 5.973
+    }
+  ],
+  "outputs": {
+    "daily_parquet": "C:\\Users\\lenovo\\Desktop\\aiml project\\data\\interim\\weather_daily\\imd_daily_ne.parquet",
+    "grid_points_parquet": "C:\\Users\\lenovo\\Desktop\\aiml project\\data\\interim\\weather_daily\\imd_grid_points_ne.parquet"
+  }
+}

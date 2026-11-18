@@ -1,0 +1,34 @@
+{
+  "output_parquet": "C:\\Users\\lenovo\\Desktop\\aiml project\\data\\processed\\wildfire.parquet",
+  "positive_celldays_parquet": "C:\\Users\\lenovo\\Desktop\\aiml project\\data\\processed\\labels\\wildfire_positive_celldays.parquet",
+  "train_years": [
+    2021,
+    2022,
+    2023
+  ],
+  "test_years": [
+    2024
+  ],
+  "excluded_years": [],
+  "excluded_years_reason": "FIRMS 2023 archive missing; 4 ERA5 months missing in 2023. Never filled with zeros.",
+  "total_positive_celldays_all_valid_years": 148251,
+  "positive_celldays_by_year": {
+    "2021": 47921,
+    "2022": 33069,
+    "2023": 38564,
+    "2024": 28697
+  },
+  "train_rows": 717324,
+  "train_positives": 119554,
+  "train_negatives": 597770,
+  "train_positive_rate": 0.16667,
+  "test_realistic_rows": 1000000,
+  "test_realistic_positives": 348,
+  "test_realistic_positive_rate": 0.000348,
+  "test_true_population_positives_2024": 28697,
+  "test_true_population_celldays_2024": 92747328,
+  "test_true_population_prevalence_2024": 0.000309,
+  "unique_spatial_blocks_train": 135,
+  "era5_missing_in_train": 67578,
+  "era5_missing_in_test": 0
+}

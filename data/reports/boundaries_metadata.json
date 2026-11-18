@@ -1,0 +1,102 @@
+{
+  "source_zip": "C:\\Users\\lenovo\\Downloads\\hima\\data\\raw\\boundaries.zip",
+  "extracted_shp": "C:\\Users\\lenovo\\Desktop\\aiml project\\data\\interim\\boundaries\\state_NWIC.shp",
+  "all_columns": [
+    "id",
+    "objectid",
+    "state",
+    "stcode",
+    "shape_leng",
+    "shape_area",
+    "ds_name",
+    "src_agency",
+    "state_name"
+  ],
+  "detected_state_column": "state_name",
+  "available_states_count": 36,
+  "available_states": [
+    "Andaman & Nicobar Island",
+    "Andhra Pradesh",
+    "Arunanchal Pradesh",
+    "Assam",
+    "Bihar",
+    "Chandigarh",
+    "Chhattisgarh",
+    "Dadra & Nagar Havelli and Daman & Diu",
+    "Delhi",
+    "Goa",
+    "Gujarat",
+    "Haryana",
+    "Himachal Pradesh",
+    "Jammu & Kashmir",
+    "Jharkhand",
+    "Karnataka",
+    "Kerala",
+    "Ladakh",
+    "Lakshadweep",
+    "Madhya Pradesh",
+    "Maharashtra",
+    "Manipur",
+    "Meghalaya",
+    "Mizoram",
+    "Nagaland",
+    "Odisha",
+    "Puducherry",
+    "Punjab",
+    "Rajasthan",
+    "Sikkim",
+    "Tamil Nadu",
+    "Telangana",
+    "Tripura",
+    "Uttar Pradesh",
+    "Uttarakhand",
+    "West Bengal"
+  ],
+  "selected_states": [
+    "Arunachal Pradesh",
+    "Assam",
+    "Manipur",
+    "Meghalaya",
+    "Mizoram",
+    "Nagaland",
+    "Tripura"
+  ],
+  "state_areas_km2": {
+    "Arunachal Pradesh": 82128.11,
+    "Assam": 78437.59,
+    "Meghalaya": 22418.13,
+    "Manipur": 22331.51,
+    "Mizoram": 21066.73,
+    "Nagaland": 16585.87,
+    "Tripura": 10444.05
+  },
+  "total_area_km2": 253411.99,
+  "original_crs": "EPSG:7755",
+  "saved_geographic_crs": "EPSG:4326",
+  "projected_crs": "EPSG:32646",
+  "projected_crs_reason": "Metric projected CRS centered at 93E for Northeast India 1 km fishnet grid generation",
+  "geometry_types_raw": {
+    "Polygon": 20,
+    "MultiPolygon": 16
+  },
+  "invalid_geometries_before": 1,
+  "geometries_repaired": true,
+  "invalid_geometries_after": 0,
+  "bounds_epsg4326_minx_miny_maxx_maxy": [
+    89.69866,
+    21.94004,
+    97.4129,
+    29.46595
+  ],
+  "bounds_projected_m": [
+    170032.33,
+    2426193.31,
+    934069.09,
+    3263529.7
+  ],
+  "outputs": {
+    "gpkg": "C:\\Users\\lenovo\\Desktop\\aiml project\\data\\processed\\boundaries\\study_states.gpkg",
+    "geojson": "C:\\Users\\lenovo\\Desktop\\aiml project\\data\\processed\\boundaries\\study_states.geojson",
+    "projected_gpkg": "C:\\Users\\lenovo\\Desktop\\aiml project\\data\\processed\\boundaries\\study_states_projected.gpkg"
+  }
+}

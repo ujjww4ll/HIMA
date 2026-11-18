@@ -1,0 +1,124 @@
+{
+  "target_years_requested": [
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "years_ingested": [
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "years_missing_in_window": [],
+  "archives_skipped_or_outside": [
+    "DL_FIRE_SV-C2_816506.zip (years=[2012, 2013])",
+    "DL_FIRE_SV-C2_816507.zip (years=[2013, 2014])",
+    "DL_FIRE_SV-C2_816508.zip (years=[2014, 2015])",
+    "DL_FIRE_SV-C2_816509.zip (years=[2015, 2016])",
+    "DL_FIRE_SV-C2_816512.zip (years=[2016, 2017])",
+    "DL_FIRE_SV-C2_816513.zip (years=[2017, 2018])",
+    "DL_FIRE_SV-C2_816514.zip (years=[2018, 2019])",
+    "DL_FIRE_SV-C2_816515.zip (years=[2019, 2020])",
+    "DL_FIRE_SV-C2_816521.zip (years=[2025, 2026])"
+  ],
+  "archive_stats": [
+    {
+      "zip_file": "DL_FIRE_SV-C2_816516.zip",
+      "years_in_archive": [
+        2020,
+        2021
+      ],
+      "extracted_csv": "C:\\Users\\lenovo\\Desktop\\aiml project\\data\\interim\\firms_extracted\\DL_FIRE_SV-C2_816516\\fire_archive_SV-C2_816516.csv",
+      "national_rows": 1261570,
+      "ne_india_target_window_rows": 73660,
+      "date_min": "2021-01-01",
+      "date_max": "2021-12-31"
+    },
+    {
+      "zip_file": "DL_FIRE_SV-C2_816517.zip",
+      "years_in_archive": [
+        2021,
+        2022
+      ],
+      "extracted_csv": "C:\\Users\\lenovo\\Desktop\\aiml project\\data\\interim\\firms_extracted\\DL_FIRE_SV-C2_816517\\fire_archive_SV-C2_816517.csv",
+      "national_rows": 1363532,
+      "ne_india_target_window_rows": 124199,
+      "date_min": "2021-01-01",
+      "date_max": "2022-12-31"
+    },
+    {
+      "zip_file": "DL_FIRE_SV-C2_816518.zip",
+      "years_in_archive": [
+        2022,
+        2023
+      ],
+      "extracted_csv": "C:\\Users\\lenovo\\Desktop\\aiml project\\data\\interim\\firms_extracted\\DL_FIRE_SV-C2_816518\\fire_archive_SV-C2_816518.csv",
+      "national_rows": 1171327,
+      "ne_india_target_window_rows": 107223,
+      "date_min": "2022-01-01",
+      "date_max": "2023-12-31"
+    },
+    {
+      "zip_file": "DL_FIRE_SV-C2_816520.zip",
+      "years_in_archive": [
+        2024,
+        2025
+      ],
+      "extracted_csv": "C:\\Users\\lenovo\\Desktop\\aiml project\\data\\interim\\firms_extracted\\DL_FIRE_SV-C2_816520\\fire_archive_SV-C2_816520.csv",
+      "national_rows": 1198688,
+      "ne_india_target_window_rows": 43021,
+      "date_min": "2024-01-01",
+      "date_max": "2024-12-31"
+    }
+  ],
+  "total_ne_detections_after_exact_dedup": 223904,
+  "exact_duplicates_removed_from_overlapping_archives": 124199,
+  "vegetation_fire_count_type_0": 219928,
+  "non_vegetation_fire_count": 3976,
+  "type_value_counts": {
+    "0": 219928,
+    "2": 3908,
+    "3": 68
+  },
+  "type_definitions_viirs_c2": {
+    "0": "presumed_vegetation_fire",
+    "1": "active_volcano",
+    "2": "other_static_land_source",
+    "3": "offshore"
+  },
+  "confidence_value_counts": {
+    "n": 191071,
+    "l": 17197,
+    "h": 15636
+  },
+  "confidence_definitions_viirs_c2": {
+    "l": "low",
+    "n": "nominal",
+    "h": "high"
+  },
+  "daynight_value_counts": {
+    "D": 197550,
+    "N": 26354
+  },
+  "satellite_value_counts": {
+    "SNPP": 223904
+  },
+  "detections_by_state": {
+    "Arunachal Pradesh": 18215,
+    "Assam": 54346,
+    "Manipur": 40061,
+    "Meghalaya": 30413,
+    "Mizoram": 44730,
+    "Nagaland": 20341,
+    "Tripura": 15798
+  },
+  "detections_by_year": {
+    "2021": 73660,
+    "2022": 50539,
+    "2023": 56684,
+    "2024": 43021
+  },
+  "output_parquet": "C:\\Users\\lenovo\\Desktop\\aiml project\\data\\interim\\firms_extracted\\firms_ne_india_detections.parquet"
+}

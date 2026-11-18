@@ -1,0 +1,224 @@
+{
+  "project": "HIMA - Hazard Intelligence, Monitoring & Assessment",
+  "hazard": "Landslide (Preliminary Weather-Only Daily Trigger Model)",
+  "disclaimer": "Research risk estimate only \u2014 not an official warning.",
+  "selected_best_model": "HistGradientBoosting",
+  "selection_criterion": "Highest 5-fold Spatial StratifiedGroupKFold PR-AUC on 2021-2023 training data",
+  "train_period": [
+    2021,
+    2022,
+    2023
+  ],
+  "test_period": [
+    2024
+  ],
+  "train_rows": 10097,
+  "train_positive_celldays": 97,
+  "test_rows": 100366,
+  "test_positive_celldays": 366,
+  "features_count": 23,
+  "features": [
+    "imd_rain_1d",
+    "imd_rain_lag1d",
+    "imd_rain_sum_3d",
+    "imd_rain_sum_7d",
+    "imd_rain_sum_15d",
+    "imd_rain_max_7d",
+    "imd_rainy_days_7d",
+    "imd_rainy_days_15d",
+    "imd_days_since_rain",
+    "era5_rainfall_mm",
+    "era5_rain_sum_3d",
+    "era5_rain_sum_7d",
+    "era5_rain_sum_15d",
+    "soil_water_layer1",
+    "era5_soil_water_mean_7d",
+    "temperature_c",
+    "relative_humidity_mean",
+    "wind_speed_ms",
+    "centroid_lat",
+    "centroid_lon",
+    "sin_doy",
+    "cos_doy",
+    "season"
+  ],
+  "state_feature_excluded_reason": "Excluded state_name intentionally to avoid exploiting Mizoram 2024 survey campaign bias.",
+  "critical_limitations": [
+    "Missing DEM/slope/aspect, WorldCover, SoilGrids, and geology static layers.",
+    "Training uses dated GSI PDF field records (117 raw -> unique cell-days in 2021-2023) and tests on 2024 dated GSI records (predominantly Cyclone Remal in Mizoram).",
+    "NOT a full landslide susceptibility model or operational warning system."
+  ],
+  "top_10_features_permutation_importance": [
+    {
+      "feature": "centroid_lat",
+      "importance_mean": 0.26174491803278677,
+      "importance_std": 0.015708154457866812
+    },
+    {
+      "feature": "centroid_lon",
+      "importance_mean": 0.04156699453551904,
+      "importance_std": 0.0018755937932224721
+    },
+    {
+      "feature": "relative_humidity_mean",
+      "importance_mean": 0.03785464480874305,
+      "importance_std": 0.004055640334782231
+    },
+    {
+      "feature": "imd_rain_1d",
+      "importance_mean": 0.02078036885245891,
+      "importance_std": 0.0020115983738763863
+    },
+    {
+      "feature": "imd_rainy_days_15d",
+      "importance_mean": 0.012100983606557314,
+      "importance_std": 0.0015258949638138617
+    },
+    {
+      "feature": "soil_water_layer1",
+      "importance_mean": 0.009477923497267615,
+      "importance_std": 0.0020923739135466734
+    },
+    {
+      "feature": "imd_rain_sum_3d",
+      "importance_mean": 0.00940875683060094,
+      "importance_std": 0.0017297536651700337
+    },
+    {
+      "feature": "temperature_c",
+      "importance_mean": 0.008981174863387831,
+      "importance_std": 0.0010930946486449227
+    },
+    {
+      "feature": "cos_doy",
+      "importance_mean": 0.00876614754098346,
+      "importance_std": 0.0002710715505665947
+    },
+    {
+      "feature": "imd_rain_max_7d",
+      "importance_mean": 0.004734494535519063,
+      "importance_std": 0.0010261903606132558
+    }
+  ],
+  "all_models_summary": [
+    {
+      "model": "DummyClassifier (Prior)",
+      "syllabus_role": "Baseline utility",
+      "best_params": "{}",
+      "cv_roc_auc": 0.3493,
+      "cv_pr_auc": 0.0074,
+      "operating_threshold": 0.5,
+      "test_roc_auc": 0.5,
+      "test_pr_auc": 0.0036,
+      "test_accuracy": 0.9964,
+      "test_precision": 0.0,
+      "test_recall": 0.0,
+      "test_f1": 0.0,
+      "test_false_alarm_rate": 0.0,
+      "test_tp": 0,
+      "test_fp": 0,
+      "test_fn": 366,
+      "test_tn": 100000
+    },
+    {
+      "model": "Logistic Regression",
+      "syllabus_role": "CSET312 Core (Titanic lab)",
+      "best_params": "{\"clf__C\": 0.05}",
+      "cv_roc_auc": 0.8637,
+      "cv_pr_auc": 0.1003,
+      "operating_threshold": 0.9306,
+      "test_roc_auc": 0.9375,
+      "test_pr_auc": 0.116,
+      "test_accuracy": 0.9883,
+      "test_precision": 0.1529,
+      "test_recall": 0.4863,
+      "test_f1": 0.2327,
+      "test_false_alarm_rate": 0.0099,
+      "test_tp": 178,
+      "test_fp": 986,
+      "test_fn": 188,
+      "test_tn": 99014
+    },
+    {
+      "model": "Gaussian Naive Bayes",
+      "syllabus_role": "CSET312 Core (Raisin lab)",
+      "best_params": "{\"clf__var_smoothing\": 0.1}",
+      "cv_roc_auc": 0.8134,
+      "cv_pr_auc": 0.0859,
+      "operating_threshold": 1.0,
+      "test_roc_auc": 0.8957,
+      "test_pr_auc": 0.0297,
+      "test_accuracy": 0.9751,
+      "test_precision": 0.0377,
+      "test_recall": 0.2377,
+      "test_f1": 0.0651,
+      "test_false_alarm_rate": 0.0222,
+      "test_tp": 87,
+      "test_fp": 2220,
+      "test_fn": 279,
+      "test_tn": 97780
+    },
+    {
+      "model": "Decision Tree",
+      "syllabus_role": "CSET312 Core (Raisin lab)",
+      "best_params": "{\"clf__max_depth\": 7, \"clf__min_samples_leaf\": 15}",
+      "cv_roc_auc": 0.7033,
+      "cv_pr_auc": 0.2416,
+      "operating_threshold": 0.983,
+      "test_roc_auc": 0.8214,
+      "test_pr_auc": 0.0933,
+      "test_accuracy": 0.9964,
+      "test_precision": 0.0,
+      "test_recall": 0.0,
+      "test_f1": 0.0,
+      "test_false_alarm_rate": 0.0,
+      "test_tp": 0,
+      "test_fp": 0,
+      "test_fn": 366,
+      "test_tn": 100000
+    },
+    {
+      "model": "Random Forest",
+      "syllabus_role": "Practical Tabular Extension",
+      "best_params": "{\"clf__max_depth\": 10, \"clf__min_samples_leaf\": 25}",
+      "cv_roc_auc": 0.8561,
+      "cv_pr_auc": 0.2081,
+      "operating_threshold": 0.6114,
+      "test_roc_auc": 0.9502,
+      "test_pr_auc": 0.1366,
+      "test_accuracy": 0.9941,
+      "test_precision": 0.192,
+      "test_recall": 0.1967,
+      "test_f1": 0.1943,
+      "test_false_alarm_rate": 0.003,
+      "test_tp": 72,
+      "test_fp": 303,
+      "test_fn": 294,
+      "test_tn": 99697
+    },
+    {
+      "model": "HistGradientBoosting",
+      "syllabus_role": "Advanced GBDT Extension",
+      "best_params": "{\"clf__learning_rate\": 0.08, \"clf__max_depth\": 6, \"clf__max_iter\": 120}",
+      "cv_roc_auc": 0.8483,
+      "cv_pr_auc": 0.3528,
+      "operating_threshold": 0.6655,
+      "test_roc_auc": 0.9367,
+      "test_pr_auc": 0.2187,
+      "test_accuracy": 0.9922,
+      "test_precision": 0.2163,
+      "test_recall": 0.429,
+      "test_f1": 0.2875,
+      "test_false_alarm_rate": 0.0057,
+      "test_tp": 157,
+      "test_fp": 569,
+      "test_fn": 209,
+      "test_tn": 99431
+    }
+  ],
+  "saved_artifacts": {
+    "best_model_joblib": "C:\\Users\\lenovo\\Desktop\\aiml project\\models\\landslide_preliminary_model.joblib",
+    "comparison_csv": "C:\\Users\\lenovo\\Desktop\\aiml project\\outputs\\tables\\landslide_model_comparison.csv"
+  },
+  "trained_timestamp_utc": "2026-11-18T04:21:29.282452+00:00"
+}

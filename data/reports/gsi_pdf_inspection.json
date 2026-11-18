@@ -1,0 +1,69 @@
+{
+  "source_file": "C:\\Users\\lenovo\\Downloads\\hima\\GSI_Landslide_Inventory_Field_Validated.pdf",
+  "file_size_mb": 300.95,
+  "total_pages": 904,
+  "pages_with_extractable_text": 904,
+  "ne_candidate_pages_scanned": 300,
+  "total_ne_records_extracted": 10731,
+  "valid_coords_count": 10730,
+  "within_7_sister_study_boundary_count": 9970,
+  "records_with_non_na_history": 4043,
+  "records_with_exact_event_date_any_year": 1443,
+  "records_dated_in_target_2021_2024_in_study": 673,
+  "records_by_state": {
+    "Arunachal Pradesh": 1191,
+    "Assam": 831,
+    "Manipur": 1589,
+    "Meghalaya": 1025,
+    "Mizoram": 3387,
+    "Nagaland": 1854,
+    "Sikkim": 760,
+    "Tripura": 94
+  },
+  "movement_type_counts": {
+    "Slide": 9503,
+    "Fall": 357,
+    "slide": 179,
+    "Flow": 134,
+    "Subsidence": 125,
+    "Complex": 115,
+    "Debris slide": 40,
+    "Composite": 36,
+    "NA": 32,
+    "": 21
+  },
+  "material_involved_counts": {
+    "Debris": 6912,
+    "Rock": 2245,
+    "Earth": 639,
+    "Soil": 426,
+    "Rock cum Debris": 107,
+    "NA": 98,
+    "Rock cum debris": 75,
+    "Rock-cum-Debris": 46,
+    "Regolith": 19,
+    "Soil cum debris": 17
+  },
+  "sample_non_na_history_values": [
+    "17 May 2016",
+    "18 May 2016",
+    "18 May 2016",
+    "02 April 2010",
+    "2019",
+    "2019",
+    "31 August 2016",
+    "18 May 2016",
+    "02nd June 2020",
+    "02 June 2020",
+    "03 June 2010",
+    "05 June 2020",
+    "02 June 2020",
+    "02 June 2020",
+    "02 June 2020"
+  ],
+  "outputs": {
+    "csv": "C:\\Users\\lenovo\\Desktop\\aiml project\\data\\interim\\events_validated\\gsi_ne_india_extracted.csv",
+    "parquet": "C:\\Users\\lenovo\\Desktop\\aiml project\\data\\interim\\events_validated\\gsi_ne_india_extracted.parquet"
+  },
+  "validation_assessment": "GSI PDF is a structured, text-extractable field-validated landslide inventory. Northeast India slide locations with exact coordinates, material, movement type, and history dates were extracted with page provenance via word-coordinate table parsing."
+}

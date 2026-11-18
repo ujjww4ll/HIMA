@@ -1,0 +1,49 @@
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Secrets & credentials (NEVER commit)
+.cdsapirc
+.netrc
+.env
+*.key
+*.pem
+*token*
+*secret*
+
+# Large generated / raw data
+data/raw/
+data/interim/
+data/processed/*
+!data/processed/boundaries/
+data/processed/boundaries/*
+!data/processed/boundaries/study_states.gpkg
+*.grib
+*.nc
+*.zip
+*.pdf
+*.parquet
+*.gpkg
+!data/processed/boundaries/study_states.gpkg
+*.joblib
+!models/*.joblib
+*.pkl
+
+# Keep reports & config tracked
+!data/reports/
+!data/reports/*.csv
+!data/reports/*.json
+!data/reports/*.md
+
+# OS files
+.DS_Store
+Thumbs.db
+

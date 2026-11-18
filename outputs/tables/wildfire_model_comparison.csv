@@ -1,0 +1,7 @@
+model,syllabus_role,best_params,cv_roc_auc,cv_pr_auc,cv_f1_at_0.5,operating_threshold,test_roc_auc,test_pr_auc,test_accuracy,test_precision,test_recall,test_f1,test_false_alarm_rate,test_brier_raw,test_brier_calibrated,test_tp,test_fp,test_fn,test_tn
+DummyClassifier (Prior),Baseline utility,{},0.4962,0.1651,0.0,0.5,0.5,0.0003,0.9997,0.0,0.0,0.0,0.0,0.02801,0.00035,0,0,348,999652
+Logistic Regression,CSET312 Core (Titanic lab),"{""clf__C"": 0.1}",0.9216,0.6802,0.6401,0.7195,0.904,0.0045,0.9187,0.0028,0.6494,0.0055,0.0812,0.11597,0.00035,226,81173,122,918479
+Gaussian Naive Bayes,CSET312 Core (Raisin lab),"{""clf__var_smoothing"": 0.001}",0.8913,0.5877,0.5265,1.0,0.8621,0.0025,0.9047,0.0021,0.5833,0.0042,0.0951,0.31608,0.26036,203,95111,145,904541
+Decision Tree,CSET312 Core (Raisin lab),"{""clf__max_depth"": 12, ""clf__min_samples_leaf"": 200}",0.9259,0.7223,0.6538,0.7612,0.9049,0.0046,0.938,0.0033,0.592,0.0066,0.0619,0.09456,0.00035,206,61906,142,937746
+Random Forest,Practical Tabular Extension,"{""clf__max_depth"": 18, ""clf__min_samples_leaf"": 25}",0.9434,0.7761,0.7149,0.6258,0.926,0.0067,0.9498,0.0044,0.6322,0.0087,0.0501,0.06318,0.00035,220,50042,128,949610
+HistGradientBoosting,Advanced GBDT Extension,"{""clf__learning_rate"": 0.1, ""clf__max_depth"": 10, ""clf__max_iter"": 150}",0.947,0.7817,0.7124,0.7118,0.9358,0.0061,0.9387,0.0039,0.6839,0.0077,0.0612,0.08341,0.0005,238,61203,110,938449

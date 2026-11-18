@@ -1,0 +1,41 @@
+{
+  "inventory_parquet": "C:\\Users\\lenovo\\Desktop\\aiml project\\data\\processed\\landslide.parquet",
+  "coolr_india_candidates": 176,
+  "coolr_ne_india_events": 0,
+  "coolr_note": "All 176 COOLR India records lie in Uttarakhand & Himachal Pradesh; 0 in Northeast India.",
+  "gsi_ne_india_within_study_boundary": 9970,
+  "date_quality_breakdown": {
+    "undated_field_validated_location": 8601,
+    "dated_outside_target_window": 696,
+    "dated_in_target_2021_2024": 673
+  },
+  "dated_events_2021_2024_raw": 673,
+  "dated_unique_celldays_2021_2024": 463,
+  "min_dated_events_threshold": 30,
+  "missing_static_terrain_layers": [
+    "SRTM / Copernicus DEM (elevation, slope, aspect)",
+    "ESA WorldCover (land cover)",
+    "SoilGrids (soil properties)",
+    "Geology / lithology"
+  ],
+  "daily_classifier_defensible_preliminary": true,
+  "decision": "TRAIN_PRELIMINARY_WEATHER_ONLY_WITH_TERRAIN_CAVEATS",
+  "caveats": [
+    "Static terrain layers (DEM/slope/aspect, WorldCover, SoilGrids, geology) are missing locally; this is strictly a preliminary weather/antecedent-rainfall trigger classifier.",
+    "Strong survey/reporting bias exists: 529/673 dated 2021-2024 records come from Mizoram's 2024 field surveys (e.g. Cyclone Remal), while 9,297 other GSI field slides have no exact occurrence date.",
+    "Undated GSI slides are strictly excluded from daily labels and used only for spatial inventory mapping."
+  ],
+  "modeling_dataset": {
+    "modeling_parquet": "C:\\Users\\lenovo\\Desktop\\aiml project\\data\\processed\\landslide_modeling.parquet",
+    "train_rows": 10097,
+    "train_positives_celldays": 97,
+    "test_rows": 100366,
+    "test_positives_celldays": 366,
+    "positive_celldays_by_year": {
+      "2021": 8,
+      "2022": 48,
+      "2023": 41,
+      "2024": 366
+    }
+  }
+}

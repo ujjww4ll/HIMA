@@ -1,0 +1,2 @@
+"""Hazard label generation modules."""
+

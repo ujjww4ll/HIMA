@@ -1,0 +1,59 @@
+{
+  "target": "fire_detected",
+  "target_definition": "Binary (1 = >=1 validated FIRMS VIIRS SNPP C2 type=0 vegetation fire in 1 km cell on date; 0 = observed no-record)",
+  "numeric_features": [
+    "temperature_c",
+    "dewpoint_c",
+    "dewpoint_depression_c",
+    "wind_speed_ms",
+    "soil_water_layer1",
+    "era5_rainfall_mm",
+    "relative_humidity_mean",
+    "relative_humidity_min",
+    "era5_temp_mean_7d",
+    "era5_temp_max_7d",
+    "era5_rh_min_7d",
+    "era5_rh_mean_7d",
+    "era5_soil_water_mean_7d",
+    "era5_wind_mean_7d",
+    "era5_rain_sum_3d",
+    "era5_rain_sum_7d",
+    "era5_rain_sum_15d",
+    "era5_days_since_rain",
+    "imd_rain_1d",
+    "imd_rain_lag1d",
+    "imd_rain_sum_3d",
+    "imd_rain_sum_7d",
+    "imd_rain_sum_15d",
+    "imd_rain_max_7d",
+    "imd_rainy_days_7d",
+    "imd_rainy_days_15d",
+    "imd_days_since_rain",
+    "centroid_lat",
+    "centroid_lon",
+    "sin_doy",
+    "cos_doy"
+  ],
+  "categorical_features": [
+    "state_name",
+    "season"
+  ],
+  "excluded_post_event_columns": [
+    "detection_count",
+    "frp_sum",
+    "frp_mean",
+    "frp_max",
+    "brightness_mean",
+    "brightness_max",
+    "day_detections",
+    "night_detections",
+    "high_conf_count",
+    "nominal_conf_count",
+    "low_conf_count"
+  ],
+  "missing_planned_predictors": [
+    "MODIS MOD13Q1 NDVI",
+    "ESA WorldCover land cover",
+    "SRTM/Copernicus DEM (elevation, slope, aspect)"
+  ]
+}

@@ -1,0 +1,7 @@
+model,syllabus_role,best_params,cv_roc_auc,cv_pr_auc,operating_threshold,test_roc_auc,test_pr_auc,test_accuracy,test_precision,test_recall,test_f1,test_false_alarm_rate,test_tp,test_fp,test_fn,test_tn
+DummyClassifier (Prior),Baseline utility,{},0.3493,0.0074,0.5,0.5,0.0036,0.9964,0.0,0.0,0.0,0.0,0,0,366,100000
+Logistic Regression,CSET312 Core (Titanic lab),"{""clf__C"": 0.05}",0.8637,0.1003,0.9306,0.9375,0.116,0.9883,0.1529,0.4863,0.2327,0.0099,178,986,188,99014
+Gaussian Naive Bayes,CSET312 Core (Raisin lab),"{""clf__var_smoothing"": 0.1}",0.8134,0.0859,1.0,0.8957,0.0297,0.9751,0.0377,0.2377,0.0651,0.0222,87,2220,279,97780
+Decision Tree,CSET312 Core (Raisin lab),"{""clf__max_depth"": 7, ""clf__min_samples_leaf"": 15}",0.7033,0.2416,0.983,0.8214,0.0933,0.9964,0.0,0.0,0.0,0.0,0,0,366,100000
+Random Forest,Practical Tabular Extension,"{""clf__max_depth"": 10, ""clf__min_samples_leaf"": 25}",0.8561,0.2081,0.6114,0.9502,0.1366,0.9941,0.192,0.1967,0.1943,0.003,72,303,294,99697
+HistGradientBoosting,Advanced GBDT Extension,"{""clf__learning_rate"": 0.08, ""clf__max_depth"": 6, ""clf__max_iter"": 120}",0.8483,0.3528,0.6655,0.9367,0.2187,0.9922,0.2163,0.429,0.2875,0.0057,157,569,209,99431

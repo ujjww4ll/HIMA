@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HIMA — Hazard Intelligence, Monitoring & Assessment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+
+  <!-- Animated background particles canvas -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- Disclaimer Banner -->
+  <div class="disclaimer-bar">
+    <span class="badge-warn">⚠ RESEARCH DEMO</span>
+    <span>Research risk estimate only — not an official warning. CSET312 AI-ML Academic Project.</span>
+    <span class="meta-pill">Study Window: 2021–2024 &bull; 1 km × 1 day grid &bull; EPSG:32646</span>
+  </div>
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="22" fill="url(#brand-grad)" opacity="0.2"/>
+            <path d="M24 8 L38 36 H10 Z" fill="url(#brand-grad)" opacity="0.9"/>
+            <path d="M24 16 L32 32 H16 Z" fill="white" opacity="0.6"/>
+            <circle cx="24" cy="28" r="3" fill="white"/>
+            <defs>
+              <linearGradient id="brand-grad" x1="0" y1="0" x2="48" y2="48">
+                <stop offset="0%" stop-color="#f97316"/>
+                <stop offset="100%" stop-color="#ef4444"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>HIMA</h1>
+          <p>Hazard Intelligence, Monitoring &amp; Assessment &middot; Northeast India</p>
+        </div>
+      </div>
+      <nav class="tab-nav" role="tablist">
+        <button class="tab-btn active" data-tab="overview">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 6a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1v-2zm0 6a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1v-2z"/></svg>
+          Overview
+        </button>
+        <button class="tab-btn" data-tab="simulator">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/></svg>
+          Risk Simulator
+        </button>
+        <button class="tab-btn" data-tab="models">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zm6-4a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zm6-3a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg>
+          ML Models
+        </button>
+        <button class="tab-btn" data-tab="gallery">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/></svg>
+          Visuals
+        </button>
+        <button class="tab-btn" data-tab="audit">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z" clip-rule="evenodd"/></svg>
+          Audit
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- KPI Strip -->
+  <section class="kpi-strip" id="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-icon" style="--c:#f97316">🗺️</div>
+      <div class="kpi-body">
+        <div class="kpi-value" id="kpi-cells">253,408</div>
+        <div class="kpi-label">1 km² Grid Cells</div>
+        <div class="kpi-sub">7 States · EPSG:32646</div>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon" style="--c:#ef4444">🔥</div>
+      <div class="kpi-body">
+        <div class="kpi-value accent-fire" id="kpi-fires">219,928</div>
+        <div class="kpi-label">FIRMS Vegetation Fires</div>
+        <div class="kpi-sub">VIIRS S-NPP C2 · 2021–2024</div>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon" style="--c:#22c55e">📈</div>
+      <div class="kpi-body">
+        <div class="kpi-value accent-green" id="kpi-wf-auc">0.9358</div>
+        <div class="kpi-label">Wildfire ROC-AUC 2024</div>
+        <div class="kpi-sub" id="kpi-wf-model">HistGradientBoosting</div>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon" style="--c:#a855f7">⛰️</div>
+      <div class="kpi-body">
+        <div class="kpi-value accent-purple" id="kpi-gsi">9,970</div>
+        <div class="kpi-label">GSI Landslide Records</div>
+        <div class="kpi-sub" id="kpi-gsi-dated">673 Dated · 463 Cell-Days</div>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon" style="--c:#3b82f6">🌊</div>
+      <div class="kpi-body">
+        <div class="kpi-value accent-blue" id="kpi-ls-auc">0.9367</div>
+        <div class="kpi-label">Landslide ROC-AUC 2024</div>
+        <div class="kpi-sub">Preliminary · Weather-only</div>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+
+    <!-- ══════════════ TAB 1: OVERVIEW & MAP ══════════════ -->
+    <section class="tab-panel active" id="tab-overview">
+      <div class="overview-layout">
+
+        <div class="map-panel card-glass">
+          <div class="card-top">
+            <div>
+              <h2 class="card-title">Northeast India — Interactive Study Map</h2>
+              <p class="card-desc">Click any state to inspect metrics &amp; load coordinates into Risk Simulator</p>
+            </div>
+            <select id="map-metric" class="styled-select">
+              <option value="fires">🔥 Wildfire Detections</option>
+              <option value="roc_auc">📊 Wildfire ROC-AUC</option>
+              <option value="landslides">⛰️ GSI Landslides</option>
+            </select>
+          </div>
+          <div class="svg-map-wrap">
+            <svg id="ne-map-svg" viewBox="0 0 760 540" aria-label="Northeast India Choropleth Map">
+              <defs>
+                <filter id="state-shadow">
+                  <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="rgba(0,0,0,0.5)"/>
+                </filter>
+                <filter id="state-glow">
+                  <feGaussianBlur stdDeviation="3" result="blur"/>
+                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+            </svg>
+            <div id="map-tooltip" class="map-tooltip" style="display:none"></div>
+          </div>
+          <div class="map-legend">
+            <span class="legend-label" id="legend-min">Low</span>
+            <div class="legend-gradient" id="legend-bar"></div>
+            <span class="legend-label" id="legend-max">High</span>
+          </div>
+          <div class="info-pill">
+            <span>ℹ</span> Sikkim excluded from ERA5 grid (ERA5 starts at 89.8°E; Sikkim at 88.0–88.9°E)
+          </div>
+        </div>
+
+        <div class="side-stack">
+          <div class="card-glass state-card" id="selected-state-card">
+            <div class="card-top">
+              <h2 class="card-title" id="sel-state-title">Select a State</h2>
+              <button class="btn-primary btn-sm" id="btn-send-to-sim">Simulate →</button>
+            </div>
+            <div id="sel-state-stats" class="state-stats">
+              <div class="empty-hint">
+                <div class="empty-icon">🗺️</div>
+                <p>Click any of the 7 Northeast India states on the map to inspect its grid size, fire counts, 2024 model accuracy, and landslide records.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-glass">
+            <div class="card-top">
+              <h2 class="card-title">Top Wildfire Drivers</h2>
+              <span class="pill-tag">Permutation ROC-AUC Drop</span>
+            </div>
+            <div id="wf-importance-bars" class="bar-list"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ TAB 2: RISK SIMULATOR ══════════════ -->
+    <section class="tab-panel" id="tab-simulator">
+      <div class="sim-top-bar card-glass">
+        <div class="hazard-toggle">
+          <button class="hazard-btn active" data-hazard="wildfire">🔥 Wildfire Risk Estimator</button>
+          <button class="hazard-btn" data-hazard="landslide">⛰️ Preliminary Landslide Trigger</button>
+        </div>
+        <div class="preset-row">
+          <span class="preset-label">Real-World Scenarios:</span>
+          <button class="preset-btn" data-preset="mizoram_dry">🌵 Dry Pre-Monsoon</button>
+          <button class="preset-btn" data-preset="assam_monsoon">🌧️ Peak Monsoon</button>
+          <button class="preset-btn" data-preset="remal_cyclone">🌀 Cyclone Remal</button>
+          <button class="preset-btn" data-preset="arunachal_winter">❄️ Cool Winter</button>
+        </div>
+      </div>
+
+      <div id="landslide-caveat" class="caveat-banner" style="display:none">
+        <strong>⚠ Preliminary Weather-Trigger Mode:</strong> Static terrain layers (DEM/slope, WorldCover, SoilGrids, geology) are not locally available. This model evaluates hydrometeorological triggering only — antecedent IMD/ERA5 rainfall &amp; soil moisture.
+      </div>
+
+      <div class="sim-layout">
+        <div class="card-glass inputs-card">
+          <div class="card-top">
+            <h2 class="card-title">Environmental Inputs</h2>
+            <button class="btn-primary" id="btn-run-predict">
+              <svg viewBox="0 0 20 20" fill="currentColor" width="16"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/></svg>
+              Run Model
+            </button>
+          </div>
+          <div class="form-grid">
+            <div class="field-group">
+              <label>State</label>
+              <select id="in-state" class="styled-select">
+                <option value="Mizoram">Mizoram</option>
+                <option value="Assam">Assam</option>
+                <option value="Manipur">Manipur</option>
+                <option value="Meghalaya">Meghalaya</option>
+                <option value="Nagaland">Nagaland</option>
+                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                <option value="Tripura">Tripura</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label>IMD Season</label>
+              <select id="in-season" class="styled-select">
+                <option value="Pre-Monsoon">Pre-Monsoon (Mar–May)</option>
+                <option value="Monsoon">Monsoon (Jun–Sep)</option>
+                <option value="Post-Monsoon">Post-Monsoon (Oct–Nov)</option>
+                <option value="Winter">Winter (Dec–Feb)</option>
+              </select>
+            </div>
+            <div class="slider-field">
+              <label>Latitude (°N): <strong id="val-lat">23.5</strong></label>
+              <input type="range" id="in-lat" min="21.9" max="29.3" step="0.1" value="23.5" />
+            </div>
+            <div class="slider-field">
+              <label>Longitude (°E): <strong id="val-lon">92.8</strong></label>
+              <input type="range" id="in-lon" min="89.8" max="97.3" step="0.1" value="92.8" />
+            </div>
+            <div class="slider-field">
+              <label>Day of Year: <strong id="val-doy">90</strong> <span class="muted" id="val-doy-date">(Mar 31)</span></label>
+              <input type="range" id="in-doy" min="1" max="365" step="1" value="90" />
+            </div>
+            <div class="slider-field">
+              <label>ERA5 Temperature (°C): <strong id="val-temp">31.0</strong></label>
+              <input type="range" id="in-temp" min="0" max="37" step="0.5" value="31.0" />
+            </div>
+            <div class="slider-field">
+              <label>ERA5 Min Relative Humidity (%): <strong id="val-rh-min">18</strong></label>
+              <input type="range" id="in-rh-min" min="5" max="100" step="1" value="18" />
+            </div>
+            <div class="slider-field">
+              <label>ERA5 Soil Moisture (m³/m³): <strong id="val-soil">0.14</strong></label>
+              <input type="range" id="in-soil" min="0.05" max="0.50" step="0.01" value="0.14" />
+            </div>
+            <div class="slider-field">
+              <label>ERA5 Wind Speed (m/s): <strong id="val-wind">2.5</strong></label>
+              <input type="range" id="in-wind" min="0.1" max="12.0" step="0.1" value="2.5" />
+            </div>
+            <div class="slider-field">
+              <label>IMD Same-Day Rainfall (mm): <strong id="val-rain1d">0</strong></label>
+              <input type="range" id="in-rain1d" min="0" max="250" step="1" value="0" />
+            </div>
+            <div class="slider-field">
+              <label>IMD 3-Day Antecedent Rain (mm): <strong id="val-rain3d">0</strong></label>
+              <input type="range" id="in-rain3d" min="0" max="500" step="2" value="0" />
+            </div>
+            <div class="slider-field">
+              <label>IMD 7-Day Antecedent Rain (mm): <strong id="val-rain7d">0</strong></label>
+              <input type="range" id="in-rain7d" min="0" max="800" step="5" value="0" />
+            </div>
+            <div class="slider-field">
+              <label>IMD 15-Day Antecedent Rain (mm): <strong id="val-rain15d">0</strong></label>
+              <input type="range" id="in-rain15d" min="0" max="1200" step="10" value="0" />
+            </div>
+            <div class="slider-field">
+              <label>Consecutive Dry Days: <strong id="val-drydays">22</strong></label>
+              <input type="range" id="in-drydays" min="0" max="60" step="1" value="22" />
+            </div>
+          </div>
+        </div>
+
+        <div class="card-glass result-card" id="result-card">
+          <div class="card-top">
+            <h2 class="card-title" id="result-title">Wildfire Risk Estimate</h2>
+            <span class="pill-tag" id="result-model-tag">HistGradientBoosting</span>
+          </div>
+
+          <div class="gauge-container">
+            <svg viewBox="0 0 280 160" class="gauge-svg">
+              <!-- Track -->
+              <path d="M 30 140 A 110 110 0 0 1 250 140" fill="none" stroke="#1e293b" stroke-width="22" stroke-linecap="round"/>
+              <!-- Color arc segments (background rainbow) -->
+              <path d="M 30 140 A 110 110 0 0 1 95 50" fill="none" stroke="#22c55e" stroke-width="22" stroke-linecap="butt" opacity="0.2"/>
+              <path d="M 95 50 A 110 110 0 0 1 185 50" fill="none" stroke="#f59e0b" stroke-width="22" stroke-linecap="butt" opacity="0.2"/>
+              <path d="M 185 50 A 110 110 0 0 1 250 140" fill="none" stroke="#ef4444" stroke-width="22" stroke-linecap="butt" opacity="0.2"/>
+              <!-- Active arc -->
+              <path id="gauge-arc" d="M 30 140 A 110 110 0 0 1 250 140" fill="none" stroke="#22c55e" stroke-width="22" stroke-linecap="round" stroke-dasharray="346" stroke-dashoffset="346" style="transition: stroke-dashoffset 1.2s cubic-bezier(0.4,0,0.2,1), stroke 0.5s ease"/>
+              <!-- Needle -->
+              <line id="gauge-needle" x1="140" y1="140" x2="140" y2="50" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0" style="transform-origin: 140px 140px; transition: transform 1.2s cubic-bezier(0.4,0,0.2,1), opacity 0.3s"/>
+              <circle cx="140" cy="140" r="6" fill="white" opacity="0.8"/>
+              <!-- Score text -->
+              <text x="140" y="108" text-anchor="middle" class="gauge-pct" id="gauge-score-text">—</text>
+              <text x="140" y="128" text-anchor="middle" class="gauge-sub-label">Relative Risk Score</text>
+            </svg>
+            <div class="band-pill" id="result-band-pill">Run model to evaluate</div>
+          </div>
+
+          <div class="result-metrics" id="result-metrics"></div>
+
+          <div class="risk-bands">
+            <div class="risk-band-item low">
+              <div class="rb-dot"></div>
+              <div><strong>LOW</strong><br/><span>0 – 30%</span></div>
+            </div>
+            <div class="risk-band-item mod">
+              <div class="rb-dot"></div>
+              <div><strong>MODERATE</strong><br/><span>30 – 60%</span></div>
+            </div>
+            <div class="risk-band-item high">
+              <div class="rb-dot"></div>
+              <div><strong>HIGH</strong><br/><span>60 – 80%</span></div>
+            </div>
+            <div class="risk-band-item crit">
+              <div class="rb-dot"></div>
+              <div><strong>CRITICAL</strong><br/><span>80 – 100%</span></div>
+            </div>
+          </div>
+
+          <p class="fine-print">Research display bands — not validated operational thresholds. Predictions served live from trained <code>scikit-learn</code> pipelines in <code>models/*.joblib</code>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ TAB 3: MODEL COMPARISON ══════════════ -->
+    <section class="tab-panel" id="tab-models">
+      <div class="card-glass">
+        <div class="card-top">
+          <div>
+            <h2 class="card-title">Wildfire Classifier Comparison — CSET312 Syllabus + Extensions</h2>
+            <p class="card-desc">Train: 2021–2023 (Spatial 5-Fold CV) → Test: 2024 Realistic (1,000,000 cell-days, prevalence 0.035%)</p>
+          </div>
+        </div>
+        <div class="table-scroll">
+          <table id="tbl-wf-models" class="data-table"></table>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="card-glass">
+          <div class="card-top">
+            <h2 class="card-title">2024 Performance by State</h2>
+            <span class="pill-tag">Best: HistGradientBoosting</span>
+          </div>
+          <div class="table-scroll">
+            <table id="tbl-wf-state" class="data-table"></table>
+          </div>
+        </div>
+        <div class="card-glass">
+          <div class="card-top">
+            <h2 class="card-title">2024 Performance by Season</h2>
+            <span class="pill-tag">Realistic Prevalence</span>
+          </div>
+          <div class="table-scroll">
+            <table id="tbl-wf-season" class="data-table"></table>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-glass">
+        <div class="card-top">
+          <div>
+            <h2 class="card-title">Preliminary Landslide Classifier Comparison</h2>
+            <p class="card-desc">Weather-trigger only · Train: 97 Positives (2021–2023) → Test: 366 Positives (2024)</p>
+          </div>
+          <span class="pill-tag warn-tag">⚠ Missing DEM/Slope/Soil/Geology</span>
+        </div>
+        <div class="table-scroll">
+          <table id="tbl-ls-models" class="data-table"></table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ TAB 4: GALLERY ══════════════ -->
+    <section class="tab-panel" id="tab-gallery">
+      <div class="gallery-filter-bar">
+        <button class="filter-btn active" data-cat="all">All Visuals</button>
+        <button class="filter-btn" data-cat="maps">Geospatial Maps</button>
+        <button class="filter-btn" data-cat="wildfire">Wildfire ML</button>
+        <button class="filter-btn" data-cat="landslide">Landslide &amp; EDA</button>
+      </div>
+      <div class="gallery-grid" id="gallery-grid"></div>
+    </section>
+
+    <!-- ══════════════ TAB 5: AUDIT & LIMITATIONS ══════════════ -->
+    <section class="tab-panel" id="tab-audit">
+      <div class="two-col">
+        <div class="card-glass">
+          <div class="card-top">
+            <h2 class="card-title">Verified Data Audit (2021–2024)</h2>
+            <span class="pill-tag">Read-Only Raw Data Root</span>
+          </div>
+          <div id="audit-details" class="audit-list"></div>
+        </div>
+        <div class="card-glass">
+          <div class="card-top">
+            <h2 class="card-title">Honest Limitations &amp; Missing Layers</h2>
+            <span class="pill-tag warn-tag">Zero Fabricated Inputs</span>
+          </div>
+          <div id="limitations-list" class="audit-list"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" style="display:none" role="dialog" aria-modal="true">
+    <div class="lightbox-overlay" id="lightbox-overlay"></div>
+    <div class="lightbox-content">
+      <button id="lightbox-close" class="lightbox-close" aria-label="Close">✕</button>
+      <img id="lightbox-img" src="" alt="Visual" />
+      <div id="lightbox-caption" class="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

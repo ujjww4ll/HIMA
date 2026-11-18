@@ -1,0 +1,26 @@
+{
+  "projected_crs": "EPSG:32646",
+  "geographic_crs": "EPSG:4326",
+  "cell_size_m": 1000,
+  "edge_cell_policy": "centroid_within",
+  "origin_x_m": 170000,
+  "origin_y_m": 2426000,
+  "bbox_cols": 765,
+  "bbox_rows": 838,
+  "total_cells": 253408,
+  "cells_outside_boundary": 0,
+  "cells_per_state": {
+    "Arunachal Pradesh": 82127,
+    "Assam": 78446,
+    "Manipur": 22327,
+    "Meghalaya": 22418,
+    "Mizoram": 21070,
+    "Nagaland": 16583,
+    "Tripura": 10437
+  },
+  "resolution_limitation_note": "1 km grid is the unified analytical frame; coarser ERA5 (~9-11 km) and IMD (~25 km) weather inputs do not gain 1 km physical resolution through spatial joining.",
+  "outputs": {
+    "attributes_parquet": "C:\\Users\\lenovo\\Desktop\\aiml project\\data\\processed\\grid\\grid_1km_attributes.parquet",
+    "grid_gpkg": "C:\\Users\\lenovo\\Desktop\\aiml project\\data\\processed\\grid\\grid_1km.gpkg"
+  }
+}

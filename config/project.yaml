@@ -1,0 +1,66 @@
+project:
+  name: "HIMA - Hazard Intelligence, Monitoring & Assessment"
+  version: "1.0.0"
+  disclaimer: "Research risk estimate only — not an official warning."
+  random_state: 42
+
+paths:
+  # Read-only raw dataset root (never modify or overwrite files here)
+  raw_data_root: "C:/Users/lenovo/Downloads/hima"
+  # Workspace output roots (relative to project root)
+  interim_dir: "data/interim"
+  processed_dir: "data/processed"
+  reports_dir: "data/reports"
+  models_dir: "models"
+  outputs_dir: "outputs"
+
+scope:
+  study_region: "Northeast India (7 Sister States inside verified ERA5 extent 89.8E-97.4E)"
+  # Configurable list of Northeast India states.
+  # Note: Sikkim (88.0E-88.9E) lies ~100 km west of local processed ERA5 longitude cutoff (89.8E)
+  # and is therefore excluded from the ERA5-coupled spatial grid (documented in reports).
+  study_states:
+    - "Arunachal Pradesh"
+    - "Assam"
+    - "Manipur"
+    - "Meghalaya"
+    - "Mizoram"
+    - "Nagaland"
+    - "Tripura"
+  excluded_ne_states_note:
+    Sikkim: "Excluded from ERA5-coupled grid because local ERA5_Land_daily_*.nc starts at lon=89.8E while Sikkim spans 88.0E-88.9E."
+  target_years: [2021, 2022, 2023, 2024]
+  date_start: "2021-01-01"
+  date_end: "2024-12-31"
+
+geospatial:
+  geographic_crs: "EPSG:4326"
+  # WGS 84 / UTM zone 46N (metres) — central meridian 93E, covers Northeast India (88E-97.4E)
+  projected_crs: "EPSG:32646"
+  projected_crs_reason: "Metric projected CRS centered at 93E for Northeast India 1 km fishnet grid generation"
+  grid_cell_size_m: 1000
+  # Keep edge cells whose centroid falls inside the study boundary (documented in grid metadata)
+  edge_cell_policy: "centroid_within"
+
+weather:
+  rainfall_lags_days: [1, 3, 7, 15]
+  wildfire_rolling_days: [3, 7, 14]
+  prediction_cutoff: "same_day_weather_for_fire_risk_and_prior_lags"
+
+wildfire:
+  # Fresh row-level audit revealed DL_FIRE_SV-C2_816518.zip spans 2022-01-01..2023-12-31!
+  # Deduplicating overlapping 2022 records yields complete 2021-2024 FIRMS coverage.
+  valid_years_in_window: [2021, 2022, 2023, 2024]
+  missing_years_in_window: []
+  temporal_train_years: [2021, 2022, 2023]
+  temporal_test_years: [2024]
+  negative_sampling_ratio: 5
+  risk_bands:
+    - {label: "LOW", min_prob: 0.0, max_prob: 0.30}
+    - {label: "MODERATE", min_prob: 0.30, max_prob: 0.60}
+    - {label: "HIGH", min_prob: 0.60, max_prob: 0.80}
+    - {label: "CRITICAL", min_prob: 0.80, max_prob: 1.00}
+
+landslide:
+  min_dated_events_for_daily_model: 30
+  note: "Train daily classifier only if validated dated events meet sample threshold; otherwise produce EDA and document limitations."
