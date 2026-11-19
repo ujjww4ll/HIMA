@@ -23,6 +23,11 @@ if /I "%1"=="test" (
     exit /b %ERRORLEVEL%
 )
 
+if /I "%1"=="data" (
+    %PY% -c "import pandas as pd; df = pd.read_parquet('data/processed/wildfire.parquet'); print('=== HIMA WILDFIRE DATASET SAMPLE (Total Rows: 1,717,324 | Columns: 60) ==='); print(df[['date', 'state_name', 'temperature_c', 'relative_humidity_min', 'soil_water_layer1', 'imd_rain_1d', 'imd_days_since_rain', 'fire_detected']].head(12).to_string(index=False))"
+    exit /b %ERRORLEVEL%
+)
+
 if /I "%1"=="api" (
     %PY% -m src.api.predict
     exit /b %ERRORLEVEL%
