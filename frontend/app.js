@@ -690,14 +690,24 @@ document.querySelectorAll(".hazard-btn").forEach(btn => {
     document.querySelectorAll(".hazard-btn").forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
     currentHazard = btn.dataset.hazard;
+    const isFlood = currentHazard === "flood";
     const lsCaveat = document.getElementById("landslide-caveat");
     const floodCaveat = document.getElementById("flood-caveat");
+    const weatherInputs = document.getElementById("weather-inputs");
     const floodInputs = document.getElementById("flood-inputs");
+    const wfPresets = document.getElementById("wf-presets");
+    const floodPresets = document.getElementById("flood-presets");
+
     if (lsCaveat) lsCaveat.style.display = currentHazard === "landslide" ? "block" : "none";
-    if (floodCaveat) floodCaveat.style.display = currentHazard === "flood" ? "block" : "none";
-    if (floodInputs) floodInputs.style.display = currentHazard === "flood" ? "block" : "none";
+    if (floodCaveat) floodCaveat.style.display = isFlood ? "block" : "none";
+    if (weatherInputs) weatherInputs.style.display = isFlood ? "none" : "flex";
+    if (floodInputs) floodInputs.style.display = isFlood ? "flex" : "none";
+    if (wfPresets) wfPresets.style.display = isFlood ? "none" : "flex";
+    if (floodPresets) floodPresets.style.display = isFlood ? "flex" : "none";
+
     const titles = { wildfire: "Wildfire Risk Estimate", landslide: "Landslide Trigger Estimate", flood: "Flood Risk Estimate" };
     setText("result-title", titles[currentHazard] || "Risk Estimate");
+    setText("inputs-title", isFlood ? "Hydrological Flood Drivers (Antecedent Rain & Basin Scale)" : "Environmental Inputs");
   });
 });
 
@@ -726,6 +736,18 @@ const PRESETS = {
     lat: 27.5, lon: 94.1, doy: 20,
     temp: 11.0, "rh-min": 55, soil: 0.26, wind: 1.5,
     rain1d: 0, rain3d: 1, rain7d: 3, rain15d: 10, drydays: 14
+  },
+  flood_dry: {
+    t1d: 5, t3d: 15, t7d: 30, t10d: 45, catchment: 2000
+  },
+  flood_moderate: {
+    t1d: 40, t3d: 90, t7d: 180, t10d: 240, catchment: 8000
+  },
+  flood_heavy: {
+    t1d: 90, t3d: 200, t7d: 350, t10d: 480, catchment: 18000
+  },
+  flood_extreme: {
+    t1d: 160, t3d: 320, t7d: 550, t10d: 750, catchment: 35000
   }
 };
 
@@ -733,18 +755,25 @@ document.querySelectorAll(".preset-btn").forEach(btn => {
   btn.addEventListener("click", () => {
     const p = PRESETS[btn.dataset.preset];
     if (!p) return;
-    if (document.getElementById("in-state")) document.getElementById("in-state").value = p.state;
-    if (document.getElementById("in-season")) document.getElementById("in-season").value = p.season;
-    ["lat","lon","doy","temp","rh-min","soil","wind","rain1d","rain3d","rain7d","rain15d","drydays"].forEach(id => {
-      const val = p[id];
-      if (val !== undefined) {
-        setSlider("in-"+id, "val-"+id, val);
-        if (id === "doy") {
-          const d = new Date(2024, 0, parseInt(val));
-          setText("val-doy-date", `(${d.toLocaleDateString("en", { month: "short", day: "numeric" })})`);
+    if (p.t1d !== undefined) {
+      ["t1d","t3d","t7d","t10d","catchment"].forEach(id => {
+        if (p[id] !== undefined) setSlider("in-" + id, "val-" + id, p[id]);
+      });
+      runPrediction();
+    } else {
+      if (document.getElementById("in-state")) document.getElementById("in-state").value = p.state;
+      if (document.getElementById("in-season")) document.getElementById("in-season").value = p.season;
+      ["lat","lon","doy","temp","rh-min","soil","wind","rain1d","rain3d","rain7d","rain15d","drydays"].forEach(id => {
+        const val = p[id];
+        if (val !== undefined) {
+          setSlider("in-"+id, "val-"+id, val);
+          if (id === "doy") {
+            const d = new Date(2024, 0, parseInt(val));
+            setText("val-doy-date", `(${d.toLocaleDateString("en", { month: "short", day: "numeric" })})`);
+          }
         }
-      }
-    });
+      });
+    }
     btn.style.borderColor = "var(--fire)";
     btn.style.color = "var(--fire)";
     setTimeout(() => { btn.style.borderColor = ""; btn.style.color = ""; }, 1500);
@@ -888,12 +917,22 @@ function displayResult(pred, data) {
   // Metrics grid
   const metricsEl = document.getElementById("result-metrics");
   if (metricsEl) {
-    const rows = [
-      { label: "Raw Risk Score", value: (rawScore * 100).toFixed(1) + "%", color: bandColor(band) },
-      { label: "Calibrated Prob.", value: (calProb * 100).toFixed(4) + "%" },
-      { label: "Alert Triggered", value: alert ? "YES ⚠" : "No", color: alert ? "#ef4444" : "" },
-      { label: "Model", value: data.model_name || "—" },
-    ];
+    let rows;
+    if (data.hazard === "flood") {
+      rows = [
+        { label: "Danger Level Exceedance", value: (rawScore * 100).toFixed(1) + "%", color: bandColor(band) },
+        { label: "Op. Threshold", value: ((data.operating_threshold_raw_score || 0.2849) * 100).toFixed(1) + "%" },
+        { label: "Alert Triggered", value: alert ? "YES ⚠ (FLOOD RISK)" : "Normal / Below Danger", color: alert ? "#ef4444" : "#22c55e" },
+        { label: "Model", value: data.model_name || "HistGradientBoosting" },
+      ];
+    } else {
+      rows = [
+        { label: "Raw Risk Score", value: (rawScore * 100).toFixed(1) + "%", color: bandColor(band) },
+        { label: "Calibrated Prob.", value: (calProb * 100).toFixed(4) + "%" },
+        { label: "Alert Triggered", value: alert ? "YES ⚠" : "No", color: alert ? "#ef4444" : "" },
+        { label: "Model", value: data.model_name || "—" },
+      ];
+    }
     metricsEl.innerHTML = rows.map(r =>
       `<div class="metric-box">
         <div class="mv" ${r.color ? `style="color:${r.color}"` : ""}>${r.value}</div>

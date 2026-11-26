@@ -195,12 +195,19 @@
           <button class="hazard-btn" data-hazard="landslide">⛰️ Preliminary Landslide Trigger</button>
           <button class="hazard-btn" data-hazard="flood">🌊 Flood Risk Estimator</button>
         </div>
-        <div class="preset-row">
+        <div class="preset-row" id="wf-presets">
           <span class="preset-label">Real-World Scenarios:</span>
           <button class="preset-btn" data-preset="mizoram_dry">🌵 Dry Pre-Monsoon</button>
           <button class="preset-btn" data-preset="assam_monsoon">🌧️ Peak Monsoon</button>
           <button class="preset-btn" data-preset="remal_cyclone">🌀 Cyclone Remal</button>
           <button class="preset-btn" data-preset="arunachal_winter">❄️ Cool Winter</button>
+        </div>
+        <div class="preset-row" id="flood-presets" style="display:none">
+          <span class="preset-label">Flood Scenarios:</span>
+          <button class="preset-btn" data-preset="flood_dry">☀️ Low Flow (Dry)</button>
+          <button class="preset-btn" data-preset="flood_moderate">🌧️ Moderate Monsoon</button>
+          <button class="preset-btn" data-preset="flood_heavy">🌊 Heavy Flood Surge</button>
+          <button class="preset-btn" data-preset="flood_extreme">🌀 Extreme Inundation</button>
         </div>
       </div>
 
@@ -215,97 +222,99 @@
       <div class="sim-layout">
         <div class="card-glass inputs-card">
           <div class="card-top">
-            <h2 class="card-title">Environmental Inputs</h2>
+            <h2 class="card-title" id="inputs-title">Environmental Inputs</h2>
             <button class="btn-primary" id="btn-run-predict">
               <svg viewBox="0 0 20 20" fill="currentColor" width="16"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/></svg>
               Run Model
             </button>
           </div>
           <div class="form-grid">
-            <div class="field-group">
-              <label>State</label>
-              <select id="in-state" class="styled-select">
-                <option value="Mizoram">Mizoram</option>
-                <option value="Assam">Assam</option>
-                <option value="Manipur">Manipur</option>
-                <option value="Meghalaya">Meghalaya</option>
-                <option value="Nagaland">Nagaland</option>
-                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                <option value="Tripura">Tripura</option>
-              </select>
-            </div>
-            <div class="field-group">
-              <label>IMD Season</label>
-              <select id="in-season" class="styled-select">
-                <option value="Pre-Monsoon">Pre-Monsoon (Mar–May)</option>
-                <option value="Monsoon">Monsoon (Jun–Sep)</option>
-                <option value="Post-Monsoon">Post-Monsoon (Oct–Nov)</option>
-                <option value="Winter">Winter (Dec–Feb)</option>
-              </select>
-            </div>
-            <div class="slider-field">
-              <label>Latitude (°N): <strong id="val-lat">23.5</strong></label>
-              <input type="range" id="in-lat" min="21.9" max="29.3" step="0.1" value="23.5" />
-            </div>
-            <div class="slider-field">
-              <label>Longitude (°E): <strong id="val-lon">92.8</strong></label>
-              <input type="range" id="in-lon" min="89.8" max="97.3" step="0.1" value="92.8" />
-            </div>
-            <div class="slider-field">
-              <label>Day of Year: <strong id="val-doy">90</strong> <span class="muted" id="val-doy-date">(Mar 31)</span></label>
-              <input type="range" id="in-doy" min="1" max="365" step="1" value="90" />
-            </div>
-            <div class="slider-field">
-              <label>ERA5 Temperature (°C): <strong id="val-temp">31.0</strong></label>
-              <input type="range" id="in-temp" min="0" max="37" step="0.5" value="31.0" />
-            </div>
-            <div class="slider-field">
-              <label>ERA5 Min Relative Humidity (%): <strong id="val-rh-min">18</strong></label>
-              <input type="range" id="in-rh-min" min="5" max="100" step="1" value="18" />
-            </div>
-            <div class="slider-field">
-              <label>ERA5 Soil Moisture (m³/m³): <strong id="val-soil">0.14</strong></label>
-              <input type="range" id="in-soil" min="0.05" max="0.50" step="0.01" value="0.14" />
-            </div>
-            <div class="slider-field">
-              <label>ERA5 Wind Speed (m/s): <strong id="val-wind">2.5</strong></label>
-              <input type="range" id="in-wind" min="0.1" max="12.0" step="0.1" value="2.5" />
-            </div>
-            <div class="slider-field">
-              <label>IMD Same-Day Rainfall (mm): <strong id="val-rain1d">0</strong></label>
-              <input type="range" id="in-rain1d" min="0" max="250" step="1" value="0" />
-            </div>
-            <div class="slider-field">
-              <label>IMD 3-Day Antecedent Rain (mm): <strong id="val-rain3d">0</strong></label>
-              <input type="range" id="in-rain3d" min="0" max="500" step="2" value="0" />
-            </div>
-            <div class="slider-field">
-              <label>IMD 7-Day Antecedent Rain (mm): <strong id="val-rain7d">0</strong></label>
-              <input type="range" id="in-rain7d" min="0" max="800" step="5" value="0" />
-            </div>
-            <div class="slider-field">
-              <label>IMD 15-Day Antecedent Rain (mm): <strong id="val-rain15d">0</strong></label>
-              <input type="range" id="in-rain15d" min="0" max="1200" step="10" value="0" />
-            </div>
-            <div class="slider-field">
-              <label>Consecutive Dry Days: <strong id="val-drydays">22</strong></label>
-              <input type="range" id="in-drydays" min="0" max="60" step="1" value="22" />
-            </div>
-            <div id="flood-inputs" style="display:none">
+            <div id="weather-inputs" style="display:flex; flex-direction:column; gap:14px;">
+              <div class="field-group">
+                <label>State</label>
+                <select id="in-state" class="styled-select">
+                  <option value="Mizoram">Mizoram</option>
+                  <option value="Assam">Assam</option>
+                  <option value="Manipur">Manipur</option>
+                  <option value="Meghalaya">Meghalaya</option>
+                  <option value="Nagaland">Nagaland</option>
+                  <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                  <option value="Tripura">Tripura</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label>IMD Season</label>
+                <select id="in-season" class="styled-select">
+                  <option value="Pre-Monsoon">Pre-Monsoon (Mar–May)</option>
+                  <option value="Monsoon">Monsoon (Jun–Sep)</option>
+                  <option value="Post-Monsoon">Post-Monsoon (Oct–Nov)</option>
+                  <option value="Winter">Winter (Dec–Feb)</option>
+                </select>
+              </div>
               <div class="slider-field">
-                <label>Rainfall T1d — 1-Day Antecedent (mm): <strong id="val-t1d">25</strong></label>
+                <label>Latitude (°N): <strong id="val-lat">23.5</strong></label>
+                <input type="range" id="in-lat" min="21.9" max="29.3" step="0.1" value="23.5" />
+              </div>
+              <div class="slider-field">
+                <label>Longitude (°E): <strong id="val-lon">92.8</strong></label>
+                <input type="range" id="in-lon" min="89.8" max="97.3" step="0.1" value="92.8" />
+              </div>
+              <div class="slider-field">
+                <label>Day of Year: <strong id="val-doy">90</strong> <span class="muted" id="val-doy-date">(Mar 31)</span></label>
+                <input type="range" id="in-doy" min="1" max="365" step="1" value="90" />
+              </div>
+              <div class="slider-field">
+                <label>ERA5 Temperature (°C): <strong id="val-temp">31.0</strong></label>
+                <input type="range" id="in-temp" min="0" max="37" step="0.5" value="31.0" />
+              </div>
+              <div class="slider-field">
+                <label>ERA5 Min Relative Humidity (%): <strong id="val-rh-min">18</strong></label>
+                <input type="range" id="in-rh-min" min="5" max="100" step="1" value="18" />
+              </div>
+              <div class="slider-field">
+                <label>ERA5 Soil Moisture (m³/m³): <strong id="val-soil">0.14</strong></label>
+                <input type="range" id="in-soil" min="0.05" max="0.50" step="0.01" value="0.14" />
+              </div>
+              <div class="slider-field">
+                <label>ERA5 Wind Speed (m/s): <strong id="val-wind">2.5</strong></label>
+                <input type="range" id="in-wind" min="0.1" max="12.0" step="0.1" value="2.5" />
+              </div>
+              <div class="slider-field">
+                <label>IMD Same-Day Rainfall (mm): <strong id="val-rain1d">0</strong></label>
+                <input type="range" id="in-rain1d" min="0" max="250" step="1" value="0" />
+              </div>
+              <div class="slider-field">
+                <label>IMD 3-Day Antecedent Rain (mm): <strong id="val-rain3d">0</strong></label>
+                <input type="range" id="in-rain3d" min="0" max="500" step="2" value="0" />
+              </div>
+              <div class="slider-field">
+                <label>IMD 7-Day Antecedent Rain (mm): <strong id="val-rain7d">0</strong></label>
+                <input type="range" id="in-rain7d" min="0" max="800" step="5" value="0" />
+              </div>
+              <div class="slider-field">
+                <label>IMD 15-Day Antecedent Rain (mm): <strong id="val-rain15d">0</strong></label>
+                <input type="range" id="in-rain15d" min="0" max="1200" step="10" value="0" />
+              </div>
+              <div class="slider-field">
+                <label>Consecutive Dry Days: <strong id="val-drydays">22</strong></label>
+                <input type="range" id="in-drydays" min="0" max="60" step="1" value="22" />
+              </div>
+            </div>
+            <div id="flood-inputs" style="display:none; flex-direction:column; gap:14px;">
+              <div class="slider-field">
+                <label>Rainfall T1d — 1-Day Flash Rain (mm): <strong id="val-t1d">25</strong></label>
                 <input type="range" id="in-t1d" min="0" max="200" step="1" value="25" />
               </div>
               <div class="slider-field">
-                <label>Rainfall T3d — 3-Day Antecedent (mm): <strong id="val-t3d">75</strong></label>
+                <label>Rainfall T3d — 3-Day Cumulative (mm): <strong id="val-t3d">75</strong></label>
                 <input type="range" id="in-t3d" min="0" max="500" step="5" value="75" />
               </div>
               <div class="slider-field">
-                <label>Rainfall T7d — 7-Day Antecedent (mm): <strong id="val-t7d">150</strong></label>
+                <label>Rainfall T7d — 7-Day Cumulative (mm): <strong id="val-t7d">150</strong></label>
                 <input type="range" id="in-t7d" min="0" max="800" step="10" value="150" />
               </div>
               <div class="slider-field">
-                <label>Rainfall T10d — 10-Day Antecedent (mm): <strong id="val-t10d">200</strong></label>
+                <label>Rainfall T10d — 10-Day Cumulative (mm): <strong id="val-t10d">200</strong></label>
                 <input type="range" id="in-t10d" min="0" max="1000" step="10" value="200" />
               </div>
               <div class="slider-field">
