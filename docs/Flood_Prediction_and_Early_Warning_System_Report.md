@@ -2,7 +2,7 @@
 ## with Multi-Hazard Landslide and Wildfire Intelligence
 **Course:** Application of Artificial Intelligence (AI-ML / CSET312)  
 **Academic Capstone Project Report**  
-**Team Members:** Ujjwal (Lead), Member 2, Member 3, Member 4, Malvika, Shubhangi, Sonam  
+**Team Members:** Sachin (Lead), Anshul, Ujjwal, Aadi, Malvika, Shubhangi, Sonam  
 
 ---
 
@@ -17,10 +17,13 @@ Coupling NASA FIRMS VIIRS (219,928 fires), IMD 0.25° Gridded Daily Rainfall (48
 
 | Member | Role Title | Codebase Ownership | Core Technical Contribution |
 | :--- | :--- | :--- | :--- |
-| **Ujjwal (Lead)** | Full-Stack AI Engineer | `frontend/`, `src/api/predict.py`, `run_hima.bat` | Web dashboard, REST API server, SVG map, live gauge, pipeline launcher. |
-| **Member 2** | Geospatial Data Lead | `src/geospatial/`, `src/audit/`, `src/ingestion/` | 253,408 1 km² grid (EPSG:32646), FIRMS fires, IMD/ERA5 KD-Tree joins. |
-| **Member 3** | Wildfire ML Lead | `src/features/`, `src/training/wildfire_pipelines.py` | 33 features, cyclical DOY transformations, 6-classifier wildfire benchmark. |
-| **Member 4** | Landslide & QA Lead | `src/ingestion/gsi.py`, `src/training/landslide_pipelines.py`, `tests/` | GSI PDF mining via pdfplumber, Bayesian prior odds calibration, 9 pytest test cases. |
+| **Sachin (Lead)** | Full-Stack AI Engineer | `frontend/`, `src/api/predict.py`, `run_hima.bat` | Web dashboard, REST API server, SVG map, live gauge, pipeline launcher. |
+| **Anshul** | Geospatial Data Lead | `src/geospatial/`, `src/audit/`, `src/ingestion/` | 253,408 1 km² grid (EPSG:32646), FIRMS fires, IMD/ERA5 KD-Tree joins. |
+| **Ujjwal** | Wildfire ML Lead | `src/features/`, `src/training/wildfire_pipelines.py` | 33 features, cyclical DOY transformations, 6-classifier wildfire benchmark. |
+| **Aadi** | Landslide & QA Lead | `src/ingestion/gsi.py`, `src/training/landslide_pipelines.py`, `tests/` | GSI PDF mining via pdfplumber, Bayesian prior odds calibration, 9 pytest test cases. |
+| **Malvika** | Flood Ingestion Lead | `src/ingestion/flood.py`, `data/raw/flood/` | INDOFLOODS ingestion (4,548 events), CHIRPS antecedent lags (T1d–T10d), Parquet sync. |
+| **Shubhangi** | Flood ML Lead | `src/training/flood_pipelines.py`, `models/flood_model.joblib` | 6 flood classifiers benchmark, GBDT tuning (0.9557 Test ROC-AUC, 98.56% Recall). |
+| **Sonam** | Domain Transfer Lead | `src/api/predict.py`, `frontend/app.js` | Solved spatial coordinate domain shift (1.7% bug), catchment scaling (100–50k km²), flood presets. |
 | **Malvika** | Flood Ingestion Lead | `src/ingestion/flood.py`, `data/raw/flood/` | INDOFLOODS ingestion (4,548 events), CHIRPS antecedent lags (T1d–T10d), Parquet sync. |
 | **Shubhangi** | Flood ML Lead | `src/training/flood_pipelines.py`, `models/flood_model.joblib` | 6 flood classifiers benchmark, GBDT tuning (0.9557 Test ROC-AUC, 98.56% Recall). |
 | **Sonam** | Domain Transfer Lead | `src/api/predict.py`, `frontend/app.js` | Solved spatial coordinate domain shift (1.7% bug), catchment scaling (100–50k km²), flood presets. |

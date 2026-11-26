@@ -135,7 +135,7 @@ def create_report():
     p_meta.add_run("Application of Artificial Intelligence (AI-ML / CSET312) • Academic Capstone Project\n")
     r2 = p_meta.add_run("Team Members & Technical Leads:\n")
     r2.font.bold = True
-    p_meta.add_run("Ujjwal (Team Lead) • Member 2 • Member 3 • Member 4 • Malvika • Shubhangi • Sonam\n")
+    p_meta.add_run("Sachin (Team Lead) • Anshul • Ujjwal • Aadi • Malvika • Shubhangi • Sonam\n")
     p_meta.add_run("Verified Study Window: 2021–2024 • Metric Grid: EPSG:32646 (253,408 cells) • INDOFLOODS Gauges: 1965–2020\n")
     p_meta.paragraph_format.space_after = Pt(20)
 
@@ -175,16 +175,16 @@ def create_report():
     
     headers_team = ["Member", "Role Title", "Codebase & Directory Ownership", "Primary Deliverables & Responsibilities"]
     rows_team = [
-        ["Ujjwal (Lead)", "Full-Stack AI Engineer & System Integration Lead", 
+        ["Sachin (Lead)", "Full-Stack AI Engineer & System Integration Lead", 
          "frontend/index.html, app.js, styles.css, src/api/predict.py, run_hima.bat",
          "Architected single-page web dashboard, multi-threaded REST API server, offline SVG choropleth map, animated risk gauge, and pipeline launcher."],
-        ["Member 2", "Geospatial Engineering & Multi-Source Ingestion Lead", 
+        ["Anshul", "Geospatial Engineering & Multi-Source Ingestion Lead", 
          "src/geospatial/, src/audit/, src/ingestion/firms.py, imd.py, era5.py",
          "Engineered 253,408 1 km² fishnet grid in UTM Zone 46N (EPSG:32646), ingested 219k FIRMS fires, IMD NetCDF, and ERA5 reanalysis via KD-Tree."],
-        ["Member 3", "Feature Engineering & Wildfire ML Lead", 
+        ["Ujjwal", "Feature Engineering & Wildfire ML Lead", 
          "src/features/weather_features.py, src/training/wildfire_pipelines.py",
          "Engineered 33 spatiotemporal features, cyclical DOY transformations, dewpoint depression, and trained 6 wildfire models (0.9358 Test ROC-AUC)."],
-        ["Member 4", "Landslide Modeling & Quality Assurance Lead", 
+        ["Aadi", "Landslide Modeling & Quality Assurance Lead", 
          "src/ingestion/gsi.py, src/training/landslide_pipelines.py, tests/",
          "Mined 9,970 GSI landslide records via pdfplumber, implemented Bayesian prior odds calibration, and authored 9 automated pytest test cases."],
         ["Malvika", "Flood Data Ingestion & CHIRPS Hydrology Lead", 
@@ -296,7 +296,7 @@ def create_report():
     # ═══════════════════════════════════════════════════════════════════════════
     add_h1("Chapter 6: Wildfire and Landslide Early Warning Pipelines")
     add_p(
-        "Engineered by Member 3 (Wildfire) and Member 4 (Landslide), the secondary hazard modules evaluate thermal satellite active fires "
+        "Engineered by Ujjwal (Wildfire) and Aadi (Landslide), the secondary hazard modules evaluate thermal satellite active fires "
         "and slope instability triggers:"
     )
     add_h2("Wildfire Benchmark on Realistic Prevalence")
@@ -318,7 +318,7 @@ def create_report():
     # ═══════════════════════════════════════════════════════════════════════════
     add_h1("Chapter 7: Full-Stack Web Architecture & Real-Time API")
     add_p(
-        "Engineered by Ujjwal (Full-Stack AI Lead), the user-facing platform provides zero-dependency deployment and real-time inference:"
+        "Engineered by Sachin (Full-Stack AI Lead), the user-facing platform provides zero-dependency deployment and real-time inference:"
     )
     add_bullet("Native SPA Architecture: Developed in pure HTML5, CSS3, and modern Vanilla JS (ES6+), eliminating massive node_modules dependencies.", "Web Dashboard: ")
     add_bullet("Multi-Threaded HTTP Server: Implemented in src/api/predict.py using Python ThreadingHTTPServer. Serves both static frontend assets and JSON REST endpoints on port 8000.", "REST API Server: ")
@@ -331,7 +331,7 @@ def create_report():
     # ═══════════════════════════════════════════════════════════════════════════
     add_h1("Chapter 8: Quality Assurance & 9 Automated Pytest Cases")
     add_p(
-        "Authored by Member 4 (Landslide & QA Lead), the automated test suite enforces rigorous mathematical and software integrity "
+        "Authored by Aadi (Landslide & QA Lead), the automated test suite enforces rigorous mathematical and software integrity "
         "via `pytest -v`. All 9 tests pass in 2.85 seconds:"
     )
     add_bullet("test_config_loads_and_has_disclaimer: Asserts configuration YAML loads cleanly and contains mandatory research disclaimer.", "Test 1: ")
@@ -371,7 +371,7 @@ def create_report():
 ## with Multi-Hazard Landslide and Wildfire Intelligence
 **Course:** Application of Artificial Intelligence (AI-ML / CSET312)  
 **Academic Capstone Project Report**  
-**Team Members:** Ujjwal (Lead), Member 2, Member 3, Member 4, Malvika, Shubhangi, Sonam  
+**Team Members:** Sachin (Lead), Anshul, Ujjwal, Aadi, Malvika, Shubhangi, Sonam  
 
 ---
 
@@ -386,10 +386,13 @@ Coupling NASA FIRMS VIIRS (219,928 fires), IMD 0.25° Gridded Daily Rainfall (48
 
 | Member | Role Title | Codebase Ownership | Core Technical Contribution |
 | :--- | :--- | :--- | :--- |
-| **Ujjwal (Lead)** | Full-Stack AI Engineer | `frontend/`, `src/api/predict.py`, `run_hima.bat` | Web dashboard, REST API server, SVG map, live gauge, pipeline launcher. |
-| **Member 2** | Geospatial Data Lead | `src/geospatial/`, `src/audit/`, `src/ingestion/` | 253,408 1 km² grid (EPSG:32646), FIRMS fires, IMD/ERA5 KD-Tree joins. |
-| **Member 3** | Wildfire ML Lead | `src/features/`, `src/training/wildfire_pipelines.py` | 33 features, cyclical DOY transformations, 6-classifier wildfire benchmark. |
-| **Member 4** | Landslide & QA Lead | `src/ingestion/gsi.py`, `src/training/landslide_pipelines.py`, `tests/` | GSI PDF mining via pdfplumber, Bayesian prior odds calibration, 9 pytest test cases. |
+| **Sachin (Lead)** | Full-Stack AI Engineer | `frontend/`, `src/api/predict.py`, `run_hima.bat` | Web dashboard, REST API server, SVG map, live gauge, pipeline launcher. |
+| **Anshul** | Geospatial Data Lead | `src/geospatial/`, `src/audit/`, `src/ingestion/` | 253,408 1 km² grid (EPSG:32646), FIRMS fires, IMD/ERA5 KD-Tree joins. |
+| **Ujjwal** | Wildfire ML Lead | `src/features/`, `src/training/wildfire_pipelines.py` | 33 features, cyclical DOY transformations, 6-classifier wildfire benchmark. |
+| **Aadi** | Landslide & QA Lead | `src/ingestion/gsi.py`, `src/training/landslide_pipelines.py`, `tests/` | GSI PDF mining via pdfplumber, Bayesian prior odds calibration, 9 pytest test cases. |
+| **Malvika** | Flood Ingestion Lead | `src/ingestion/flood.py`, `data/raw/flood/` | INDOFLOODS ingestion (4,548 events), CHIRPS antecedent lags (T1d–T10d), Parquet sync. |
+| **Shubhangi** | Flood ML Lead | `src/training/flood_pipelines.py`, `models/flood_model.joblib` | 6 flood classifiers benchmark, GBDT tuning (0.9557 Test ROC-AUC, 98.56% Recall). |
+| **Sonam** | Domain Transfer Lead | `src/api/predict.py`, `frontend/app.js` | Solved spatial coordinate domain shift (1.7% bug), catchment scaling (100–50k km²), flood presets. |
 | **Malvika** | Flood Ingestion Lead | `src/ingestion/flood.py`, `data/raw/flood/` | INDOFLOODS ingestion (4,548 events), CHIRPS antecedent lags (T1d–T10d), Parquet sync. |
 | **Shubhangi** | Flood ML Lead | `src/training/flood_pipelines.py`, `models/flood_model.joblib` | 6 flood classifiers benchmark, GBDT tuning (0.9557 Test ROC-AUC, 98.56% Recall). |
 | **Sonam** | Domain Transfer Lead | `src/api/predict.py`, `frontend/app.js` | Solved spatial coordinate domain shift (1.7% bug), catchment scaling (100–50k km²), flood presets. |

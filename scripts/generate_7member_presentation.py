@@ -2,7 +2,7 @@
 Generate comprehensive PowerPoint Presentation for:
 Flood Prediction and Early Warning System
 (with Multi-Hazard Landslide & Wildfire Intelligence)
-7-Member Team Breakdown: Ujjwal, Member 2, Member 3, Member 4, Malvika, Shubhangi, Sonam
+7-Member Team Breakdown: Sachin, Anshul, Ujjwal, Aadi, Malvika, Shubhangi, Sonam
 """
 from __future__ import annotations
 import sys
@@ -36,13 +36,13 @@ ROSE      = RGBColor(0xF4, 0x3F, 0x5E)  # Rose
 RED       = RGBColor(0xEF, 0x44, 0x44)  # Red
 
 # Member Colors (7 distinct vibrant colors)
-C_UJJWAL    = CYAN     # Full Stack & Architecture
-C_M2        = LIME     # Geospatial & Grid
-C_M3        = ORANGE   # Wildfire ML
-C_M4        = PURPLE   # Landslide ML & QA
-C_MALVIKA   = TEAL     # Flood Ingestion & Hydrology
-C_SHUBHANGI = BLUE     # Flood ML & Benchmark
-C_SONAM     = GOLD     # Multi-Hazard & Domain Shift
+C_SACHIN    = CYAN     # Full Stack & Architecture (M1)
+C_ANSHUL    = LIME     # Geospatial & Grid (M2)
+C_UJJWAL    = ORANGE   # Wildfire ML & Feature Engineering (M3)
+C_AADI      = PURPLE   # Landslide ML & QA (M4)
+C_MALVIKA   = TEAL     # Flood Ingestion & Hydrology (M5)
+C_SHUBHANGI = BLUE     # Flood ML & Benchmark (M6)
+C_SONAM     = GOLD     # Multi-Hazard & Domain Shift (M7)
 
 prs = Presentation()
 prs.slide_width  = Inches(13.333)
@@ -140,10 +140,10 @@ add_text(s1, "An End-to-End Machine Learning Framework Coupling NASA FIRMS, IMD 
 # 7 Member Grid on Title Slide
 add_text(s1, "TEAM MEMBERS & TECHNICAL OWNERSHIP:", 1.2, 3.85, 10.5, 0.3, font_size=11, bold=True, color=WHITE)
 team_cols = [
-    ("Ujjwal (Lead)", "Full Stack & Web Architecture", C_UJJWAL),
-    ("Member 2", "Geospatial Grid & Weather Ingest", C_M2),
-    ("Member 3", "Wildfire ML & Feature Eng.", C_M3),
-    ("Member 4", "Landslide ML, Calibration & QA", C_M4),
+    ("Sachin (Lead)", "Full Stack & Web Architecture", C_SACHIN),
+    ("Anshul", "Geospatial Grid & Weather Ingest", C_ANSHUL),
+    ("Ujjwal", "Wildfire ML & Feature Eng.", C_UJJWAL),
+    ("Aadi", "Landslide ML, Calibration & QA", C_AADI),
     ("Malvika", "Flood Ingestion & CHIRPS Hydrology", C_MALVIKA),
     ("Shubhangi", "Flood ML & 6-Model Benchmark", C_SHUBHANGI),
     ("Sonam", "Multi-Hazard & Domain Transfer", C_SONAM),
@@ -171,11 +171,11 @@ cards_s2 = [
     ("⛰️ Rainfall Landslides (Cascading)", 
      "• Intense rainfall saturates hillslopes, triggering fatal debris flows in fragile terrains.\n"
      "• Complex trigger mechanics: immediate same-day rain vs 3–15 day antecedent moisture accumulation.\n"
-     "• Need: Hydrometeorological trigger modeling calibrated for rare-event baseline priors.", C_M4),
+     "• Need: Hydrometeorological trigger modeling calibrated for rare-event baseline priors.", C_AADI),
     ("🔥 Pre-Monsoon Wildfires (Compound)", 
      "• Arid pre-monsoon spells (Feb–May) trigger severe forest fires across Northeast India.\n"
      "• Forest burning strips vegetative root cover, severely exacerbating monsoon soil erosion and flash runoff.\n"
-     "• Need: Coupling thermal satellite detections with ERA5 atmospheric drying indices.", C_M3),
+     "• Need: Coupling thermal satellite detections with ERA5 atmospheric drying indices.", C_UJJWAL),
 ]
 for i, (title, desc, col) in enumerate(cards_s2):
     x = 0.6 + i * 4.1
@@ -192,10 +192,10 @@ set_bg(s3, DARK_BG)
 add_header(s3, "7-Member Architectural Responsibility Matrix", "Complete Technical Ownership Across Codebase, Models, Data & Verification")
 
 mem_matrix = [
-    ("Ujjwal", "Full Stack AI Lead", "frontend/index.html, app.js, styles.css, src/api/predict.py", "Interactive Web UI, Live Multi-Hazard Gauge, REST API Server", C_UJJWAL),
-    ("Member 2", "Geospatial Data Lead", "src/geospatial/, src/audit/, src/ingestion/firms.py, imd.py", "253,408 Grid Cells (EPSG:32646), FIRMS Fires, IMD & ERA5 Ingestion", C_M2),
-    ("Member 3", "Wildfire ML Lead", "src/features/weather_features.py, src/training/wildfire_pipelines.py", "33 Features, Cyclical Encodings, Wildfire 6-Model Benchmark (0.9358 AUC)", C_M3),
-    ("Member 4", "Landslide & QA Lead", "src/ingestion/gsi.py, src/training/landslide_pipelines.py, tests/", "GSI PDF Mining, Bayesian Prior Calibration, 9 Pytest Integrity Tests", C_M4),
+    ("Sachin", "Full Stack AI Lead", "frontend/index.html, app.js, styles.css, src/api/predict.py", "Interactive Web UI, Live Multi-Hazard Gauge, REST API Server", C_SACHIN),
+    ("Anshul", "Geospatial Data Lead", "src/geospatial/, src/audit/, src/ingestion/firms.py, imd.py", "253,408 Grid Cells (EPSG:32646), FIRMS Fires, IMD & ERA5 Ingestion", C_ANSHUL),
+    ("Ujjwal", "Wildfire ML Lead", "src/features/weather_features.py, src/training/wildfire_pipelines.py", "33 Features, Cyclical Encodings, Wildfire 6-Model Benchmark (0.9358 AUC)", C_UJJWAL),
+    ("Aadi", "Landslide & QA Lead", "src/ingestion/gsi.py, src/training/landslide_pipelines.py, tests/", "GSI PDF Mining, Bayesian Prior Calibration, 9 Pytest Integrity Tests", C_AADI),
     ("Malvika", "Flood Ingestion Lead", "src/ingestion/flood.py, data/raw/flood/, config/project.yaml", "INDOFLOODS Ingestion (4,548 events), CHIRPS T1d–T10d Lags, Parquet Sync", C_MALVIKA),
     ("Shubhangi", "Flood ML Lead", "src/training/flood_pipelines.py, models/flood_model.joblib", "Flood 6-Model Benchmark, HistGradientBoosting Tuning (0.9557 Test AUC)", C_SHUBHANGI),
     ("Sonam", "Domain Transfer Lead", "src/api/predict.py, src/evaluation/metrics.py, frontend/app.js", "Spatial Confounder Elimination, Catchment Scaling, Multi-Hazard Scenarios", C_SONAM),
@@ -231,18 +231,18 @@ for i, (title, items, col) in enumerate(arch_blocks):
     add_text(s4, "\n\n".join(items), x+0.15, 2.05, 2.6, 4.7, font_size=11, color=WHITE)
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# SECTION 1: UJJWAL — FULL STACK & API INTEGRATION (SLIDES 5–8)
+# SECTION 1: SACHIN — FULL STACK & API INTEGRATION (SLIDES 5–8)
 # ═══════════════════════════════════════════════════════════════════════════════
 section_slide("Full-Stack AI Architecture & Real-Time Dashboard", 
               "REST API Engine · Interactive SVG Map · Multi-Hazard Risk Simulator",
-              "Ujjwal", "Team Lead & Full-Stack AI Engineer", C_UJJWAL)
+              "Sachin", "Team Lead & Full-Stack AI Engineer", C_SACHIN)
 
-# Slide 6: Ujjwal - Web Dashboard Architecture
+# Slide 6: Sachin - Web Dashboard Architecture
 s6 = prs.slides.add_slide(BLANK)
 set_bg(s6, DARK_BG)
-add_header(s6, "Web Dashboard & Interactive Risk Simulator", "Crafted by Ujjwal — Zero External Framework Overhead, 100% Native Web Standards", tag_color=C_UJJWAL)
-add_rect(s6, 0.5, 1.4, 6.0, 5.6, CARD_BG, border_color=C_UJJWAL, border_pt=1)
-add_text(s6, "🖥️ ARCHITECTURAL HIGHLIGHTS (Ujjwal)", 0.8, 1.6, 5.4, 0.35, font_size=14, bold=True, color=C_UJJWAL)
+add_header(s6, "Web Dashboard & Interactive Risk Simulator", "Crafted by Sachin — Zero External Framework Overhead, 100% Native Web Standards", tag_color=C_SACHIN)
+add_rect(s6, 0.5, 1.4, 6.0, 5.6, CARD_BG, border_color=C_SACHIN, border_pt=1)
+add_text(s6, "🖥️ ARCHITECTURAL HIGHLIGHTS (Sachin)", 0.8, 1.6, 5.4, 0.35, font_size=14, bold=True, color=C_SACHIN)
 add_text(s6, 
     "• Single-Page Application (SPA) built without heavy React/Vue runtime overhead.\n\n"
     "• Native Canvas Particle System rendering dynamic ambient atmospheric background.\n\n"
@@ -252,7 +252,7 @@ add_text(s6,
     0.8, 2.1, 5.4, 4.6, font_size=12, color=WHITE, line_spacing=18)
 
 add_rect(s6, 6.8, 1.4, 6.0, 5.6, CARD_BG, border_color=RGBColor(0x33, 0x41, 0x55), border_pt=1)
-add_text(s6, "🌐 REST API & ENDPOINTS (Ujjwal)", 7.1, 1.6, 5.4, 0.35, font_size=14, bold=True, color=CYAN)
+add_text(s6, "🌐 REST API & ENDPOINTS (Sachin)", 7.1, 1.6, 5.4, 0.35, font_size=14, bold=True, color=CYAN)
 add_text(s6,
     "• Multi-Threaded HTTP Server: Implemented in `src/api/predict.py` using Python's standard `ThreadingHTTPServer`.\n\n"
     "• `/api/overview`: Aggregates ingestion audits, model cards, GeoJSON polygons, and comparison tables in single JSON payload.\n\n"
@@ -261,13 +261,13 @@ add_text(s6,
     "• `/api/predict/flood`: Evaluates antecedent CHIRPS lags (T1d–T10d) + catchment area, returns danger level exceedance prob.",
     7.1, 2.1, 5.4, 4.6, font_size=12, color=WHITE, line_spacing=18)
 
-# Slide 7: Ujjwal - Interactive SVG Map
+# Slide 7: Sachin - Interactive SVG Map
 s7 = prs.slides.add_slide(BLANK)
 set_bg(s7, DARK_BG)
-add_header(s7, "Geospatial SVG Map & Multi-Hazard Simulator", "Built by Ujjwal — Real-Time Coordinate Injection & Dynamic Scenario Presets", tag_color=C_UJJWAL)
+add_header(s7, "Geospatial SVG Map & Multi-Hazard Simulator", "Built by Sachin — Real-Time Coordinate Injection & Dynamic Scenario Presets", tag_color=C_SACHIN)
 add_img(s7, MAPS / "study_area_and_grid.png", 0.5, 1.4, 6.0, 5.6)
-add_rect(s7, 6.8, 1.4, 6.0, 5.6, CARD_BG, border_color=C_UJJWAL, border_pt=1)
-add_text(s7, "🎯 INTERACTIVE WORKFLOW", 7.1, 1.6, 5.4, 0.35, font_size=14, bold=True, color=C_UJJWAL)
+add_rect(s7, 6.8, 1.4, 6.0, 5.6, CARD_BG, border_color=C_SACHIN, border_pt=1)
+add_text(s7, "🎯 INTERACTIVE WORKFLOW", 7.1, 1.6, 5.4, 0.35, font_size=14, bold=True, color=C_SACHIN)
 add_text(s7,
     "1. Map Selection → Simulator Coupling:\n"
     "   Clicking any of the 7 states on the choropleth map automatically extracts its representative latitude & longitude and injects them into the Risk Simulator.\n\n"
@@ -279,12 +279,12 @@ add_text(s7,
     "   Includes pre-calibrated real meteorological events (e.g., Cyclone Remal, Dry Pre-Monsoon, Flash Flood).",
     7.1, 2.1, 5.4, 4.6, font_size=12, color=WHITE, line_spacing=17)
 
-# Slide 8: Ujjwal - Viva Q&A
+# Slide 8: Sachin - Viva Q&A
 s8 = prs.slides.add_slide(BLANK)
 set_bg(s8, DARK_BG)
-add_header(s8, "Member 1 (Ujjwal) — Viva Defense & Architecture Q&A", "Technical Justifications for Full-Stack System Design", tag_color=C_UJJWAL)
-add_rect(s8, 0.5, 1.4, 12.33, 5.6, CARD_BG, border_color=C_UJJWAL, border_pt=1)
-viva_u = [
+add_header(s8, "Member 1 (Sachin) — Viva Defense & Architecture Q&A", "Technical Justifications for Full-Stack System Design", tag_color=C_SACHIN)
+add_rect(s8, 0.5, 1.4, 12.33, 5.6, CARD_BG, border_color=C_SACHIN, border_pt=1)
+viva_s = [
     ("Q1: Why use Python's built-in ThreadingHTTPServer instead of Flask or FastAPI?",
      "A: To maintain zero external deployment friction. The university demo requires instant 1-click startup via `run_hima.bat` without installing heavy WSGI containers or external server binaries. Threading handles concurrent requests smoothly."),
     ("Q2: How does the web UI prevent cross-origin resource sharing (CORS) blocks?",
@@ -292,24 +292,24 @@ viva_u = [
     ("Q3: Why did you build an offline SVG map instead of embedding Google Maps or Mapbox?",
      "A: Mapbox and Google Maps require active API tokens and external internet connectivity. Our SVG map uses simplified TopoJSON/GeoJSON polygons rendered directly in the DOM, guaranteeing 100% offline functionality in isolated test environments.")
 ]
-for i, (q, a) in enumerate(viva_u):
+for i, (q, a) in enumerate(viva_s):
     y = 1.6 + i * 1.75
     add_text(s8, q, 0.8, y, 11.7, 0.35, font_size=13, bold=True, color=CYAN)
     add_text(s8, a, 0.8, y+0.4, 11.7, 1.2, font_size=12, color=WHITE, line_spacing=16)
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# SECTION 2: MEMBER 2 — GEOSPATIAL & MULTI-SOURCE INGESTION (SLIDES 9–11)
+# SECTION 2: ANSHUL — GEOSPATIAL & MULTI-SOURCE INGESTION (SLIDES 9–11)
 # ═══════════════════════════════════════════════════════════════════════════════
 section_slide("Geospatial Engineering & Multi-Source Ingestion",
               "253,408 1 km² Grid · FIRMS VIIRS · IMD Gridded Rainfall · ERA5 Reanalysis",
-              "Member 2", "Geospatial & Data Pipeline Lead", C_M2)
+              "Anshul", "Geospatial & Data Pipeline Lead", C_ANSHUL)
 
-# Slide 10: Member 2 - Geospatial Grid
+# Slide 10: Anshul - Geospatial Grid
 s10 = prs.slides.add_slide(BLANK)
 set_bg(s10, DARK_BG)
-add_header(s10, "1 km² Spatiotemporal Fishnet Grid Construction", "Engineered by Member 2 — Dual Projected CRS & Strict Multi-Source Geometry Clipping", tag_color=C_M2)
-add_rect(s10, 0.5, 1.4, 6.0, 5.6, CARD_BG, border_color=C_M2, border_pt=1)
-add_text(s10, "📐 GEOSPATIAL SPECIFICATIONS (Member 2)", 0.8, 1.6, 5.4, 0.35, font_size=14, bold=True, color=C_M2)
+add_header(s10, "1 km² Spatiotemporal Fishnet Grid Construction", "Engineered by Anshul — Dual Projected CRS & Strict Multi-Source Geometry Clipping", tag_color=C_ANSHUL)
+add_rect(s10, 0.5, 1.4, 6.0, 5.6, CARD_BG, border_color=C_ANSHUL, border_pt=1)
+add_text(s10, "📐 GEOSPATIAL SPECIFICATIONS (Anshul)", 0.8, 1.6, 5.4, 0.35, font_size=14, bold=True, color=C_ANSHUL)
 add_text(s10,
     "• Study Region: Seven Sister States of Northeast India (Arunachal Pradesh, Assam, Manipur, Meghalaya, Mizoram, Nagaland, Tripura).\n\n"
     "• Metric Projection: Converted geographic WGS84 coordinates into **EPSG:32646 (UTM Zone 46N)** where 1 unit = exactly 1 metre.\n\n"
@@ -329,12 +329,12 @@ add_text(s10,
     "  0.1° resolution (~10 km), 2,491 grid points. 4 missing months (2023-08, 09, 11, 12) strictly preserved as NaN rather than corrupted with artificial zeros.",
     7.1, 2.1, 5.4, 4.6, font_size=12, color=WHITE, line_spacing=18)
 
-# Slide 11: Member 2 - Viva Q&A
+# Slide 11: Anshul - Viva Q&A
 s11 = prs.slides.add_slide(BLANK)
 set_bg(s11, DARK_BG)
-add_header(s11, "Member 2 — Viva Defense & Geospatial Q&A", "Technical Justifications for Coordinate Reference Systems & Data Cleanliness", tag_color=C_M2)
-add_rect(s11, 0.5, 1.4, 12.33, 5.6, CARD_BG, border_color=C_M2, border_pt=1)
-viva_m2 = [
+add_header(s11, "Member 2 (Anshul) — Viva Defense & Geospatial Q&A", "Technical Justifications for Coordinate Reference Systems & Data Cleanliness", tag_color=C_ANSHUL)
+add_rect(s11, 0.5, 1.4, 12.33, 5.6, CARD_BG, border_color=C_ANSHUL, border_pt=1)
+viva_anshul = [
     ("Q1: Why couldn't you create a 1 km grid directly in WGS84 (EPSG:4326) degrees?",
      "A: In EPSG:4326, coordinates are measured in degrees. 1 degree of longitude at the equator is ~111 km, but shrinks significantly as latitude increases toward the Himalayas (28°N). Generating cells in degrees creates deformed trapezoids. UTM Zone 46N (EPSG:32646) uses metres, guaranteeing exact 1,000m × 1,000m squares."),
     ("Q2: Why was Sikkim excluded from the continuous ERA5 grid?",
@@ -342,24 +342,24 @@ viva_m2 = [
     ("Q3: How did you join point-level fire detections to 1 km polygon cells without massive memory bottlenecks?",
      "A: We mapped cell centroids into a Scipy KD-Tree structure and performed nearest-neighbor lookup in Euclidean UTM coordinates, reducing join complexity from O(N × M) to O(N log M), running in under 4 seconds.")
 ]
-for i, (q, a) in enumerate(viva_m2):
+for i, (q, a) in enumerate(viva_anshul):
     y = 1.6 + i * 1.75
     add_text(s11, q, 0.8, y, 11.7, 0.35, font_size=13, bold=True, color=LIME)
     add_text(s11, a, 0.8, y+0.4, 11.7, 1.2, font_size=12, color=WHITE, line_spacing=16)
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# SECTION 3: MEMBER 3 — WILDFIRE ML & FEATURE ENGINEERING (SLIDES 12–15)
+# SECTION 3: UJJWAL — WILDFIRE ML & FEATURE ENGINEERING (SLIDES 12–15)
 # ═══════════════════════════════════════════════════════════════════════════════
 section_slide("Wildfire Machine Learning & Feature Engineering",
               "33 Spatiotemporal Variables · Cyclical DOY · 6 Classifiers · 0.9358 Test ROC-AUC",
-              "Member 3", "Feature Engineering & Wildfire ML Lead", C_M3)
+              "Ujjwal", "Feature Engineering & Wildfire ML Lead", C_UJJWAL)
 
-# Slide 13: Member 3 - Features
+# Slide 13: Ujjwal - Features
 s13 = prs.slides.add_slide(BLANK)
 set_bg(s13, DARK_BG)
-add_header(s13, "33 Spatiotemporal Weather Features & Cyclical Encodings", "Crafted by Member 3 — Capturing Pre-Monsoon Aridity and Forest Desiccation", tag_color=C_M3)
-add_rect(s13, 0.5, 1.4, 6.0, 5.6, CARD_BG, border_color=C_M3, border_pt=1)
-add_text(s13, "🔬 FEATURE TAXONOMY (Member 3)", 0.8, 1.6, 5.4, 0.35, font_size=14, bold=True, color=C_M3)
+add_header(s13, "33 Spatiotemporal Weather Features & Cyclical Encodings", "Crafted by Ujjwal — Capturing Pre-Monsoon Aridity and Forest Desiccation", tag_color=C_UJJWAL)
+add_rect(s13, 0.5, 1.4, 6.0, 5.6, CARD_BG, border_color=C_UJJWAL, border_pt=1)
+add_text(s13, "🔬 FEATURE TAXONOMY (Ujjwal)", 0.8, 1.6, 5.4, 0.35, font_size=14, bold=True, color=C_UJJWAL)
 add_text(s13,
     "• Cyclical Temporal Transformations:\n"
     "  Encodes day-of-year into periodic wavefunctions to preserve annual continuity between Dec 31 (DOY 365) and Jan 1 (DOY 1):\n"
@@ -372,19 +372,19 @@ add_text(s13,
 
 add_img(s13, FIGS / "wildfire_feature_importance.png", 6.8, 1.4, 6.0, 5.6)
 
-# Slide 14: Member 3 - Wildfire Models
+# Slide 14: Ujjwal - Wildfire Models
 s14 = prs.slides.add_slide(BLANK)
 set_bg(s14, DARK_BG)
-add_header(s14, "Wildfire Classifier Benchmark — 6 Syllabus Models", "Evaluated on 2024 Temporal Hold-Out (1,000,000 cell-days, 0.035% Realistic Prevalence)", tag_color=C_M3)
+add_header(s14, "Wildfire Classifier Benchmark — 6 Syllabus Models", "Evaluated on 2024 Temporal Hold-Out (1,000,000 cell-days, 0.035% Realistic Prevalence)", tag_color=C_UJJWAL)
 add_img(s14, FIGS / "wildfire_model_comparison.png", 0.5, 1.4, 6.0, 5.6)
 add_img(s14, FIGS / "wildfire_roc_pr_curves.png", 6.8, 1.4, 6.0, 5.6)
 
-# Slide 15: Member 3 - Viva Q&A
+# Slide 15: Ujjwal - Viva Q&A
 s15 = prs.slides.add_slide(BLANK)
 set_bg(s15, DARK_BG)
-add_header(s15, "Member 3 — Viva Defense & Feature Engineering Q&A", "Technical Justifications for Model Selection & Temporal Splits", tag_color=C_M3)
-add_rect(s15, 0.5, 1.4, 12.33, 5.6, CARD_BG, border_color=C_M3, border_pt=1)
-viva_m3 = [
+add_header(s15, "Member 3 (Ujjwal) — Viva Defense & Feature Engineering Q&A", "Technical Justifications for Model Selection & Temporal Splits", tag_color=C_UJJWAL)
+add_rect(s15, 0.5, 1.4, 12.33, 5.6, CARD_BG, border_color=C_UJJWAL, border_pt=1)
+viva_u_ml = [
     ("Q1: Why did HistGradientBoosting beat Random Forest and Decision Trees?",
      "A: HistGradientBoosting bins continuous numerical values into 256 integer buckets, dramatically accelerating split calculations and handling natural NaN gaps in ERA5 reanalysis without imputation distortion. Its boosting mechanism sequentially corrects hard false positives."),
     ("Q2: Why did you evaluate on a realistic prevalence test set (0.035%) instead of a 50-50 balanced set?",
@@ -392,40 +392,40 @@ viva_m3 = [
     ("Q3: Why was sin(DOY) the #1 permutation feature importance driver?",
      "A: Forest fires in Northeast India are hyper-seasonal, peaking strictly between February and April (pre-monsoon slash-and-burn jhum cycles). The sine transform gives the tree an uninterrupted seasonal clock signal.")
 ]
-for i, (q, a) in enumerate(viva_m3):
+for i, (q, a) in enumerate(viva_u_ml):
     y = 1.6 + i * 1.75
     add_text(s15, q, 0.8, y, 11.7, 0.35, font_size=13, bold=True, color=ORANGE)
     add_text(s15, a, 0.8, y+0.4, 11.7, 1.2, font_size=12, color=WHITE, line_spacing=16)
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# SECTION 4: MEMBER 4 — LANDSLIDE ML, CALIBRATION & QA (SLIDES 16–19)
+# SECTION 4: AADI — LANDSLIDE ML, CALIBRATION & QA (SLIDES 16–19)
 # ═══════════════════════════════════════════════════════════════════════════════
 section_slide("Landslide Modeling, Calibration & QA Test Suite",
               "GSI PDF Extraction · Bayesian Prior Adjustment · 9 Pytest Automated Tests",
-              "Member 4", "Landslide ML, Calibration & QA Lead", C_M4)
+              "Aadi", "Landslide ML, Calibration & QA Lead", C_AADI)
 
-# Slide 17: Member 4 - Landslide Models
+# Slide 17: Aadi - Landslide Models
 s17 = prs.slides.add_slide(BLANK)
 set_bg(s17, DARK_BG)
-add_header(s17, "Landslide Hydrometeorological Trigger Modeling", "Engineered by Member 4 — GSI PDF Extraction & Weather-Only Feasibility Analysis", tag_color=C_M4)
+add_header(s17, "Landslide Hydrometeorological Trigger Modeling", "Engineered by Aadi — GSI PDF Extraction & Weather-Only Feasibility Analysis", tag_color=C_AADI)
 add_img(s17, FIGS / "landslide_model_comparison.png", 0.5, 1.4, 6.0, 5.6)
-add_rect(s17, 6.8, 1.4, 6.0, 5.6, CARD_BG, border_color=C_M4, border_pt=1)
-add_text(s17, "⛏️ GSI INVENTORY & CHALLENGES", 7.1, 1.6, 5.4, 0.35, font_size=14, bold=True, color=C_M4)
+add_rect(s17, 6.8, 1.4, 6.0, 5.6, CARD_BG, border_color=C_AADI, border_pt=1)
+add_text(s17, "⛏️ GSI INVENTORY & CHALLENGES", 7.1, 1.6, 5.4, 0.35, font_size=14, bold=True, color=C_AADI)
 add_text(s17,
     "• Mined 9,970 Landslide Records:\n"
     "  Extracted from scanned Geological Survey of India (GSI) multi-page PDF bulletins using `pdfplumber`.\n\n"
     "• Critical Temporal Filtering:\n"
     "  Out of 9,970 records, only 673 possessed valid calendar dates within the 2021–2024 study window (collapsing to 463 unique cell-days).\n\n"
     "• Scientific Candor (Honest Limitations):\n"
-    "  High-resolution static DEM (slope/aspect) and SoilGrids were unavailable locally. Member 4 modeled this strictly as a **Weather-Trigger Pipeline** (rainfall + soil saturation), explicitly avoiding fabricated terrain layers.",
+    "  High-resolution static DEM (slope/aspect) and SoilGrids were unavailable locally. Aadi modeled this strictly as a **Weather-Trigger Pipeline** (rainfall + soil saturation), explicitly avoiding fabricated terrain layers.",
     7.1, 2.1, 5.4, 4.6, font_size=12, color=WHITE, line_spacing=17)
 
-# Slide 18: Member 4 - Bayesian Calibration & 9 Tests
+# Slide 18: Aadi - Bayesian Calibration & 9 Tests
 s18 = prs.slides.add_slide(BLANK)
 set_bg(s18, DARK_BG)
-add_header(s18, "Bayesian Prior Calibration & 9 Automated Pytest Cases", "Guaranteed Mathematical Monotonicity, Non-Negativity, and Zero Future Leakage", tag_color=C_M4)
-add_rect(s18, 0.5, 1.4, 6.0, 5.6, CARD_BG, border_color=C_M4, border_pt=1)
-add_text(s18, "⚖️ BAYESIAN PRIOR ODDS CALIBRATION", 0.8, 1.6, 5.4, 0.35, font_size=14, bold=True, color=C_M4)
+add_header(s18, "Bayesian Prior Calibration & 9 Automated Pytest Cases", "Guaranteed Mathematical Monotonicity, Non-Negativity, and Zero Future Leakage", tag_color=C_AADI)
+add_rect(s18, 0.5, 1.4, 6.0, 5.6, CARD_BG, border_color=C_AADI, border_pt=1)
+add_text(s18, "⚖️ BAYESIAN PRIOR ODDS CALIBRATION", 0.8, 1.6, 5.4, 0.35, font_size=14, bold=True, color=C_AADI)
 add_text(s18,
     "• The Problem: Classifiers trained on balanced subsets output raw probabilities near 0.5, creating severe false alarms in deployment.\n\n"
     "• The Bayesian Correction:\n"
@@ -450,12 +450,12 @@ for idx, tname in enumerate(test_list):
     ty = 2.15 + idx * 0.48
     add_text(s18, f"✔ {tname}", 7.2, ty, 5.2, 0.3, font_size=10, bold=True, color=WHITE)
 
-# Slide 19: Member 4 - Viva Q&A
+# Slide 19: Aadi - Viva Q&A
 s19 = prs.slides.add_slide(BLANK)
 set_bg(s19, DARK_BG)
-add_header(s19, "Member 4 — Viva Defense & Quality Assurance Q&A", "Technical Justifications for Spatial Bias Removal & Test Rigor", tag_color=C_M4)
-add_rect(s19, 0.5, 1.4, 12.33, 5.6, CARD_BG, border_color=C_M4, border_pt=1)
-viva_m4 = [
+add_header(s19, "Member 4 (Aadi) — Viva Defense & Quality Assurance Q&A", "Technical Justifications for Spatial Bias Removal & Test Rigor", tag_color=C_AADI)
+add_rect(s19, 0.5, 1.4, 12.33, 5.6, CARD_BG, border_color=C_AADI, border_pt=1)
+viva_aadi = [
     ("Q1: Why did you exclude 'state_name' from landslide features?",
      "A: In the GSI dataset, 529 out of 673 dated landslide records originated from specialized survey teams in Mizoram. Including `state_name` would cause the model to learn 'Mizoram = Landslide', exploiting survey collection bias rather than physical precipitation mechanisms."),
     ("Q2: What does `test_no_post_event_leakage_in_features` verify?",
@@ -463,9 +463,9 @@ viva_m4 = [
     ("Q3: Does Bayesian calibration alter the ROC-AUC score?",
      "A: No. Because the Bayesian odds adjustment is strictly monotonic, it preserves the relative ranking of samples. The ROC-AUC remains identical, while the probability values are calibrated to true real-world occurrence rates.")
 ]
-for i, (q, a) in enumerate(viva_m4):
+for i, (q, a) in enumerate(viva_aadi):
     y = 1.6 + i * 1.75
-    add_text(s19, q, 0.8, y, 11.7, 0.35, font_size=13, bold=True, color=PURPLE)
+    add_text(s19, q, 0.8, y, 11.7, 0.35, font_size=13, bold=True, color=C_AADI)
     add_text(s19, a, 0.8, y+0.4, 11.7, 1.2, font_size=12, color=WHITE, line_spacing=16)
 
 # ═══════════════════════════════════════════════════════════════════════════════
