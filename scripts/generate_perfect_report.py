@@ -17,8 +17,55 @@ from docx.oxml.ns import nsdecls, qn
 
 PROJECT_ROOT = Path(r"c:\Users\lenovo\Desktop\aiml project")
 DOCX_OUT = PROJECT_ROOT / "Flood_Prediction_and_Early_Warning_System_Report.docx"
+DOCX_FIXED = PROJECT_ROOT / "Flood_Prediction_and_Early_Warning_System_Report_Fixed.docx"
 MD_OUT = PROJECT_ROOT / "docs" / "Flood_Prediction_and_Early_Warning_System_Report.md"
 FIGS_DIR = PROJECT_ROOT / "outputs" / "figures"
+
+def clean_math_text(text: str) -> str:
+    """Transform raw LaTeX equations into clean, publication-grade typographic math for Word."""
+    text = text.replace(
+        r"$$\frac{\partial A}{\partial t} + \frac{\partial Q}{\partial x} = q, \quad \frac{\partial Q}{\partial t} + \frac{\partial}{\partial x}\left(\frac{\beta Q^2}{A}\right) + gA \frac{\partial h}{\partial x} + gA(S_f - S_0) = 0$$",
+        "\n\n    • Continuity Equation (Conservation of Mass):\n      ∂A/∂t + ∂Q/∂x = q\n\n    • Momentum Equation (Conservation of Momentum):\n      ∂Q/∂t + ∂(β·Q² / A)/∂x + g·A·(∂h/∂x) + g·A·(S_f - S_0) = 0\n\nwhere A is wetted cross-sectional area (m²), Q is river discharge (m³/s), h is water depth (m), S_0 is channel bed slope, S_f is friction slope, β is the momentum correction coefficient, g is acceleration due to gravity (9.81 m/s²), and q is lateral tributary inflow."
+    )
+    text = text.replace(
+        r"$$\text{Odds}_{true} = \text{Odds}_{sample} \times \left( \frac{\pi_{true}}{1 - \pi_{true}} \Big/ \frac{\pi_{sample}}{1 - \pi_{sample}} \right)$$",
+        "\n\n    • Prior Odds Adjustment Formula:\n      Odds_true = Odds_sample × [ (π_true / (1 - π_true)) / (π_sample / (1 - π_sample)) ]\n"
+    )
+    text = text.replace(
+        r"$$P_{calibrated} = \frac{\text{Odds}_{true}}{1 + \text{Odds}_{true}}$$ ",
+        "\n    • Calibrated Probability Recovery Formula:\n      P_calibrated = Odds_true / (1 + Odds_true)\n\n"
+    )
+    text = text.replace(
+        r"($BS = \frac{1}{N} \sum (p_i - y_i)^2$)",
+        "[Brier Score = (1/N) · Σ (p_i - y_i)²]"
+    )
+    text = text.replace(
+        r"$$\text{stroke-dashoffset} = 346 \times \left(1 - \frac{\text{Risk Percentage}}{100}\right)$$",
+        "\n\n    • Dial Dash-Offset Interpolation:\n      stroke-dashoffset = 346 × [ 1 - (Risk Percentage / 100) ]\n"
+    )
+    text = text.replace(r"$253,408 \times 2,491 \approx 6.31 \times 10^8$", "253,408 × 2,491 ≈ 6.31 × 10⁸")
+    text = text.replace(r"$\mathcal{O}(N \log M)$", "O(N · log M)")
+    text = text.replace(r"$f_{\sin} = \sin(2\pi \cdot \text{doy} / 365)$ and $f_{\cos} = \cos(2\pi \cdot \text{doy} / 365)$", "f_sin = sin(2π · DOY / 365) and f_cos = cos(2π · DOY / 365)")
+    text = text.replace(r"$\Delta T_d = T_{air} - T_{dew}$", "ΔT_d = T_air - T_dew")
+    text = text.replace(r"$\Delta T_d > 15^\circ\text{C}$", "ΔT_d > 15°C")
+    text = text.replace(r"($P_{daily} < 1.0\text{ mm}$)", "(P_daily < 1.0 mm)")
+    text = text.replace(r"$y_i = 1$", "y_i = 1")
+    text = text.replace(r"$y_i = 0$", "y_i = 0")
+    text = text.replace(r"($p = 0.765$)", "(p = 0.765)")
+    text = text.replace(r"($\lambda = 1.0$)", "(λ = 1.0)")
+    text = text.replace(r"$P(X|y) = \prod P(x_j|y)$", "P(X | y) = ∏ P(x_j | y)")
+    text = text.replace(r"$\alpha = 0.005$", "α = 0.005")
+    text = text.replace(r"**$\tau = 0.2849$**", "τ = 0.2849")
+    text = text.replace(r"($0.00035$)", "(0.00035)")
+    text = text.replace(r"$\pi_{sample}$", "π_sample")
+    text = text.replace(r"$\pi_{true}$", "π_true")
+    text = text.replace(r"$\text{Longitude} > 91.6^\circ\text{E}$", "Longitude > 91.6°E")
+    text = text.replace(r"($T_{1d}$–$T_{10d}$)", "(T_1d to T_10d)")
+    text = text.replace(r"($km^2$)", "(km²)")
+    text = text.replace(r"($n$)", "(n)")
+    text = text.replace(r"($T_{1d}$ to $T_{10d}$)", "(T_1d to T_10d)")
+    text = text.replace("$", "")
+    return text
 
 # Color Palette Constants
 COLOR_NAVY = RGBColor(0x0F, 0x17, 0x2A)     # #0F172A Primary Dark
@@ -123,6 +170,7 @@ def create_report():
         return p
 
     def add_p(text, bold_prefix=""):
+        text = clean_math_text(text)
         p = doc.add_paragraph()
         p.paragraph_format.space_after = Pt(6)
         p.paragraph_format.line_spacing = 1.15
@@ -139,6 +187,7 @@ def create_report():
         return p
 
     def add_bullet(text, bold_prefix=""):
+        text = clean_math_text(text)
         p = doc.add_paragraph(style='List Bullet')
         p.paragraph_format.space_after = Pt(3)
         p.paragraph_format.line_spacing = 1.15
@@ -155,6 +204,7 @@ def create_report():
         return p
 
     def add_callout(text, title="KEY ARCHITECTURAL TAKEAWAY", border_hex="0284C7", bg_hex="F0F9FF"):
+        text = clean_math_text(text)
         p = doc.add_paragraph()
         p.paragraph_format.space_before = Pt(8)
         p.paragraph_format.space_after = Pt(8)
@@ -255,12 +305,12 @@ def create_report():
     # ═══════════════════════════════════════════════════════════════════════════
     p_inst = doc.add_paragraph()
     p_inst.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    r_inst = p_inst.add_run("DEPARTMENT OF ARTIFICIAL INTELLIGENCE & MACHINE LEARNING\nSCHOOL OF COMPUTER SCIENCE AND ENGINEERING\n")
+    r_inst = p_inst.add_run("BENNETT UNIVERSITY\nSCHOOL OF COMPUTER SCIENCE ENGINEERING AND TECHNOLOGY\n")
     r_inst.font.bold = True
-    r_inst.font.size = Pt(11)
+    r_inst.font.size = Pt(12)
     r_inst.font.color.rgb = COLOR_NAVY
     p_inst.paragraph_format.space_before = Pt(10)
-    p_inst.paragraph_format.space_after = Pt(30)
+    p_inst.paragraph_format.space_after = Pt(24)
 
     add_title("FLOOD PREDICTION AND EARLY WARNING SYSTEM")
     add_subtitle("WITH MULTI-HAZARD LANDSLIDE AND WILDFIRE INTELLIGENCE\nAn End-to-End Spatiotemporal Machine Learning Platform for Hydrometeorological Disaster Risk Assessment")
@@ -269,10 +319,10 @@ def create_report():
     p_meta.alignment = WD_ALIGN_PARAGRAPH.CENTER
     r_crs = p_meta.add_run("Course Title: ")
     r_crs.font.bold = True
-    p_meta.add_run("Application of Artificial Intelligence (CSET312 / AI-ML Capstone)\n")
+    p_meta.add_run("Application of Artificial Intelligence (CSET381)\n")
     r_ay = p_meta.add_run("Academic Period: ")
     r_ay.font.bold = True
-    p_meta.add_run("Seventh Semester B.Tech (2025–2026 Academic Session)\n")
+    p_meta.add_run("Fifth Semester B.Tech (2025–2026 Academic Session)\n")
     r_rep = p_meta.add_run("Document Classification: ")
     r_rep.font.bold = True
     p_meta.add_run("Comprehensive Engineering Project & Research Dissertation\n")
@@ -281,13 +331,13 @@ def create_report():
     # Team Grid Table on Cover Page
     cover_headers = ["Member Name", "Assigned Technical Role", "Primary Subsystem Ownership"]
     cover_rows = [
-        ["Sachin (Team Lead)", "Full-Stack AI Engineer", "Single-Page Web UI, Multi-Threaded REST API, System Integration"],
-        ["Anshul", "Geospatial Data Engineer", "253,408 km² Fishnet Grid (EPSG:32646), FIRMS, IMD NetCDF, ERA5 Ingestion"],
+        ["Sachin Sharma", "Full-Stack AI Engineer", "Single-Page Web UI, Multi-Threaded REST API, System Integration"],
+        ["Anshul Yadav", "Geospatial Data Engineer", "253,408 km² Fishnet Grid (EPSG:32646), FIRMS, IMD NetCDF, ERA5 Ingestion"],
         ["Ujjwal", "Wildfire ML Lead", "33 Weather Features, Cyclical Wavefunctions, Wildfire Benchmark"],
-        ["Aadi", "Landslide ML & QA Lead", "GSI PDF Mining via pdfplumber, Bayesian Calibration, 9 Pytest Suite"],
-        ["Malvika", "Flood Ingestion Lead", "INDOFLOODS CWC Gauge Mining, CHIRPS Satellite Hydrology Lags"],
-        ["Shubhangi", "Flood ML Architecture Lead", "6-Classifier Benchmark, GBDT Optimization, Recall Maximization"],
-        ["Sonam", "Domain Transfer Lead", "Spatial Confounder Elimination, Catchment Scaling, Multi-Hazard Chains"]
+        ["Aadi Dhiman", "Landslide ML & QA Lead", "GSI PDF Mining via pdfplumber, Bayesian Calibration, 9 Pytest Suite"],
+        ["Malvika Yadav", "Flood Ingestion Lead", "INDOFLOODS CWC Gauge Mining, CHIRPS Satellite Hydrology Lags"],
+        ["Shubhangi Singh", "Flood ML Architecture Lead", "6-Classifier Benchmark, GBDT Optimization, Recall Maximization"],
+        ["Sonam Bharti", "Domain Transfer Lead", "Spatial Confounder Elimination, Catchment Scaling, Multi-Hazard Chains"]
     ]
     add_table_data(cover_headers, cover_rows, col_widths=[2.0, 2.2, 2.8])
 
@@ -299,9 +349,9 @@ def create_report():
     add_h1("Certificate of Bonafide Academic Work")
     add_p(
         "This is to formally certify that this project report entitled 'Flood Prediction and Early Warning System with Multi-Hazard "
-        "Landslide and Wildfire Intelligence' submitted by the student team comprising Sachin, Anshul, Ujjwal, Aadi, Malvika, "
-        "Shubhangi, and Sonam in partial fulfillment of the requirements for the award of Bachelor of Technology in Computer Science "
-        "and Engineering (Artificial Intelligence and Machine Learning) for the course Application of Artificial Intelligence (CSET312) "
+        "Landslide and Wildfire Intelligence' submitted by the student team comprising Sachin Sharma, Anshul Yadav, Ujjwal, "
+        "Aadi Dhiman, Malvika Yadav, Shubhangi Singh, and Sonam Bharti in partial fulfillment of the requirements for the award of "
+        "Bachelor of Technology in Computer Science and Engineering for the course Application of Artificial Intelligence (CSET381) "
         "is a bonafide record of authentic, original engineering and scientific work carried out under university faculty supervision. "
         "The results embodied in this dissertation have not been submitted to any other university or institute for the award of any degree or diploma."
     )
@@ -311,9 +361,12 @@ def create_report():
     p_sign.paragraph_format.space_after = Pt(30)
     r_s1 = p_sign.add_run("_______________________________\t\t\t_______________________________\n")
     r_s1.font.bold = True
-    r_s2 = p_sign.add_run("Faculty Project Supervisor\t\t\t\tHead of Department (CSE / AIML)\n")
+    r_s2 = p_sign.add_run("Dr. Kimmi Gupta\t\t\t\t\tHead of Department\n")
     r_s2.font.bold = True
     r_s2.font.color.rgb = COLOR_NAVY
+    r_s3 = p_sign.add_run("Faculty Project Supervisor\t\t\t\tSchool of CSE & Technology\n")
+    r_s3.font.size = Pt(9.5)
+    r_s3.font.color.rgb = COLOR_MUTED
 
     add_h1("Student Declaration & Ethical Research Statement")
     add_p(
@@ -977,8 +1030,14 @@ def create_report():
         r_r.font.color.rgb = COLOR_SLATE
 
     # Save DOCX
-    doc.save(str(DOCX_OUT))
-    print(f"Publication-Grade DOCX Report successfully generated at: {DOCX_OUT}")
+    try:
+        doc.save(str(DOCX_OUT))
+        print(f"Publication-Grade DOCX Report successfully generated at: {DOCX_OUT}")
+    except PermissionError:
+        print(f"Note: {DOCX_OUT.name} is currently open in Word.")
+        
+    doc.save(str(DOCX_FIXED))
+    print(f"Publication-Grade Fixed DOCX Report successfully saved at: {DOCX_FIXED}")
 
     # ═══════════════════════════════════════════════════════════════════════════
     # GENERATE COMPREHENSIVE MARKDOWN REPORT
@@ -987,9 +1046,10 @@ def create_report():
     
     md_content = """# Flood Prediction and Early Warning System
 ## with Multi-Hazard Landslide and Wildfire Intelligence
-**Course:** Application of Artificial Intelligence (AI-ML / CSET312) — Capstone Project  
-**Department:** Department of Artificial Intelligence & Machine Learning, School of Computer Science & Engineering  
-**Academic Session:** 2025–2026  
+**Institution:** Bennett University, School of Computer Science Engineering and Technology  
+**Course:** Application of Artificial Intelligence (CSET381)  
+**Academic Session:** Fifth Semester B.Tech (2025–2026 Academic Session)  
+**Faculty Project Supervisor:** Dr. Kimmi Gupta  
 **Document Classification:** Comprehensive Academic Project Report (10/10 Standard)  
 
 ---
@@ -998,13 +1058,13 @@ def create_report():
 
 | Member | Academic Role | Codebase & Modules Owned | Core Technical & Scientific Contributions |
 | :--- | :--- | :--- | :--- |
-| **Sachin (Lead)** | Full-Stack AI Engineer | `frontend/`, `src/api/predict.py`, `run_hima.bat` | Zero-dependency Single Page Application (SPA), multi-threaded REST API (`ThreadingHTTPServer`), offline SVG choropleth map, animated CSS arc risk dial, 1-click execution script. |
-| **Anshul** | Geospatial Data Engineer | `src/geospatial/`, `src/audit/`, `src/ingestion/` | 253,408 1 km² metric fishnet grid in UTM Zone 46N (EPSG:32646), ingestion of 219,928 FIRMS fires, IMD 0.25° NetCDFs, and ERA5 reanalysis via Scipy KD-Tree. |
+| **Sachin Sharma (Lead)** | Full-Stack AI Engineer | `frontend/`, `src/api/predict.py`, `run_hima.bat` | Zero-dependency Single Page Application (SPA), multi-threaded REST API (`ThreadingHTTPServer`), offline SVG choropleth map, animated CSS arc risk dial, 1-click execution script. |
+| **Anshul Yadav** | Geospatial Data Engineer | `src/geospatial/`, `src/audit/`, `src/ingestion/` | 253,408 1 km² metric fishnet grid in UTM Zone 46N (EPSG:32646), ingestion of 219,928 FIRMS fires, IMD 0.25° NetCDFs, and ERA5 reanalysis via Scipy KD-Tree. |
 | **Ujjwal** | Wildfire ML Lead | `src/features/`, `src/training/wildfire_pipelines.py` | 33 spatiotemporal features, cyclical sine/cosine DOY wavefunctions, dewpoint depression, and benchmarked 6 wildfire models on 1,000,000 cell-day 2024 hold-out test set. |
-| **Aadi** | Landslide & QA Lead | `src/ingestion/gsi.py`, `src/training/landslide_pipelines.py`, `tests/` | Mined 9,970 GSI landslide records via `pdfplumber`, implemented Bayesian prior odds calibration, and authored 9 automated pytest test cases. |
-| **Malvika** | Flood Ingestion Lead | `src/ingestion/flood.py`, `data/raw/flood/` | Ingested INDOFLOODS (4,548 river flood events across 155 CWC gauges), integrated CHIRPS cumulative rainfall lags ($T_{1d}$–$T_{10d}$), and structured Parquet storage. |
-| **Shubhangi** | Flood ML Lead | `src/training/flood_pipelines.py`, `models/flood_model.joblib` | Trained and evaluated 6 flood classifiers, performed hyperparameter grid search, and achieved 98.56% Recall with HistGradientBoosting. |
-| **Sonam** | Domain Transfer Lead | `src/api/predict.py`, `frontend/app.js` | Diagnosed and solved spatial coordinate domain shift (the 1.7% bug), scaled catchment area parameters (100–50,000 km²), and built flood presets. |
+| **Aadi Dhiman** | Landslide & QA Lead | `src/ingestion/gsi.py`, `src/training/landslide_pipelines.py`, `tests/` | Mined 9,970 GSI landslide records via `pdfplumber`, implemented Bayesian prior odds calibration, and authored 9 automated pytest test cases. |
+| **Malvika Yadav** | Flood Ingestion Lead | `src/ingestion/flood.py`, `data/raw/flood/` | Ingested INDOFLOODS (4,548 river flood events across 155 CWC gauges), integrated CHIRPS cumulative rainfall lags ($T_{1d}$–$T_{10d}$), and structured Parquet storage. |
+| **Shubhangi Singh** | Flood ML Lead | `src/training/flood_pipelines.py`, `models/flood_model.joblib` | Trained and evaluated 6 flood classifiers, performed hyperparameter grid search, and achieved 98.56% Recall with HistGradientBoosting. |
+| **Sonam Bharti** | Domain Transfer Lead | `src/api/predict.py`, `frontend/app.js` | Diagnosed and solved spatial coordinate domain shift (the 1.7% bug), scaled catchment area parameters (100–50,000 km²), and built flood presets. |
 
 ---
 

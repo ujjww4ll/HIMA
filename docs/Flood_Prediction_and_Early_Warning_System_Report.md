@@ -1,8 +1,9 @@
 # Flood Prediction and Early Warning System
 ## with Multi-Hazard Landslide and Wildfire Intelligence
-**Course:** Application of Artificial Intelligence (AI-ML / CSET312) — Capstone Project  
-**Department:** Department of Artificial Intelligence & Machine Learning, School of Computer Science & Engineering  
-**Academic Session:** 2025–2026  
+**Institution:** Bennett University, School of Computer Science Engineering and Technology  
+**Course:** Application of Artificial Intelligence (CSET381)  
+**Academic Session:** Fifth Semester B.Tech (2025–2026 Academic Session)  
+**Faculty Project Supervisor:** Dr. Kimmi Gupta  
 **Document Classification:** Comprehensive Academic Project Report (10/10 Standard)  
 
 ---
@@ -11,13 +12,13 @@
 
 | Member | Academic Role | Codebase & Modules Owned | Core Technical & Scientific Contributions |
 | :--- | :--- | :--- | :--- |
-| **Sachin (Lead)** | Full-Stack AI Engineer | `frontend/`, `src/api/predict.py`, `run_hima.bat` | Zero-dependency Single Page Application (SPA), multi-threaded REST API (`ThreadingHTTPServer`), offline SVG choropleth map, animated CSS arc risk dial, 1-click execution script. |
-| **Anshul** | Geospatial Data Engineer | `src/geospatial/`, `src/audit/`, `src/ingestion/` | 253,408 1 km² metric fishnet grid in UTM Zone 46N (EPSG:32646), ingestion of 219,928 FIRMS fires, IMD 0.25° NetCDFs, and ERA5 reanalysis via Scipy KD-Tree. |
+| **Sachin Sharma (Lead)** | Full-Stack AI Engineer | `frontend/`, `src/api/predict.py`, `run_hima.bat` | Zero-dependency Single Page Application (SPA), multi-threaded REST API (`ThreadingHTTPServer`), offline SVG choropleth map, animated CSS arc risk dial, 1-click execution script. |
+| **Anshul Yadav** | Geospatial Data Engineer | `src/geospatial/`, `src/audit/`, `src/ingestion/` | 253,408 1 km² metric fishnet grid in UTM Zone 46N (EPSG:32646), ingestion of 219,928 FIRMS fires, IMD 0.25° NetCDFs, and ERA5 reanalysis via Scipy KD-Tree. |
 | **Ujjwal** | Wildfire ML Lead | `src/features/`, `src/training/wildfire_pipelines.py` | 33 spatiotemporal features, cyclical sine/cosine DOY wavefunctions, dewpoint depression, and benchmarked 6 wildfire models on 1,000,000 cell-day 2024 hold-out test set. |
-| **Aadi** | Landslide & QA Lead | `src/ingestion/gsi.py`, `src/training/landslide_pipelines.py`, `tests/` | Mined 9,970 GSI landslide records via `pdfplumber`, implemented Bayesian prior odds calibration, and authored 9 automated pytest test cases. |
-| **Malvika** | Flood Ingestion Lead | `src/ingestion/flood.py`, `data/raw/flood/` | Ingested INDOFLOODS (4,548 river flood events across 155 CWC gauges), integrated CHIRPS cumulative rainfall lags ($T_{1d}$–$T_{10d}$), and structured Parquet storage. |
-| **Shubhangi** | Flood ML Lead | `src/training/flood_pipelines.py`, `models/flood_model.joblib` | Trained and evaluated 6 flood classifiers, performed hyperparameter grid search, and achieved 98.56% Recall with HistGradientBoosting. |
-| **Sonam** | Domain Transfer Lead | `src/api/predict.py`, `frontend/app.js` | Diagnosed and solved spatial coordinate domain shift (the 1.7% bug), scaled catchment area parameters (100–50,000 km²), and built flood presets. |
+| **Aadi Dhiman** | Landslide & QA Lead | `src/ingestion/gsi.py`, `src/training/landslide_pipelines.py`, `tests/` | Mined 9,970 GSI landslide records via `pdfplumber`, implemented Bayesian prior odds calibration, and authored 9 automated pytest test cases. |
+| **Malvika Yadav** | Flood Ingestion Lead | `src/ingestion/flood.py`, `data/raw/flood/` | Ingested INDOFLOODS (4,548 river flood events across 155 CWC gauges), integrated CHIRPS cumulative rainfall lags ($T_{1d}$–$T_{10d}$), and structured Parquet storage. |
+| **Shubhangi Singh** | Flood ML Lead | `src/training/flood_pipelines.py`, `models/flood_model.joblib` | Trained and evaluated 6 flood classifiers, performed hyperparameter grid search, and achieved 98.56% Recall with HistGradientBoosting. |
+| **Sonam Bharti** | Domain Transfer Lead | `src/api/predict.py`, `frontend/app.js` | Diagnosed and solved spatial coordinate domain shift (the 1.7% bug), scaled catchment area parameters (100–50,000 km²), and built flood presets. |
 
 ---
 
