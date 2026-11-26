@@ -55,14 +55,12 @@ from src.evaluation.metrics import (
 FLOOD_NUMERIC_FEATURES = [
     # Antecedent CHIRPS cumulative rainfall lags (primary flood triggers)
     "T1d", "T2d", "T3d", "T4d", "T5d", "T6d", "T7d", "T8d", "T9d", "T10d",
-    # Catchment physical characteristics
+    # Catchment physical characteristics (pure hydrological features — Lat/Lon excluded
+    # so model generalises regionally to NE India without out-of-domain spatial bias)
     "catchment_area_km2",
     "stream_order",
     "population_density",
     "urban_pct",
-    # Event context
-    "Latitude",
-    "Longitude",
 ]
 FLOOD_CATEGORICAL_FEATURES = ["soil_type", "lithology_type", "land_cover"]
 FLOOD_ALL_FEATURES = FLOOD_NUMERIC_FEATURES + FLOOD_CATEGORICAL_FEATURES

@@ -155,7 +155,7 @@ function populateKPIs(d) {
     const fbest = (d.flood_card.all_models_summary || []).find(m => m.model === d.flood_card.selected_best_model);
     if (fbest) {
       const el = document.getElementById("kpi-flood-auc");
-      if (el) el.textContent = fbest.test_roc_auc?.toFixed(4) || "0.9634";
+      if (el) el.textContent = fbest.test_roc_auc?.toFixed(4) || "0.9557";
       const mel = document.getElementById("kpi-flood-model");
       if (mel) mel.textContent = d.flood_card.selected_best_model || "HistGradientBoosting";
     }
@@ -814,12 +814,12 @@ async function runPrediction() {
     const t3d  = parseFloat(document.getElementById("in-t3d")?.value  || 75);
     const t7d  = parseFloat(document.getElementById("in-t7d")?.value  || 150);
     const t10d = parseFloat(document.getElementById("in-t10d")?.value || 200);
-    const catchArea = parseFloat(document.getElementById("in-catchment")?.value || 500);
+    const catchArea = parseFloat(document.getElementById("in-catchment")?.value || 8000);
     const floodPayload = {
       T1d: t1d, T2d: t1d * 1.5, T3d: t3d, T4d: t3d * 1.1,
       T5d: t7d * 0.6, T6d: t7d * 0.75, T7d: t7d,
       T8d: t10d * 0.85, T9d: t10d * 0.92, T10d: t10d,
-      catchment_area_km2: catchArea, Latitude: lat, Longitude: lon,
+      catchment_area_km2: catchArea,
     };
     try {
       const fres = await fetch("/api/predict/flood", {
