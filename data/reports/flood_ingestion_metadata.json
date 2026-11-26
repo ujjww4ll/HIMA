@@ -1,0 +1,81 @@
+{
+  "source_file": "data\\raw\\flood\\indofloods_integrated.csv",
+  "total_events": 4548,
+  "ne_india_events": 2,
+  "all_india_events": 4548,
+  "date_range": {
+    "earliest": "1965-07-21",
+    "latest": "2020-09-24"
+  },
+  "top_15_states_by_events": {
+    "Karnataka": 1496,
+    "Maharashtra": 817,
+    "Kerala": 531,
+    "Madhya Pradesh": 394,
+    "Odisha": 293,
+    "Andhra Pradesh": 285,
+    "West Bengal": 242,
+    "Tamil Nadu": 220,
+    "Chhattisgarh": 123,
+    "Telangana": 68,
+    "Gujarat": 48,
+    "Jharkhand": 20,
+    "Rajasthan": 5,
+    "Dadra and Nagar Haveli and Daman and Diu": 4,
+    "Tripura": 2
+  },
+  "ne_india_state_breakdown": {
+    "Tripura": 2
+  },
+  "exceeds_danger_level_all_india": 3481,
+  "exceeds_danger_level_ne_india": 0,
+  "flood_types": {
+    "Flood": 2919,
+    "Severe Flood": 1629
+  },
+  "features_kept": [
+    "EventID",
+    "GaugeID",
+    "Station",
+    "State",
+    "Latitude",
+    "Longitude",
+    "Start Date",
+    "End Date",
+    "Event Duration (days)",
+    "Peak Flood Level (m)",
+    "Peak Discharge Q (cumec)",
+    "Flood Volume (cumec)",
+    "Flood Type",
+    "Warning Level",
+    "Danger Level",
+    "Time to Peak (days)",
+    "T1d",
+    "T2d",
+    "T3d",
+    "T4d",
+    "T5d",
+    "T6d",
+    "T7d",
+    "T8d",
+    "T9d",
+    "T10d",
+    "Catchment Area",
+    "Stream Order",
+    "Soil type",
+    "lithology type",
+    "Land cover",
+    "Population Density",
+    "Urban percentage"
+  ],
+  "chirps_summary": {
+    "total_rows": 1302155,
+    "unique_gauges": 155,
+    "date_range": [
+      "1998-01-01",
+      "2020-12-31"
+    ]
+  },
+  "output_parquet": "C:\\Users\\lenovo\\Desktop\\aiml project\\data\\processed\\flood.parquet",
+  "note": "IndoFloods covers all-India gauged rivers 1965\u20132020. NE India records are limited (Assam/Manipur) due to sparse gauge networks. CHIRPS satellite rainfall fills spatial gaps for antecedent rainfall features."
+}

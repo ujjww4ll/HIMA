@@ -1,4 +1,4 @@
-"""Step 11: HIMA Research Web Dashboard & Prediction API (Wildfire + Preliminary Landslide).
+"""Step 11: HIMA Research Web Dashboard & Prediction API (Wildfire + Landslide + Flood).
 
 Serves:
   - Static frontend dashboard from `frontend/` (`GET /`)
@@ -6,6 +6,7 @@ Serves:
   - Live metadata, model comparison tables & simplified state GeoJSON (`GET /api/overview`)
   - Validated Wildfire inference (`POST /predict` and `POST /api/predict/wildfire`)
   - Preliminary Weather-Only Landslide inference (`POST /api/predict/landslide`)
+  - Flood Risk inference (`POST /api/predict/flood`)
 
 Never fabricates live weather, missing terrain layers, or official alerts.
 """
@@ -28,10 +29,11 @@ from src.config import PROJECT_ROOT
 from src.evaluation.metrics import DISCLAIMER, assign_risk_band, bayes_prior_adjust
 
 
-DEFAULT_WILDFIRE_MODEL = PROJECT_ROOT / "models" / "wildfire_best_model.joblib"
+DEFAULT_WILDFIRE_MODEL  = PROJECT_ROOT / "models" / "wildfire_best_model.joblib"
 DEFAULT_LANDSLIDE_MODEL = PROJECT_ROOT / "models" / "landslide_preliminary_model.joblib"
+DEFAULT_FLOOD_MODEL     = PROJECT_ROOT / "models" / "flood_model.joblib"
 FRONTEND_DIR = PROJECT_ROOT / "frontend"
-OUTPUTS_DIR = PROJECT_ROOT / "outputs"
+OUTPUTS_DIR  = PROJECT_ROOT / "outputs"
 
 
 class WildfireRiskPredictor:
@@ -63,23 +65,20 @@ class WildfireRiskPredictor:
 
         raw_probs = self.pipeline.predict_proba(X)[:, 1]
         cal_probs = bayes_prior_adjust(raw_probs, self.effective_train_prior, self.population_prior)
-        # Risk band on raw relative score vs calibrated daily probability (both returned transparently!)
         bands_raw = assign_risk_band(raw_probs)
         bands_cal = assign_risk_band(cal_probs)
         alerts_at_thr = (raw_probs >= self.operating_threshold).astype(int)
 
         predictions = []
         for i in range(len(df)):
-            predictions.append(
-                {
-                    "index": i,
-                    "raw_score": round(float(raw_probs[i]), 5),
-                    "calibrated_daily_probability": round(float(cal_probs[i]), 6),
-                    "provisional_risk_band": str(bands_cal[i]),
-                    "relative_score_band": str(bands_raw[i]),
-                    "above_cv_f1_threshold": bool(alerts_at_thr[i]),
-                }
-            )
+            predictions.append({
+                "index": i,
+                "raw_score": round(float(raw_probs[i]), 5),
+                "calibrated_daily_probability": round(float(cal_probs[i]), 6),
+                "provisional_risk_band": str(bands_cal[i]),
+                "relative_score_band": str(bands_raw[i]),
+                "above_cv_f1_threshold": bool(alerts_at_thr[i]),
+            })
 
         return {
             "hazard": "wildfire",
@@ -148,6 +147,58 @@ class LandslideRiskPredictor:
         }
 
 
+class FloodRiskPredictor:
+    """Loads INDOFLOODS flood risk model — predicts probability of exceeding danger level."""
+
+    def __init__(self, model_path: str | Path = DEFAULT_FLOOD_MODEL) -> None:
+        self.model_path = Path(model_path)
+        self.available = self.model_path.exists()
+        if not self.available:
+            return
+        bundle = joblib.load(self.model_path)
+        self.model_name: str = bundle["model_name"]
+        self.pipeline = bundle["pipeline"]
+        self.features: list[str] = bundle["features"]
+        self.operating_threshold: float = float(bundle["operating_threshold"])
+        self.trained_timestamp_utc: str = bundle.get("trained_timestamp_utc", "")
+        self.disclaimer: str = bundle.get("disclaimer", DISCLAIMER)
+        self.note: str = bundle.get(
+            "note",
+            "Trained on INDOFLOODS all-India gauged river events 1965–2020.",
+        )
+
+    def predict(self, records: list[dict[str, Any]]) -> dict[str, Any]:
+        if not self.available:
+            raise FileNotFoundError("Flood model artifact not found. Run src.training.flood_pipelines first.")
+        df = pd.DataFrame(records)
+        for col in self.features:
+            if col not in df.columns:
+                df[col] = np.nan
+        X = df[self.features]
+        raw_probs = self.pipeline.predict_proba(X)[:, 1]
+        bands = assign_risk_band(raw_probs)
+        alerts = (raw_probs >= self.operating_threshold).astype(int)
+
+        predictions = [
+            {
+                "index": i,
+                "raw_score": round(float(raw_probs[i]), 5),
+                "relative_score_band": str(bands[i]),
+                "above_cv_f1_threshold": bool(alerts[i]),
+            }
+            for i in range(len(df))
+        ]
+        return {
+            "hazard": "flood",
+            "model_name": self.model_name,
+            "trained_timestamp_utc": self.trained_timestamp_utc,
+            "operating_threshold_raw_score": self.operating_threshold,
+            "disclaimer": self.disclaimer,
+            "note": self.note,
+            "predictions": predictions,
+        }
+
+
 def _read_json_if_exists(path: Path) -> Any:
     if path.exists():
         return json.loads(path.read_text(encoding="utf-8"))
@@ -164,8 +215,8 @@ def _read_csv_records_if_exists(path: Path) -> list[dict[str, Any]]:
 def build_dashboard_overview() -> dict[str, Any]:
     """Assemble real verified reports, tables, and simplified NE India GeoJSON for the web UI."""
     reports = PROJECT_ROOT / "data" / "reports"
-    tables = PROJECT_ROOT / "outputs" / "tables"
-    models = PROJECT_ROOT / "models"
+    tables  = PROJECT_ROOT / "outputs" / "tables"
+    models  = PROJECT_ROOT / "models"
 
     # Load simplified study-state polygons for fast offline SVG map rendering
     boundaries_geojson: dict[str, Any] = {"type": "FeatureCollection", "features": []}
@@ -181,7 +232,9 @@ def build_dashboard_overview() -> dict[str, Any]:
                 gdf["area_km2"] = (gdf["shape_area"] / 1e6).round(2)
             else:
                 gdf["area_km2"] = None
-        boundaries_geojson = json.loads(gdf[["state_name", "area_km2", "rep_lon", "rep_lat", "geometry"]].to_json())
+        boundaries_geojson = json.loads(
+            gdf[["state_name", "area_km2", "rep_lon", "rep_lat", "geometry"]].to_json()
+        )
 
     return {
         "disclaimer": DISCLAIMER,
@@ -192,15 +245,19 @@ def build_dashboard_overview() -> dict[str, Any]:
         "weather_meta": _read_json_if_exists(reports / "weather_features_metadata.json"),
         "landslide_feasibility": _read_json_if_exists(reports / "landslide_feasibility.json"),
         "gsi_meta": _read_json_if_exists(reports / "gsi_pdf_inspection.json"),
+        "flood_meta": _read_json_if_exists(reports / "flood_ingestion_metadata.json"),
         "wildfire_card": _read_json_if_exists(models / "wildfire_model_card.json"),
         "landslide_card": _read_json_if_exists(models / "landslide_model_card.json"),
+        "flood_card": _read_json_if_exists(models / "flood_model_card.json"),
         "tables": {
-            "wildfire_models": _read_csv_records_if_exists(tables / "wildfire_model_comparison.csv"),
+            "wildfire_models":    _read_csv_records_if_exists(tables / "wildfire_model_comparison.csv"),
             "wildfire_per_state": _read_csv_records_if_exists(tables / "wildfire_test2024_per_state.csv"),
-            "wildfire_per_season": _read_csv_records_if_exists(tables / "wildfire_test2024_per_season.csv"),
-            "wildfire_importance": _read_csv_records_if_exists(tables / "wildfire_feature_importance.csv")[:12],
-            "landslide_models": _read_csv_records_if_exists(tables / "landslide_model_comparison.csv"),
-            "landslide_importance": _read_csv_records_if_exists(tables / "landslide_feature_importance.csv")[:12],
+            "wildfire_per_season":_read_csv_records_if_exists(tables / "wildfire_test2024_per_season.csv"),
+            "wildfire_importance":_read_csv_records_if_exists(tables / "wildfire_feature_importance.csv")[:12],
+            "landslide_models":   _read_csv_records_if_exists(tables / "landslide_model_comparison.csv"),
+            "landslide_importance":_read_csv_records_if_exists(tables / "landslide_feature_importance.csv")[:12],
+            "flood_models":       _read_csv_records_if_exists(tables / "flood_model_comparison.csv"),
+            "flood_importance":   _read_csv_records_if_exists(tables / "flood_feature_importance.csv")[:12],
         },
         "boundaries_geojson": boundaries_geojson,
     }
@@ -208,9 +265,10 @@ def build_dashboard_overview() -> dict[str, Any]:
 
 def serve_http(host: str = "127.0.0.1", port: int = 8000) -> None:
     """Start the HIMA Research Dashboard & Prediction API server."""
-    wf_predictor = WildfireRiskPredictor()
-    ls_predictor = LandslideRiskPredictor()
-    overview_cache = build_dashboard_overview()
+    wf_predictor    = WildfireRiskPredictor()
+    ls_predictor    = LandslideRiskPredictor()
+    flood_predictor = FloodRiskPredictor()
+    overview_cache  = build_dashboard_overview()
 
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, format: str, *args: Any) -> None:
@@ -240,22 +298,19 @@ def serve_http(host: str = "127.0.0.1", port: int = 8000) -> None:
             parsed = urlparse(self.path).path
 
             if parsed == "/health":
-                self._send_json(
-                    200,
-                    {
-                        "status": "ok",
-                        "wildfire_model": wf_predictor.model_name,
-                        "landslide_model": ls_predictor.model_name if ls_predictor.available else None,
-                        "disclaimer": wf_predictor.disclaimer,
-                    },
-                )
+                self._send_json(200, {
+                    "status": "ok",
+                    "wildfire_model":  wf_predictor.model_name,
+                    "landslide_model": ls_predictor.model_name if ls_predictor.available else None,
+                    "flood_model":     flood_predictor.model_name if flood_predictor.available else None,
+                    "disclaimer": wf_predictor.disclaimer,
+                })
                 return
 
             if parsed == "/api/overview":
                 self._send_json(200, overview_cache)
                 return
 
-            # Serve generated PNG maps & figures securely from outputs/
             if parsed.startswith("/outputs/"):
                 rel = parsed.removeprefix("/outputs/").lstrip("/")
                 target = (OUTPUTS_DIR / rel).resolve()
@@ -265,7 +320,6 @@ def serve_http(host: str = "127.0.0.1", port: int = 8000) -> None:
                     self._send_json(403, {"error": "Forbidden path"})
                 return
 
-            # Serve frontend static files
             if parsed in {"/", "/index.html"}:
                 self._send_file(FRONTEND_DIR / "index.html")
                 return
@@ -280,7 +334,11 @@ def serve_http(host: str = "127.0.0.1", port: int = 8000) -> None:
 
         def do_POST(self) -> None:
             parsed = urlparse(self.path).path
-            if parsed not in {"/predict", "/api/predict/wildfire", "/api/predict/landslide"}:
+            valid_endpoints = {
+                "/predict", "/api/predict/wildfire",
+                "/api/predict/landslide", "/api/predict/flood",
+            }
+            if parsed not in valid_endpoints:
                 self._send_json(404, {"error": f"Endpoint not found: {parsed}"})
                 return
             length = int(self.headers.get("Content-Length", "0"))
@@ -290,6 +348,8 @@ def serve_http(host: str = "127.0.0.1", port: int = 8000) -> None:
                 records = payload if isinstance(payload, list) else payload.get("records", [payload])
                 if parsed == "/api/predict/landslide":
                     result = ls_predictor.predict(records)
+                elif parsed == "/api/predict/flood":
+                    result = flood_predictor.predict(records)
                 else:
                     result = wf_predictor.predict(records)
                 self._send_json(200, result)
@@ -302,6 +362,8 @@ def serve_http(host: str = "127.0.0.1", port: int = 8000) -> None:
     print(f"Wildfire Model:  {wf_predictor.model_name}")
     if ls_predictor.available:
         print(f"Landslide Model: {ls_predictor.model_name} (Preliminary Weather-Only)")
+    if flood_predictor.available:
+        print(f"Flood Model:     {flood_predictor.model_name} (INDOFLOODS All-India)")
     print(f"Disclaimer:      {wf_predictor.disclaimer}")
     print("Press Ctrl+C to stop.")
     print("===================================================================")

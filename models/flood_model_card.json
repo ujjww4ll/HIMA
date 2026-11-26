@@ -1,0 +1,208 @@
+{
+  "project": "HIMA - Hazard Intelligence, Monitoring & Assessment",
+  "hazard": "Flood (Exceeds Danger Level \u2014 INDOFLOODS)",
+  "disclaimer": "Research risk estimate only \u2014 not an official warning.",
+  "selected_best_model": "HistGradientBoosting",
+  "selection_criterion": "Highest 5-fold StratifiedKFold PR-AUC",
+  "dataset": "INDOFLOODS All-India Gauged River Events 1965\u20132020",
+  "train_rows": 3183,
+  "test_rows": 1365,
+  "train_positives": 2436,
+  "test_positives": 1045,
+  "features_count": 19,
+  "features": [
+    "T1d",
+    "T2d",
+    "T3d",
+    "T4d",
+    "T5d",
+    "T6d",
+    "T7d",
+    "T8d",
+    "T9d",
+    "T10d",
+    "catchment_area_km2",
+    "stream_order",
+    "population_density",
+    "urban_pct",
+    "Latitude",
+    "Longitude",
+    "soil_type",
+    "lithology_type",
+    "land_cover"
+  ],
+  "note": "NE India has limited gauging stations in INDOFLOODS. Model is trained all-India and applicable for regional risk estimation. Antecedent CHIRPS rainfall (T1d\u2013T10d) are primary flood triggers.",
+  "top_10_features_permutation_importance": [
+    {
+      "feature": "catchment_area_km2",
+      "importance_mean": 0.05710556220095686,
+      "importance_std": 0.006115219708930663
+    },
+    {
+      "feature": "population_density",
+      "importance_mean": 0.04264413875598076,
+      "importance_std": 0.003714153067474569
+    },
+    {
+      "feature": "Latitude",
+      "importance_mean": 0.030501495215310915,
+      "importance_std": 0.002513871952535693
+    },
+    {
+      "feature": "Longitude",
+      "importance_mean": 0.009021830143540521,
+      "importance_std": 0.00162569732402325
+    },
+    {
+      "feature": "lithology_type",
+      "importance_mean": 0.007897129186602746,
+      "importance_std": 0.0023673034553254734
+    },
+    {
+      "feature": "T1d",
+      "importance_mean": 0.0037218899521530347,
+      "importance_std": 0.00209423560836908
+    },
+    {
+      "feature": "urban_pct",
+      "importance_mean": 0.002893839712918589,
+      "importance_std": 0.0017830999221447941
+    },
+    {
+      "feature": "T10d",
+      "importance_mean": 0.0019093899521530177,
+      "importance_std": 0.001411951064415226
+    },
+    {
+      "feature": "T7d",
+      "importance_mean": 0.0017464114832535182,
+      "importance_std": 0.0005218579906472788
+    },
+    {
+      "feature": "T8d",
+      "importance_mean": 0.0017281698564592495,
+      "importance_std": 0.0011790317989441984
+    }
+  ],
+  "all_models_summary": [
+    {
+      "model": "DummyClassifier (Prior)",
+      "syllabus_role": "Baseline utility",
+      "best_params": "{}",
+      "cv_roc_auc": 0.499,
+      "cv_pr_auc": 0.7649,
+      "operating_threshold": 0.5,
+      "test_roc_auc": 0.5,
+      "test_pr_auc": 0.7656,
+      "test_accuracy": 0.7656,
+      "test_precision": 0.7656,
+      "test_recall": 1.0,
+      "test_f1": 0.8672,
+      "test_false_alarm_rate": 1.0,
+      "test_tp": 1045,
+      "test_fp": 320,
+      "test_fn": 0,
+      "test_tn": 0
+    },
+    {
+      "model": "Logistic Regression",
+      "syllabus_role": "CSET312 Core",
+      "best_params": "{\"clf__C\": 5.0}",
+      "cv_roc_auc": 0.8352,
+      "cv_pr_auc": 0.9204,
+      "operating_threshold": 0.3743,
+      "test_roc_auc": 0.8215,
+      "test_pr_auc": 0.92,
+      "test_accuracy": 0.8256,
+      "test_precision": 0.8832,
+      "test_recall": 0.89,
+      "test_f1": 0.8866,
+      "test_false_alarm_rate": 0.3844,
+      "test_tp": 930,
+      "test_fp": 123,
+      "test_fn": 115,
+      "test_tn": 197
+    },
+    {
+      "model": "Gaussian Naive Bayes",
+      "syllabus_role": "CSET312 Core",
+      "best_params": "{\"clf__var_smoothing\": 1e-09}",
+      "cv_roc_auc": 0.7628,
+      "cv_pr_auc": 0.8957,
+      "operating_threshold": 0.9944,
+      "test_roc_auc": 0.7547,
+      "test_pr_auc": 0.8883,
+      "test_accuracy": 0.8044,
+      "test_precision": 0.8107,
+      "test_recall": 0.9713,
+      "test_f1": 0.8838,
+      "test_false_alarm_rate": 0.7406,
+      "test_tp": 1015,
+      "test_fp": 237,
+      "test_fn": 30,
+      "test_tn": 83
+    },
+    {
+      "model": "Decision Tree",
+      "syllabus_role": "CSET312 Core",
+      "best_params": "{\"clf__max_depth\": 8, \"clf__min_samples_leaf\": 10}",
+      "cv_roc_auc": 0.9447,
+      "cv_pr_auc": 0.9728,
+      "operating_threshold": 0.1927,
+      "test_roc_auc": 0.9377,
+      "test_pr_auc": 0.9682,
+      "test_accuracy": 0.9253,
+      "test_precision": 0.9214,
+      "test_recall": 0.9866,
+      "test_f1": 0.9529,
+      "test_false_alarm_rate": 0.275,
+      "test_tp": 1031,
+      "test_fp": 88,
+      "test_fn": 14,
+      "test_tn": 232
+    },
+    {
+      "model": "Random Forest",
+      "syllabus_role": "Practical Tabular Extension",
+      "best_params": "{\"clf__max_depth\": 12, \"clf__min_samples_leaf\": 5}",
+      "cv_roc_auc": 0.9707,
+      "cv_pr_auc": 0.9874,
+      "operating_threshold": 0.4367,
+      "test_roc_auc": 0.9644,
+      "test_pr_auc": 0.9867,
+      "test_accuracy": 0.9495,
+      "test_precision": 0.9519,
+      "test_recall": 0.9837,
+      "test_f1": 0.9675,
+      "test_false_alarm_rate": 0.1625,
+      "test_tp": 1028,
+      "test_fp": 52,
+      "test_fn": 17,
+      "test_tn": 268
+    },
+    {
+      "model": "HistGradientBoosting",
+      "syllabus_role": "Advanced GBDT Extension",
+      "best_params": "{\"clf__learning_rate\": 0.03, \"clf__max_depth\": 6, \"clf__max_iter\": 150}",
+      "cv_roc_auc": 0.9726,
+      "cv_pr_auc": 0.9889,
+      "operating_threshold": 0.2876,
+      "test_roc_auc": 0.9634,
+      "test_pr_auc": 0.9855,
+      "test_accuracy": 0.956,
+      "test_precision": 0.9573,
+      "test_recall": 0.9866,
+      "test_f1": 0.9717,
+      "test_false_alarm_rate": 0.1437,
+      "test_tp": 1031,
+      "test_fp": 46,
+      "test_fn": 14,
+      "test_tn": 274
+    }
+  ],
+  "saved_artifacts": {
+    "best_model_joblib": "C:\\Users\\lenovo\\Desktop\\aiml project\\models\\flood_model.joblib",
+    "comparison_csv": "C:\\Users\\lenovo\\Desktop\\aiml project\\outputs\\tables\\flood_model_comparison.csv"
+  },
+  "trained_timestamp_utc": "2026-11-26T19:47:47.117689+00:00"
+}

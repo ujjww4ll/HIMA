@@ -150,6 +150,16 @@ function populateKPIs(d) {
 
   const lsBest = lc.best_model_test_metrics || (lc.all_model_results || []).find(m => m.model === lc.selected_best_model) || {};
   setText("kpi-ls-auc", lsBest.test_roc_auc ? lsBest.test_roc_auc.toFixed(4) : "0.9367");
+
+  if (d.flood_card) {
+    const fbest = (d.flood_card.all_models_summary || []).find(m => m.model === d.flood_card.selected_best_model);
+    if (fbest) {
+      const el = document.getElementById("kpi-flood-auc");
+      if (el) el.textContent = fbest.test_roc_auc?.toFixed(4) || "0.9634";
+      const mel = document.getElementById("kpi-flood-model");
+      if (mel) mel.textContent = d.flood_card.selected_best_model || "HistGradientBoosting";
+    }
+  }
 }
 
 function setText(id, val) {
@@ -529,6 +539,9 @@ function renderModelTables(d) {
   renderTable("tbl-wf-state",   tables.wildfire_per_state, formatState);
   renderTable("tbl-wf-season",  tables.wildfire_per_season, formatSeason);
   renderTable("tbl-ls-models",  tables.landslide_models, formatLandslide);
+  if (tables.flood_models && tables.flood_models.length) {
+    renderTable("tbl-flood-models", tables.flood_models, formatFlood);
+  }
 }
 
 function renderTable(id, rows, formatter) {
@@ -623,6 +636,30 @@ const formatLandslide = {
   classFor: formatWildfire.classFor
 };
 
+const formatFlood = {
+  cols: [
+    { label: "Model",         key: "model" },
+    { label: "CV ROC-AUC",    key: "cv_roc_auc" },
+    { label: "CV PR-AUC",     key: "cv_pr_auc" },
+    { label: "Test ROC-AUC",  key: "test_roc_auc" },
+    { label: "Test PR-AUC",   key: "test_pr_auc" },
+    { label: "Recall",        key: "test_recall" },
+    { label: "Precision",     key: "test_precision" },
+    { label: "FAR",           key: "test_false_alarm_rate" },
+  ],
+  format(key, val) {
+    if (val === null || val === undefined) return "—";
+    if (["cv_roc_auc","cv_pr_auc","test_roc_auc","test_pr_auc","test_recall","test_precision","test_false_alarm_rate"].includes(key))
+      return Number(val).toFixed(4);
+    return val;
+  },
+  classFor(key, val, isBest) {
+    if (key === "test_roc_auc" && isBest) return "td-best td-auc";
+    if (key === "test_roc_auc") return "td-auc";
+    return "";
+  }
+};
+
 // ─── 5. RISK SIMULATOR ────────────────────────────────────────────────────────
 let currentHazard = "wildfire";
 
@@ -640,15 +677,27 @@ let currentHazard = "wildfire";
   });
 });
 
+// Flood slider live update
+["t1d","t3d","t7d","t10d","catchment"].forEach(id => {
+  const inp = document.getElementById("in-" + id);
+  const lbl = document.getElementById("val-" + id);
+  if (inp && lbl) inp.addEventListener("input", () => { lbl.textContent = inp.value; });
+});
+
 // Hazard mode toggle
 document.querySelectorAll(".hazard-btn").forEach(btn => {
   btn.addEventListener("click", () => {
     document.querySelectorAll(".hazard-btn").forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
     currentHazard = btn.dataset.hazard;
-    const caveat = document.getElementById("landslide-caveat");
-    if (caveat) caveat.style.display = currentHazard === "landslide" ? "block" : "none";
-    setText("result-title", currentHazard === "wildfire" ? "Wildfire Risk Estimate" : "Landslide Trigger Estimate");
+    const lsCaveat = document.getElementById("landslide-caveat");
+    const floodCaveat = document.getElementById("flood-caveat");
+    const floodInputs = document.getElementById("flood-inputs");
+    if (lsCaveat) lsCaveat.style.display = currentHazard === "landslide" ? "block" : "none";
+    if (floodCaveat) floodCaveat.style.display = currentHazard === "flood" ? "block" : "none";
+    if (floodInputs) floodInputs.style.display = currentHazard === "flood" ? "block" : "none";
+    const titles = { wildfire: "Wildfire Risk Estimate", landslide: "Landslide Trigger Estimate", flood: "Flood Risk Estimate" };
+    setText("result-title", titles[currentHazard] || "Risk Estimate");
   });
 });
 
@@ -758,6 +807,41 @@ async function runPrediction() {
   };
 
   const endpoint = currentHazard === "landslide" ? "/api/predict/landslide" : "/api/predict/wildfire";
+
+  // ── FLOOD branch — separate payload & endpoint ────────────────────────────
+  if (currentHazard === "flood") {
+    const t1d  = parseFloat(document.getElementById("in-t1d")?.value  || 25);
+    const t3d  = parseFloat(document.getElementById("in-t3d")?.value  || 75);
+    const t7d  = parseFloat(document.getElementById("in-t7d")?.value  || 150);
+    const t10d = parseFloat(document.getElementById("in-t10d")?.value || 200);
+    const catchArea = parseFloat(document.getElementById("in-catchment")?.value || 500);
+    const floodPayload = {
+      T1d: t1d, T2d: t1d * 1.5, T3d: t3d, T4d: t3d * 1.1,
+      T5d: t7d * 0.6, T6d: t7d * 0.75, T7d: t7d,
+      T8d: t10d * 0.85, T9d: t10d * 0.92, T10d: t10d,
+      catchment_area_km2: catchArea, Latitude: lat, Longitude: lon,
+    };
+    try {
+      const fres = await fetch("/api/predict/flood", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(floodPayload)
+      });
+      const fdata = await fres.json();
+      if (!fres.ok) throw new Error(fdata.error || "API error");
+      const fpred = Array.isArray(fdata.predictions) ? fdata.predictions[0] : (fdata.predictions || fdata);
+      displayResult(fpred, fdata);
+    } catch (err) {
+      console.error("Flood prediction error:", err);
+      showResultError(err.message);
+    } finally {
+      if (btn) {
+        btn.innerHTML = `<svg viewBox="0 0 20 20" fill="currentColor" width="16"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/></svg> Run Model`;
+        btn.disabled = false;
+      }
+    }
+    return;
+  }
+  // ─────────────────────────────────────────────────────────────────────────
 
   try {
     const res = await fetch(endpoint, {
@@ -878,6 +962,11 @@ const GALLERY_ITEMS = [
   { src: "/outputs/figures/landslide_rainfall_eda.png",        cat: "landslide", title: "Landslide Rainfall EDA",               desc: "IMD antecedent rainfall distributions" },
   { src: "/outputs/figures/landslide_gsi_coolr_eda.png",       cat: "landslide", title: "GSI & COOLR Inventory EDA",            desc: "Spatial & temporal landslide record breakdown" },
   { src: "/outputs/figures/weather_rainfall_eda.png",          cat: "landslide", title: "ERA5 & IMD Weather EDA",               desc: "Northeast India seasonal weather patterns" },
+  { src: "/outputs/figures/flood_model_comparison.png",        cat: "flood",     title: "Flood: Model Comparison (6 Classifiers)", desc: "INDOFLOODS · CV & Test ROC-AUC / PR-AUC" },
+  { src: "/outputs/figures/flood_roc_pr_curves.png",           cat: "flood",     title: "Flood: ROC & PR Curves",                 desc: "30% hold-out test · 4,548 events all-India" },
+  { src: "/outputs/figures/flood_confusion_matrices.png",      cat: "flood",     title: "Flood: Confusion Matrices",              desc: "All 6 classifiers at operating threshold" },
+  { src: "/outputs/figures/flood_feature_importance.png",      cat: "flood",     title: "Flood: Feature Importance (T-Day Lags)", desc: "CHIRPS antecedent rainfall T1d–T10d + catchment" },
+  { src: "/outputs/figures/flood_decision_tree.png",           cat: "flood",     title: "Flood: Decision Tree Logic",             desc: "Interpretable rainfall-threshold rules" },
 ];
 
 let currentCat = "all";

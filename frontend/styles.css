@@ -215,6 +215,7 @@ body {
 .accent-green  { color: var(--green); }
 .accent-blue   { color: var(--blue); }
 .accent-purple { color: var(--purple); }
+.accent-cyan   { color: #06b6d4; }
 
 /* ─── MAIN CONTAINER ─── */
 .container {

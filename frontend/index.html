@@ -110,6 +110,14 @@
         <div class="kpi-sub">Preliminary · Weather-only</div>
       </div>
     </div>
+    <div class="kpi-card">
+      <div class="kpi-icon" style="--c:#06b6d4">🌊</div>
+      <div class="kpi-body">
+        <div class="kpi-value accent-cyan" id="kpi-flood-auc">0.9634</div>
+        <div class="kpi-label">Flood ROC-AUC (Test)</div>
+        <div class="kpi-sub" id="kpi-flood-model">HistGradientBoosting</div>
+      </div>
+    </div>
   </section>
 
   <main class="container">
@@ -185,6 +193,7 @@
         <div class="hazard-toggle">
           <button class="hazard-btn active" data-hazard="wildfire">🔥 Wildfire Risk Estimator</button>
           <button class="hazard-btn" data-hazard="landslide">⛰️ Preliminary Landslide Trigger</button>
+          <button class="hazard-btn" data-hazard="flood">🌊 Flood Risk Estimator</button>
         </div>
         <div class="preset-row">
           <span class="preset-label">Real-World Scenarios:</span>
@@ -197,6 +206,10 @@
 
       <div id="landslide-caveat" class="caveat-banner" style="display:none">
         <strong>⚠ Preliminary Weather-Trigger Mode:</strong> Static terrain layers (DEM/slope, WorldCover, SoilGrids, geology) are not locally available. This model evaluates hydrometeorological triggering only — antecedent IMD/ERA5 rainfall &amp; soil moisture.
+      </div>
+
+      <div id="flood-caveat" class="caveat-banner" style="display:none">
+        <strong>🌊 Flood Risk Mode:</strong> Uses antecedent CHIRPS rainfall lags (T1d–T10d) + catchment characteristics. Trained on INDOFLOODS all-India gauged river events 1965–2020. Not a cell-day model — event-level risk estimate.
       </div>
 
       <div class="sim-layout">
@@ -277,6 +290,28 @@
             <div class="slider-field">
               <label>Consecutive Dry Days: <strong id="val-drydays">22</strong></label>
               <input type="range" id="in-drydays" min="0" max="60" step="1" value="22" />
+            </div>
+            <div id="flood-inputs" style="display:none">
+              <div class="slider-field">
+                <label>Rainfall T1d — 1-Day Antecedent (mm): <strong id="val-t1d">25</strong></label>
+                <input type="range" id="in-t1d" min="0" max="200" step="1" value="25" />
+              </div>
+              <div class="slider-field">
+                <label>Rainfall T3d — 3-Day Antecedent (mm): <strong id="val-t3d">75</strong></label>
+                <input type="range" id="in-t3d" min="0" max="500" step="5" value="75" />
+              </div>
+              <div class="slider-field">
+                <label>Rainfall T7d — 7-Day Antecedent (mm): <strong id="val-t7d">150</strong></label>
+                <input type="range" id="in-t7d" min="0" max="800" step="10" value="150" />
+              </div>
+              <div class="slider-field">
+                <label>Rainfall T10d — 10-Day Antecedent (mm): <strong id="val-t10d">200</strong></label>
+                <input type="range" id="in-t10d" min="0" max="1000" step="10" value="200" />
+              </div>
+              <div class="slider-field">
+                <label>Catchment Area (km²): <strong id="val-catchment">500</strong></label>
+                <input type="range" id="in-catchment" min="10" max="5000" step="10" value="500" />
+              </div>
             </div>
           </div>
         </div>
@@ -380,6 +415,19 @@
           <table id="tbl-ls-models" class="data-table"></table>
         </div>
       </div>
+
+      <div class="card-glass">
+        <div class="card-top">
+          <div>
+            <h2 class="card-title">Flood Risk Classifier Comparison — INDOFLOODS</h2>
+            <p class="card-desc">Target: Exceeds Danger Level · 70/30 Stratified Split · 4,548 all-India gauged flood events 1965–2020</p>
+          </div>
+          <span class="pill-tag">CHIRPS T1d–T10d + Catchment</span>
+        </div>
+        <div class="table-scroll">
+          <table id="tbl-flood-models" class="data-table"></table>
+        </div>
+      </div>
     </section>
 
     <!-- ══════════════ TAB 4: GALLERY ══════════════ -->
@@ -389,6 +437,7 @@
         <button class="filter-btn" data-cat="maps">Geospatial Maps</button>
         <button class="filter-btn" data-cat="wildfire">Wildfire ML</button>
         <button class="filter-btn" data-cat="landslide">Landslide &amp; EDA</button>
+        <button class="filter-btn" data-cat="flood">🌊 Flood ML</button>
       </div>
       <div class="gallery-grid" id="gallery-grid"></div>
     </section>

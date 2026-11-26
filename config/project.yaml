@@ -64,3 +64,14 @@ wildfire:
 landslide:
   min_dated_events_for_daily_model: 30
   note: "Train daily classifier only if validated dated events meet sample threshold; otherwise produce EDA and document limitations."
+
+flood:
+  dataset: "INDOFLOODS — All-India Gauged River Events 1965–2020"
+  source_files:
+    - "data/raw/flood/indofloods_integrated.csv"
+    - "data/raw/flood/precipitation_variables_indofloods.csv"
+    - "data/raw/flood/chirps_rainfall_all.csv"
+  target_column: "exceeds_danger_level"
+  train_test_split_ratio: 0.70
+  antecedent_rainfall_lags: ["T1d","T2d","T3d","T4d","T5d","T6d","T7d","T8d","T9d","T10d"]
+  note: "NE India has only 2 gauged records in INDOFLOODS; model is trained all-India and applied regionally."
